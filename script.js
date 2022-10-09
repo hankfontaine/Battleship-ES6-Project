@@ -341,49 +341,67 @@
     ///////////////////////////////////////////////////////////////////////
     ////////////////////////////// END ////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////// END OF BUSINESS LOGIC MODULES ///////////////////////
+    ///////////////////////////////////////////////////////////////////////
+
+    const mainContainer = document.querySelector('.main');
+
+    const header = document.querySelector('.header');
+    const gameTitle = document.createElement('div');
+    gameTitle.classList.add('header-text');
+    gameTitle.append('BATTLESHIP');
+    header.appendChild(gameTitle);
+
+    const body = document.querySelector('.body');
+
+    const mainGameplayWindow = document.createElement('div');
+    mainGameplayWindow.classList.add('main-gameplay-window');
+    body.appendChild(mainGameplayWindow);
+
+    const playerOffenseBoardContainer = document.createElement('div');
+    playerOffenseBoardContainer.classList.add('player-offense-board-container');
+    mainGameplayWindow.appendChild(playerOffenseBoardContainer);
+
+    const playerOffensiveGridArea = document.createElement('div');
+    playerOffensiveGridArea.classList.add('grid-area');
+    playerOffenseBoardContainer.appendChild(playerOffensiveGridArea);
+
+    const playerDefenseBoardContainer = document.createElement('div');
+    playerDefenseBoardContainer.classList.add('player-defense-board-container');
+    mainGameplayWindow.appendChild(playerDefenseBoardContainer);
+
+    const playerDefensiveGridArea = document.createElement('div');
+    playerDefensiveGridArea.classList.add('grid-area');
+    playerDefenseBoardContainer.appendChild(playerDefensiveGridArea);
+
+    const footer = document.querySelector('.footer');
+    const footerText = document.createElement('div');
+    footerText.classList.add('footer-text');
+    footerText.append('c Hank');
+    footer.appendChild(footerText);
+
+    const generateGridSquares = (board, grid) => {
+      board.forEach((square) => {
+        const newSquare = document.createElement('div');
+        newSquare.classList.add('square');
+        grid.appendChild(newSquare);
+      });
+    };
+
+    generateGridSquares(
+      playerOne.defensiveBoard.squares,
+      playerDefensiveGridArea,
+    );
+
+    generateGridSquares(
+      playerOne.offensiveBoard.squares,
+      playerOffensiveGridArea,
+    );
   };
 
   (function main() {
     playRound();
   })();
-
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////// END OF BUSINESS LOGIC MODULES ///////////////////////
-  ///////////////////////////////////////////////////////////////////////
 })();
-
-const mainContainer = document.querySelector('.main');
-
-const header = document.querySelector('.header');
-const gameTitle = document.createElement('div');
-gameTitle.classList.add('header-text');
-gameTitle.append('BATTLESHIP');
-header.appendChild(gameTitle);
-
-const body = document.querySelector('.body');
-
-const mainGameplayWindow = document.createElement('div');
-mainGameplayWindow.classList.add('main-gameplay-window');
-body.appendChild(mainGameplayWindow);
-
-const playerOffenseBoardContainer = document.createElement('div');
-playerOffenseBoardContainer.classList.add('player-offense-board-container');
-mainGameplayWindow.appendChild(playerOffenseBoardContainer);
-
-const playerOffensiveGridArea = document.createElement('div');
-playerOffensiveGridArea.classList.add('grid-area');
-playerOffenseBoardContainer.appendChild(playerOffensiveGridArea);
-
-const playerDefenseBoardContainer = document.createElement('div');
-playerDefenseBoardContainer.classList.add('player-defense-board-container');
-mainGameplayWindow.appendChild(playerDefenseBoardContainer);
-
-const playerDefensiveGridArea = document.createElement('div');
-playerDefensiveGridArea.classList.add('grid-area');
-playerDefenseBoardContainer.appendChild(playerDefensiveGridArea);
-
-const footer = document.querySelector('.footer');
-const footerText = document.createElement('div');
-footerText.classList.add('footer-text');
-footerText.append('c Hank');
-footer.appendChild(footerText);
