@@ -386,7 +386,10 @@
       board.forEach((square) => {
         const newSquare = document.createElement('div');
         newSquare.classList.add('square');
+        newSquare.id =
+          'x' + square.coordsOfSquare[0] + 'y' + square.coordsOfSquare[1];
         grid.appendChild(newSquare);
+        console.log(newSquare.id);
       });
     };
 
@@ -395,11 +398,17 @@
       playerDefensiveGridArea,
     );
 
+    console.log(playerOne.defensiveBoard.squares[0].coordsOfSquare);
+
     generateGridSquares(
       playerOne.offensiveBoard.squares,
       playerOffensiveGridArea,
     );
   };
+
+  ///////////////////////////////////////////////////////////////////////
+  /////////////// END OF DOM MANIPULATION MODULES ///////////////////////
+  ///////////////////////////////////////////////////////////////////////
 
   (function main() {
     playRound();
