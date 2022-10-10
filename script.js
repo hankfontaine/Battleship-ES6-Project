@@ -387,9 +387,9 @@
         const newSquare = document.createElement('div');
         newSquare.classList.add('square');
         newSquare.id =
-          'x' + square.coordsOfSquare[0] + 'y' + square.coordsOfSquare[1];
+          +square.coordsOfSquare[0].toString() +
+          square.coordsOfSquare[1].toString();
         grid.appendChild(newSquare);
-        console.log(newSquare.id);
       });
     };
 
@@ -397,8 +397,6 @@
       playerOne.defensiveBoard.squares,
       playerDefensiveGridArea,
     );
-
-    console.log(playerOne.defensiveBoard.squares[0].coordsOfSquare);
 
     generateGridSquares(
       playerOne.offensiveBoard.squares,
