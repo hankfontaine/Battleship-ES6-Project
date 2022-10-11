@@ -48,6 +48,8 @@
       this.squares = this.makeSquares();
       this.deployedShips = [];
       this.shipCount = 0;
+      this.gridArray = [];
+      this.gridSquares = this.makeGridSquares();
     }
 
     makeSquares = () => {
@@ -58,6 +60,28 @@
         }
       }
       return squaresArray;
+    };
+    makeGridSquares = () => {
+      // psuedocode here to create element, attribute id and class
+      if (this.player === 'Human' && this.boardType === 'defensive') {
+        // console.log(this.squares.coordsOfSquare);
+        // console.log(this.player, this.boardType);
+        // psuedocode here
+      }
+      if (this.player === 'Human' && this.boardType === 'offensive') {
+        // console.log(this.player, this.boardType);
+        // psuedocode here
+      }
+      //   const newSquare = document.createElement('div');
+      //   newSquare.classList.add('square');
+      //   newSquare.id =
+      //     this.boardType.toString() +
+      //     +square.coordsOfSquare[0].toString() +
+      //     +square.coordsOfSquare[1].toString();
+      //   if (this.boardType === 'offensive') {
+      //     document.playerOffensiveGridArea.appendChild(newSquare);
+      //   } else {
+      //     document.playerDefensiveGridArea.appendChild(newSquare);
     };
 
     setShipLengthToDeploy = () => {
@@ -174,48 +198,49 @@
       if (!this.deployedShips.find((ship) => ship.sunk === false))
         return 'loss';
     };
-    test() {
-      console.log('test');
+    generateGridSquares() {
+      if (this.player !== 'Human') return;
+
+      ///////////////////////////////////////////////////////////////////////
+      ///////////////// BEGIN DOM MANIPULATION LOGIC MODULES ///////////////////////
+      ///////////////////////////////////////////////////////////////////////
+
+      // const gridArray = [];
+      // const generateGridSquares = (board, grid, boardType) => {
+      //   // if player !== "playerOne", then generate grid squares
+      //   board.forEach((square) => {
+      //     const newSquare = document.createElement('div');
+      //     newSquare.classList.add('square');
+      //     newSquare.id =
+      //       boardType.toString() +
+      //       +square.coordsOfSquare[0].toString() +
+      //       square.coordsOfSquare[1].toString();
+      //     grid.appendChild(newSquare);
+      //     gridArray.push(newSquare);
+      //   });
+      // };
+
+      // generateGridSquares(
+      //   playerOne.defensiveBoard.squares,
+      //   playerDefensiveGridArea,
+      //   'defensive',
+      // );
+
+      // generateGridSquares(
+      //   playerOne.offensiveBoard.squares,
+      //   playerOffensiveGridArea,
+      //   'offensive',
+      // );
+
+      // function findCoorespondingGridSquares(coords, context) {
+      //   find matching squares to coords
+      //   // update classlist to new class
+      //   // can be used both for ship placement and attacks/defense
+      // }
+
+      // findCoorespondingGridSquares();
     }
   }
-
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////// BEGIN DOM MANIPULATION LOGIC MODULES ///////////////////////
-  ///////////////////////////////////////////////////////////////////////
-
-  const gridArray = [];
-  const generateGridSquares = (board, grid, boardType) => {
-    board.forEach((square) => {
-      const newSquare = document.createElement('div');
-      newSquare.classList.add('square');
-      newSquare.id =
-        boardType.toString() +
-        +square.coordsOfSquare[0].toString() +
-        square.coordsOfSquare[1].toString();
-      grid.appendChild(newSquare);
-      gridArray.push(newSquare);
-    });
-  };
-
-  // generateGridSquares(
-  //   playerOne.defensiveBoard.squares,
-  //   playerDefensiveGridArea,
-  //   'defensive',
-  // );
-
-  // generateGridSquares(
-  //   playerOne.offensiveBoard.squares,
-  //   playerOffensiveGridArea,
-  //   'offensive',
-  // );
-
-  function findCoorespondingGridSquares(coords, context) {
-    // find matching squares to coords
-    // update classlist to new class
-    // can be used both for ship placement and attacks/defense
-  }
-
-  findCoorespondingGridSquares();
 
   ///////////////////////////////////////////////////////////////////////
   ///////////////// END DOM MANIPULATION LOGIC MODULES ////./////////////
