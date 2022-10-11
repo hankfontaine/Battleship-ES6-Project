@@ -6,23 +6,25 @@ const initializeDom = () => {
   ///////////////// BEGIN DOM MANIPULATION LOGIC MODULES ///////////////////////
   ///////////////////////////////////////////////////////////////////////
 
-  const mainContainer = document.querySelector('.main');
-
   const header = document.querySelector('.header');
   const gameTitle = document.createElement('div');
   gameTitle.classList.add('header-text');
-  gameTitle.append('BATTLESHIP');
+  // gameTitle.append('BATTLESHIP');
   header.appendChild(gameTitle);
 
   const body = document.querySelector('.body');
 
-  const mainGameplayWindow = document.createElement('div');
-  mainGameplayWindow.classList.add('main-gameplay-window');
-  body.appendChild(mainGameplayWindow);
+  const topGameplayWindow = document.createElement('div');
+  topGameplayWindow.classList.add('main-gameplay-window');
+  body.appendChild(topGameplayWindow);
+
+  const bottomGameplayWindow = document.createElement('div');
+  bottomGameplayWindow.classList.add('main-gameplay-window');
+  body.appendChild(bottomGameplayWindow);
 
   const playerOffenseBoardContainer = document.createElement('div');
   playerOffenseBoardContainer.classList.add('player-offense-board-container');
-  mainGameplayWindow.appendChild(playerOffenseBoardContainer);
+  topGameplayWindow.appendChild(playerOffenseBoardContainer);
 
   const playerOffensiveGridArea = document.createElement('div');
   playerOffensiveGridArea.classList.add('grid-area');
@@ -31,7 +33,7 @@ const initializeDom = () => {
 
   const playerDefenseBoardContainer = document.createElement('div');
   playerDefenseBoardContainer.classList.add('player-defense-board-container');
-  mainGameplayWindow.appendChild(playerDefenseBoardContainer);
+  bottomGameplayWindow.appendChild(playerDefenseBoardContainer);
 
   const playerDefensiveGridArea = document.createElement('div');
   playerDefensiveGridArea.classList.add('grid-area');
@@ -41,7 +43,7 @@ const initializeDom = () => {
   const footer = document.querySelector('.footer');
   const footerText = document.createElement('div');
   footerText.classList.add('footer-text');
-  footerText.append('c Hank');
+  // footerText.append('c Hank');
   footer.appendChild(footerText);
 
   ///////////////////////////////////////////////////////////////////////
@@ -114,32 +116,29 @@ initializeDom();
       }
       return squaresArray;
     };
+
     makeGridSquares = () => {
-      const newSquare = document.createElement('div');
-      newSquare.classList.add('square');
-      // psuedocode here to create element, attribute id and class
-      // forEach for each square?
+      if (this.player === 'Computer') return;
+
+      let assignedArea;
+
       if (this.player === 'Human' && this.boardType === 'defensive') {
-        const area = document.querySelector('#defense-area');
-        area.appendChild(newSquare);
-        // console.log(this.squares.coordsOfSquare);
-        // console.log(this.player, this.boardType);
-        // psuedocode here
+        assignedArea = document.querySelector('#defense-area');
       }
       if (this.player === 'Human' && this.boardType === 'offensive') {
-        const area = document.querySelector('#offense-area');
-        area.appendChild(newSquare);
-        // console.log(this.player, this.boardType);
-        // psuedocode here
+        assignedArea = document.querySelector('#offense-area');
       }
-      //   newSquare.id =
-      //     this.boardType.toString() +
-      //     +square.coordsOfSquare[0].toString() +
-      //     +square.coordsOfSquare[1].toString();
-      //   if (this.boardType === 'offensive') {
-      //     document.playerOffensiveGridArea.appendChild(newSquare);
-      //   } else {
-      //     document.playerDefensiveGridArea.appendChild(newSquare);
+
+      this.squares.forEach((square) => {
+        let newSquare = document.createElement('div');
+        newSquare.classList.add('square');
+        newSquare.id =
+          this.boardType +
+          square.coordsOfSquare[0] +
+          '-' +
+          square.coordsOfSquare[1];
+        assignedArea.appendChild(newSquare);
+      });
     };
 
     setShipLengthToDeploy = () => {

@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(189, 189, 189);
+  background-color: rgb(65, 65, 220);
   font-family: 'Poly', serif;
 }
 
@@ -17,12 +17,14 @@ body {
   border: 2px solid black;
   border-radius: 9px;
   display: flex;
+  flex-direction: column;
+  background-color: slategray;
 }
 
 .player-offense-board-container,
 .player-defense-board-container {
   margin: 10px;
-  background-color: slategray;
+  background-color: rgb(177, 183, 189);
   height: 300px;
   width: 300px;
   display: flex;
