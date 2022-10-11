@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(65, 65, 220);
+  background-color: rgb(83, 83, 217);
   font-family: 'Poly', serif;
 }
 
@@ -19,6 +19,7 @@ body {
   display: flex;
   flex-direction: column;
   background-color: slategray;
+  box-shadow: 1px 1px 3px black;
 }
 
 .player-offense-board-container,
@@ -45,7 +46,7 @@ body {
 
 .square {
   box-sizing: border-box;
-  border: 2px solid black;
+  border: 1.7px solid black;
   height: 28px;
   width: 28px;
 }
