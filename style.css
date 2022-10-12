@@ -50,3 +50,7 @@ body {
   height: 28px;
   width: 28px;
 }
+
+.occupied-square {
+  background-color: black;
+}

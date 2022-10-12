@@ -134,9 +134,11 @@ initializeDom();
         newSquare.classList.add('square');
         newSquare.id =
           this.boardType +
+          '-' +
           square.coordsOfSquare[0] +
           '-' +
           square.coordsOfSquare[1];
+        this.gridArray.push(newSquare);
         assignedArea.appendChild(newSquare);
       });
     };
@@ -205,7 +207,36 @@ initializeDom();
         ).isOccupiedBy = ship.name;
       });
       this.deployedShips.push(ship);
+      this.showShipOnscreen(ship);
       return ship;
+    };
+
+    showShipOnscreen = (ship) => {
+      if (this.player === 'Computer' || this.boardType === 'Offensive') return;
+
+      let possibleGridSquares = [];
+
+      this.gridArray.forEach((gridSquare) => {
+        const splitString = gridSquare.id.split('-');
+        possibleGridSquares.push(splitString[1] + ',' + splitString[2]);
+      });
+
+      console.log(possibleGridSquares);
+
+      // ship.coordsOccupied.forEach((coord) => {
+      //   possibleGridSquares.find((element) => {
+      //     element[0] === coord[0] && element[1] === coord[1];
+      //   });
+      // });
+
+      // for each coords occupied of ship, find corresponding
+      // grid square and change class
+
+      // console.log(ship.coordsOccupied);
+      //check for boardtype
+      // separate coordsOccupied[0] and coordsOccupied[1]
+      // find matching squares in gridArray
+      // console.log(this.gridArray);
     };
 
     recieveAttack = (coords) => {
@@ -255,48 +286,6 @@ initializeDom();
       if (!this.deployedShips.find((ship) => ship.sunk === false))
         return 'loss';
     };
-    generateGridSquares() {
-      if (this.player !== 'Human') return;
-
-      ///////////////////////////////////////////////////////////////////////
-      ///////////////// BEGIN DOM MANIPULATION LOGIC MODULES ///////////////////////
-      ///////////////////////////////////////////////////////////////////////
-
-      // const gridArray = [];
-      // const generateGridSquares = (board, grid, boardType) => {
-      //   // if player !== "playerOne", then generate grid squares
-      //   board.forEach((square) => {
-      //     const newSquare = document.createElement('div');
-      //     newSquare.classList.add('square');
-      //     newSquare.id =
-      //       boardType.toString() +
-      //       +square.coordsOfSquare[0].toString() +
-      //       square.coordsOfSquare[1].toString();
-      //     grid.appendChild(newSquare);
-      //     gridArray.push(newSquare);
-      //   });
-      // };
-
-      // generateGridSquares(
-      //   playerOne.defensiveBoard.squares,
-      //   playerDefensiveGridArea,
-      //   'defensive',
-      // );
-
-      // generateGridSquares(
-      //   playerOne.offensiveBoard.squares,
-      //   playerOffensiveGridArea,
-      //   'offensive',
-      // );
-
-      // function findCoorespondingGridSquares(coords, context) {
-      //   find matching squares to coords
-      //   // update classlist to new class
-      //   // can be used both for ship placement and attacks/defense
-      // }
-
-      // findCoorespondingGridSquares();
-    }
   }
 
   ///////////////////////////////////////////////////////////////////////
@@ -342,32 +331,32 @@ initializeDom();
         playerOne.defensiveBoard.setShipLengthToDeploy(),
         setShipOrientation(),
       );
-      playerOne.defensiveBoard.placeShip(
-        [6, 1],
-        playerOne.defensiveBoard.setShipLengthToDeploy(),
-        setShipOrientation(),
-      );
-      playerOne.defensiveBoard.placeShip(
-        [2, 2],
-        playerOne.defensiveBoard.setShipLengthToDeploy(),
-        setShipOrientation('X'),
-      );
-      playerOne.defensiveBoard.placeShip(
-        [5, 5],
-        playerOne.defensiveBoard.setShipLengthToDeploy(),
-        setShipOrientation(),
-      );
-      playerOne.defensiveBoard.placeShip(
-        [5, 6],
-        playerOne.defensiveBoard.setShipLengthToDeploy(),
-        setShipOrientation('X'),
-      );
+      // playerOne.defensiveBoard.placeShip(
+      //   [6, 1],
+      //   playerOne.defensiveBoard.setShipLengthToDeploy(),
+      //   setShipOrientation(),
+      // );
+      // playerOne.defensiveBoard.placeShip(
+      //   [2, 2],
+      //   playerOne.defensiveBoard.setShipLengthToDeploy(),
+      //   setShipOrientation('X'),
+      // );
+      // playerOne.defensiveBoard.placeShip(
+      //   [5, 5],
+      //   playerOne.defensiveBoard.setShipLengthToDeploy(),
+      //   setShipOrientation(),
+      // );
+      // playerOne.defensiveBoard.placeShip(
+      //   [5, 6],
+      //   playerOne.defensiveBoard.setShipLengthToDeploy(),
+      //   setShipOrientation('X'),
+      // );
 
-      playerTwo.defensiveBoard.placeShip(
-        [1, 1],
-        playerTwo.defensiveBoard.setShipLengthToDeploy(),
-        setShipOrientation(),
-      );
+      // playerTwo.defensiveBoard.placeShip(
+      //   [1, 1],
+      //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
+      //   setShipOrientation(),
+      // );
       // playerTwo.defensiveBoard.placeShip(
       //   [6, 1],
       //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
