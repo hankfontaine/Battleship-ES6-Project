@@ -136,6 +136,21 @@ initializeDom();
           square.coordsOfSquare[0] + '-' + square.coordsOfSquare[1];
         this.gridArray.push(newSquare);
         assignedArea.appendChild(newSquare);
+
+        // attack portion goes here
+
+        if (this.player === 'Human' && this.boardType === 'offensive') {
+          newSquare.addEventListener('click', function () {
+            console.log(square);
+            // let playerOneCoords = square.coordsOfSquare;
+            // let playerOneAttack =
+            //   playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
+            // playerOne.offensiveBoard.sendAttack(
+            //   playerOneCoords,
+            //   playerOneAttack,
+            // );
+          });
+        }
       });
     };
 
@@ -228,15 +243,6 @@ initializeDom();
         pegSlot.classList = 'unhit-peg';
         soughtSpace.appendChild(pegSlot);
       });
-
-      // for each coords occupied of ship, find corresponding
-      // grid square and change class
-
-      // console.log(ship.coordsOccupied);
-      //check for boardtype
-      // separate coordsOccupied[0] and coordsOccupied[1]
-      // find matching squares in gridArray
-      // console.log(this.gridArray);
     };
 
     recieveAttack = (coords) => {
