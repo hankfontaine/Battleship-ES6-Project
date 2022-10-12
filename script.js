@@ -118,14 +118,16 @@ initializeDom();
     };
 
     makeGridSquares = () => {
-      if (this.player === 'Computer') return;
+      // needs to use computer for top screen
+
+      if (this.boardType === 'offensive') return;
 
       let assignedArea;
 
-      if (this.player === 'Human' && this.boardType === 'defensive') {
+      if (this.player === 'Human') {
         assignedArea = document.querySelector('#defense-area');
       }
-      if (this.player === 'Human' && this.boardType === 'offensive') {
+      if (this.player === 'Computer') {
         assignedArea = document.querySelector('#offense-area');
       }
 
@@ -139,11 +141,31 @@ initializeDom();
 
         // attack portion goes here
 
-        // if (this.player === 'Human' && this.boardType === 'offensive') {
-        //   newSquare.addEventListener('click', function () {
-        //     console.log(square);
-        //   });
-        // }
+        if (this.player === 'Computer') {
+          newSquare.addEventListener('click', function () {
+            if (square.wasAttacked) return;
+
+            let peg = document.createElement('div');
+
+            if (square.isOccupiedBy) {
+              // const soughtShip = deployedShips.find(
+              //   (ship) => ship.name === square.isOccupiedBy,
+              // );
+              // soughtShip.hit(square.coordsOfSquare);
+
+              peg.classList.add('hit-peg');
+            } else {
+              peg.classList.add('unhit-peg');
+              square.isOccupiedBy = 'miss';
+              //   // console.log('that was a miss!');
+            }
+            newSquare.appendChild(peg);
+            square.wasAttacked = true;
+            console.log(square);
+            // this.checkForLoss();
+            // return attackedCoords.isOccupiedBy;
+          });
+        }
       });
     };
 
@@ -409,10 +431,10 @@ initializeDom();
     //   });
     // });
 
-    let playerOneCoords = [10, 10];
-    let playerOneAttack =
-      playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-    playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
+    // let playerOneCoords = [10, 10];
+    // let playerOneAttack =
+    //   playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
+    // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
 
     ///////////////////////////////////////////////////////////////////////
     /////////////////////// PLAYER TWO ATTACKS ////////////////////////////
@@ -428,25 +450,25 @@ initializeDom();
     ///////////////////////////////////////////////////////////////////////
 
     (function keepGameGoingDuringTesting() {
-      playerOneCoords = [1, 1];
-      playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-      playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
+      // playerOneCoords = [1, 1];
+      // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
+      // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
 
-      playerOneCoords = [2, 1];
-      playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-      playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
+      // playerOneCoords = [2, 1];
+      // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
+      // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
 
-      playerOneCoords = [3, 1];
-      playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-      playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
+      // playerOneCoords = [3, 1];
+      // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
+      // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
 
-      playerOneCoords = [4, 1];
-      playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-      playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
+      // playerOneCoords = [4, 1];
+      // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
+      // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
 
-      playerOneCoords = [5, 1];
-      playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-      playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
+      // playerOneCoords = [5, 1];
+      // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
+      // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
 
       if (playerOne.defensiveBoard.checkForLoss() === 'loss') {
         result = playerOne.name + ' won the game!';
