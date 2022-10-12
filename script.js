@@ -139,18 +139,11 @@ initializeDom();
 
         // attack portion goes here
 
-        if (this.player === 'Human' && this.boardType === 'offensive') {
-          newSquare.addEventListener('click', function () {
-            console.log(square);
-            // let playerOneCoords = square.coordsOfSquare;
-            // let playerOneAttack =
-            //   playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-            // playerOne.offensiveBoard.sendAttack(
-            //   playerOneCoords,
-            //   playerOneAttack,
-            // );
-          });
-        }
+        // if (this.player === 'Human' && this.boardType === 'offensive') {
+        //   newSquare.addEventListener('click', function () {
+        //     console.log(square);
+        //   });
+        // }
       });
     };
 
@@ -363,26 +356,26 @@ initializeDom();
         playerTwo.defensiveBoard.setShipLengthToDeploy(),
         setShipOrientation(),
       );
-      // playerTwo.defensiveBoard.placeShip(
-      //   [6, 1],
-      //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
-      //   setShipOrientation(),
-      // );
-      // playerTwo.defensiveBoard.placeShip(
-      //   [2, 2],
-      //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
-      //   setShipOrientation('X'),
-      // );
-      // playerTwo.defensiveBoard.placeShip(
-      //   [5, 5],
-      //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
-      //   setShipOrientation(),
-      // );
-      // playerTwo.defensiveBoard.placeShip(
-      //   [5, 6],
-      //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
-      //   setShipOrientation('X'),
-      // );
+      playerTwo.defensiveBoard.placeShip(
+        [6, 1],
+        playerTwo.defensiveBoard.setShipLengthToDeploy(),
+        setShipOrientation(),
+      );
+      playerTwo.defensiveBoard.placeShip(
+        [2, 2],
+        playerTwo.defensiveBoard.setShipLengthToDeploy(),
+        setShipOrientation('X'),
+      );
+      playerTwo.defensiveBoard.placeShip(
+        [5, 5],
+        playerTwo.defensiveBoard.setShipLengthToDeploy(),
+        setShipOrientation(),
+      );
+      playerTwo.defensiveBoard.placeShip(
+        [5, 6],
+        playerTwo.defensiveBoard.setShipLengthToDeploy(),
+        setShipOrientation('X'),
+      );
     })();
 
     ///////////////////////////////////////////////////////////////////////
@@ -403,6 +396,19 @@ initializeDom();
     /////////////////////// PLAYER ONE ATTACKS ////////////////////////////
     ///////////////////////////////////////////////////////////////////////
 
+    // playerOne.offensiveBoard.squares.forEach((square) => {
+    //   // let newSquare = document.createElement('div');
+    //   // newSquare.classList.add('square');
+    //   // newSquare.id = square.coordsOfSquare[0] + '-' + square.coordsOfSquare[1];
+    //   // this.gridArray.push(newSquare);
+    //   // assignedArea.appendChild(newSquare);
+
+    //   // attack portion goes here
+    //   square.addEventListener('click', function () {
+    //     console.log(square);
+    //   });
+    // });
+
     let playerOneCoords = [10, 10];
     let playerOneAttack =
       playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
@@ -412,10 +418,10 @@ initializeDom();
     /////////////////////// PLAYER TWO ATTACKS ////////////////////////////
     ///////////////////////////////////////////////////////////////////////
 
-    let playerTwoCoords = generateComputerMove(playerTwo);
-    let playerTwoAttack =
-      playerOne.defensiveBoard.recieveAttack(playerTwoCoords);
-    playerTwo.offensiveBoard.sendAttack(playerTwoCoords, playerTwoAttack);
+    // let playerTwoCoords = generateComputerMove(playerTwo);
+    // let playerTwoAttack =
+    //   playerOne.defensiveBoard.recieveAttack(playerTwoCoords);
+    // playerTwo.offensiveBoard.sendAttack(playerTwoCoords, playerTwoAttack);
 
     ///////////////////////////////////////////////////////////////////////
     /////////////////// TEMP ESCAPE FROM RECURSION ////////////////////////
