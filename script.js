@@ -109,8 +109,8 @@ initializeDom();
 
     makeSquares = () => {
       const squaresArray = [];
-      for (let x = 1; x <= 10; x++) {
-        for (let y = 1; y <= 10; y++) {
+      for (let x = 10; x >= 1; x--) {
+        for (let y = 10; y >= 1; y--) {
           squaresArray.push(new Square([x, y]));
         }
       }
@@ -224,6 +224,9 @@ initializeDom();
             element.id.split('-')[1] == coord[1],
         );
         soughtSpace.classList.add('occupied-square');
+        const pegSlot = document.createElement('div');
+        pegSlot.classList = 'unhit-peg';
+        soughtSpace.appendChild(pegSlot);
       });
 
       // for each coords occupied of ship, find corresponding
@@ -329,12 +332,12 @@ initializeDom();
         setShipOrientation(),
       );
       playerOne.defensiveBoard.placeShip(
-        [6, 1],
+        [7, 1],
         playerOne.defensiveBoard.setShipLengthToDeploy(),
         setShipOrientation(),
       );
       playerOne.defensiveBoard.placeShip(
-        [2, 2],
+        [2, 3],
         playerOne.defensiveBoard.setShipLengthToDeploy(),
         setShipOrientation('X'),
       );
@@ -344,16 +347,16 @@ initializeDom();
         setShipOrientation(),
       );
       playerOne.defensiveBoard.placeShip(
-        [5, 6],
+        [5, 7],
         playerOne.defensiveBoard.setShipLengthToDeploy(),
         setShipOrientation('X'),
       );
 
-      // playerTwo.defensiveBoard.placeShip(
-      //   [1, 1],
-      //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
-      //   setShipOrientation(),
-      // );
+      playerTwo.defensiveBoard.placeShip(
+        [1, 1],
+        playerTwo.defensiveBoard.setShipLengthToDeploy(),
+        setShipOrientation(),
+      );
       // playerTwo.defensiveBoard.placeShip(
       //   [6, 1],
       //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
