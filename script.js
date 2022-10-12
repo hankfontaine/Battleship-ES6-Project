@@ -133,11 +133,7 @@ initializeDom();
         let newSquare = document.createElement('div');
         newSquare.classList.add('square');
         newSquare.id =
-          this.boardType +
-          '-' +
-          square.coordsOfSquare[0] +
-          '-' +
-          square.coordsOfSquare[1];
+          square.coordsOfSquare[0] + '-' + square.coordsOfSquare[1];
         this.gridArray.push(newSquare);
         assignedArea.appendChild(newSquare);
       });
@@ -218,16 +214,17 @@ initializeDom();
 
       this.gridArray.forEach((gridSquare) => {
         const splitString = gridSquare.id.split('-');
-        possibleGridSquares.push(splitString[1] + ',' + splitString[2]);
+        possibleGridSquares.push(splitString[0]);
       });
 
-      console.log(possibleGridSquares);
-
-      // ship.coordsOccupied.forEach((coord) => {
-      //   possibleGridSquares.find((element) => {
-      //     element[0] === coord[0] && element[1] === coord[1];
-      //   });
-      // });
+      ship.coordsOccupied.forEach((coord) => {
+        const soughtSpace = this.gridArray.find(
+          (element) =>
+            element.id.split('-')[0] == coord[0] &&
+            element.id.split('-')[1] == coord[1],
+        );
+        soughtSpace.classList.add('occupied-square');
+      });
 
       // for each coords occupied of ship, find corresponding
       // grid square and change class
@@ -331,26 +328,26 @@ initializeDom();
         playerOne.defensiveBoard.setShipLengthToDeploy(),
         setShipOrientation(),
       );
-      // playerOne.defensiveBoard.placeShip(
-      //   [6, 1],
-      //   playerOne.defensiveBoard.setShipLengthToDeploy(),
-      //   setShipOrientation(),
-      // );
-      // playerOne.defensiveBoard.placeShip(
-      //   [2, 2],
-      //   playerOne.defensiveBoard.setShipLengthToDeploy(),
-      //   setShipOrientation('X'),
-      // );
-      // playerOne.defensiveBoard.placeShip(
-      //   [5, 5],
-      //   playerOne.defensiveBoard.setShipLengthToDeploy(),
-      //   setShipOrientation(),
-      // );
-      // playerOne.defensiveBoard.placeShip(
-      //   [5, 6],
-      //   playerOne.defensiveBoard.setShipLengthToDeploy(),
-      //   setShipOrientation('X'),
-      // );
+      playerOne.defensiveBoard.placeShip(
+        [6, 1],
+        playerOne.defensiveBoard.setShipLengthToDeploy(),
+        setShipOrientation(),
+      );
+      playerOne.defensiveBoard.placeShip(
+        [2, 2],
+        playerOne.defensiveBoard.setShipLengthToDeploy(),
+        setShipOrientation('X'),
+      );
+      playerOne.defensiveBoard.placeShip(
+        [5, 5],
+        playerOne.defensiveBoard.setShipLengthToDeploy(),
+        setShipOrientation(),
+      );
+      playerOne.defensiveBoard.placeShip(
+        [5, 6],
+        playerOne.defensiveBoard.setShipLengthToDeploy(),
+        setShipOrientation('X'),
+      );
 
       // playerTwo.defensiveBoard.placeShip(
       //   [1, 1],
