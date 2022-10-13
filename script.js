@@ -199,10 +199,25 @@ const fillUpdateArea = (input) => {
             };
 
             let playerTwoCoords = generateComputerMove(playerTwo);
+            let squareToRecieveAttack;
 
-            console.log(playerOne.defensiveBoard);
-            // let playerTwoAttack =
-            //   playerOne.defensiveBoard.recieveAttack(playerTwoCoords);
+            playerOne.defensiveBoard.squares.forEach((element) => {
+              if (element.coordsOfSquare[0] === playerTwoCoords[0]) {
+                if (element.coordsOfSquare[1] === playerTwoCoords[1]) {
+                  squareToRecieveAttack = element;
+                }
+              }
+            });
+
+            console.log(squareToRecieveAttack);
+
+            //
+            //
+            //
+            // psuedo goes here
+            //
+            //
+            //
           });
         }
       });
