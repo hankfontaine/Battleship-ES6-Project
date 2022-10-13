@@ -85,12 +85,12 @@ const fillUpdateArea = (input) => {
           return this.coordsWhereHit;
         }
       });
-      this.isSunk();
     };
+
     isSunk = () => {
       if (this.coordsWhereHit.length === this.coordsOccupied.length) {
         this.sunk = true;
-        // console.log(this.name + ' sunk!');
+        fillUpdateArea(this.name + ' sunk!');
       }
     };
   }
@@ -124,8 +124,6 @@ const fillUpdateArea = (input) => {
     };
 
     makeGridSquares = () => {
-      // needs to use computer for top screen
-
       if (this.boardType === 'offensive') return;
 
       let assignedArea;
@@ -151,8 +149,6 @@ const fillUpdateArea = (input) => {
         this.gridArray.push(newSquare);
         assignedArea.appendChild(newSquare);
 
-        // attack portion goes here
-
         if (this.player === 'Computer') {
           newSquare.addEventListener('click', function () {
             if (square.wasAttacked) return;
@@ -168,6 +164,7 @@ const fillUpdateArea = (input) => {
               fillUpdateArea(
                 playerTwo.name + "'s " + soughtShip.name + ' was hit!',
               );
+              soughtShip.isSunk();
 
               peg.classList.add('hit-peg');
             } else {
@@ -277,26 +274,6 @@ const fillUpdateArea = (input) => {
       });
     };
 
-    // sendAttack = (coords, wasAHit) => {
-    //   const attackedCoords = this.squares.find(
-    //     (nodeOfShip) =>
-    //       nodeOfShip.coordsOfSquare[0] === coords[0] &&
-    //       nodeOfShip.coordsOfSquare[1] === coords[1],
-    //   );
-    //   if (attackedCoords.wasAttacked) return;
-
-    //   attackedCoords.isOccupiedBy = wasAHit;
-    //   attackedCoords.wasAttacked = true;
-    // console.log(
-    //   attackedCoords.coordsOfSquare +
-    //     ' was attacked by ' +
-    //     this.player +
-    //     ' and it was a ' +
-    //     wasAHit +
-    //     '!',
-    // );
-    // };
-
     checkForLoss = () => {
       if (
         !playerTwo.defensiveBoard.deployedShips.find(
@@ -405,8 +382,7 @@ const fillUpdateArea = (input) => {
   ///////////////////////////////////////////////////////////////////////
 
   // let playerTwoCoords = generateComputerMove(playerTwo);
-  // let playerTwoAttack =
-  //   playerOne.defensiveBoard.recieveAttack(playerTwoCoords);
+  // let playerTwoAttack = playerOne.defensiveBoard.recieveAttack(playerTwoCoords);
 
   ///////////////////////////////////////////////////////////////////////
   ////////////////////////////// END ////////////////////////////////////
