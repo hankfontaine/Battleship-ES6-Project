@@ -277,44 +277,42 @@ const fillUpdateArea = (input) => {
       });
     };
 
-    sendAttack = (coords, wasAHit) => {
-      const attackedCoords = this.squares.find(
-        (nodeOfShip) =>
-          nodeOfShip.coordsOfSquare[0] === coords[0] &&
-          nodeOfShip.coordsOfSquare[1] === coords[1],
-      );
-      if (attackedCoords.wasAttacked) return;
+    // sendAttack = (coords, wasAHit) => {
+    //   const attackedCoords = this.squares.find(
+    //     (nodeOfShip) =>
+    //       nodeOfShip.coordsOfSquare[0] === coords[0] &&
+    //       nodeOfShip.coordsOfSquare[1] === coords[1],
+    //   );
+    //   if (attackedCoords.wasAttacked) return;
 
-      attackedCoords.isOccupiedBy = wasAHit;
-      attackedCoords.wasAttacked = true;
-      // console.log(
-      //   attackedCoords.coordsOfSquare +
-      //     ' was attacked by ' +
-      //     this.player +
-      //     ' and it was a ' +
-      //     wasAHit +
-      //     '!',
-      // );
-    };
+    //   attackedCoords.isOccupiedBy = wasAHit;
+    //   attackedCoords.wasAttacked = true;
+    // console.log(
+    //   attackedCoords.coordsOfSquare +
+    //     ' was attacked by ' +
+    //     this.player +
+    //     ' and it was a ' +
+    //     wasAHit +
+    //     '!',
+    // );
+    // };
+
     checkForLoss = () => {
       if (
         !playerTwo.defensiveBoard.deployedShips.find(
           (ship) => ship.sunk === false,
-        ) ||
+        )
+      ) {
+        return fillUpdateArea(playerOne.name + ' won the game!');
+      } else if (
         !playerOne.defensiveBoard.deployedShips.find(
           (ship) => ship.sunk === false,
         )
       ) {
-        console.log('test');
-        fillUpdateArea(this.player + ' loses!');
-        return 'loss';
+        return fillUpdateArea(playerOne.name + ' won the game!');
       }
     };
   }
-
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////// END DOM MANIPULATION LOGIC MODULES ////./////////////
-  ///////////////////////////////////////////////////////////////////////
 
   class Player {
     constructor(name) {
@@ -342,7 +340,6 @@ const fillUpdateArea = (input) => {
     ].coordsOfSquare;
   };
 
-  // const playRound = () => {
   const playerOne = new Player('Human');
   const playerTwo = new Player('Computer');
 
@@ -404,92 +401,14 @@ const fillUpdateArea = (input) => {
   })();
 
   ///////////////////////////////////////////////////////////////////////
-  /////////////////// CHECK FOR WIN CONDITION ///////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  if (playerOne.defensiveBoard.checkForLoss() === 'loss') {
-    result = playerOne.name + ' won the game!';
-    // console.log(result);
-    return result;
-  }
-
-  if (playerTwo.defensiveBoard.checkForLoss() === 'loss') {
-    result = playerOne.name + ' won the game!';
-    // console.log(result);
-    return result;
-  }
-  ///////////////////////////////////////////////////////////////////////
-  /////////////////////// PLAYER ONE ATTACKS ////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-
-  // playerOne.offensiveBoard.squares.forEach((square) => {
-  //   // let newSquare = document.createElement('div');
-  //   // newSquare.classList.add('square');
-  //   // newSquare.id = square.coordsOfSquare[0] + '-' + square.coordsOfSquare[1];
-  //   // this.gridArray.push(newSquare);
-  //   // assignedArea.appendChild(newSquare);
-
-  //   // attack portion goes here
-  //   square.addEventListener('click', function () {
-  //     console.log(square);
-  //   });
-  // });
-
-  // let playerOneCoords = [10, 10];
-  // let playerOneAttack =
-  //   playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-  // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
-
-  ///////////////////////////////////////////////////////////////////////
   /////////////////////// PLAYER TWO ATTACKS ////////////////////////////
   ///////////////////////////////////////////////////////////////////////
 
   // let playerTwoCoords = generateComputerMove(playerTwo);
   // let playerTwoAttack =
   //   playerOne.defensiveBoard.recieveAttack(playerTwoCoords);
-  // playerTwo.offensiveBoard.sendAttack(playerTwoCoords, playerTwoAttack);
-
-  ///////////////////////////////////////////////////////////////////////
-  /////////////////// TEMP ESCAPE FROM RECURSION ////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-
-  (function keepGameGoingDuringTesting() {
-    // playerOneCoords = [1, 1];
-    // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-    // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
-    // playerOneCoords = [2, 1];
-    // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-    // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
-    // playerOneCoords = [3, 1];
-    // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-    // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
-    // playerOneCoords = [4, 1];
-    // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-    // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
-    // playerOneCoords = [5, 1];
-    // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-    // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
-  })();
-
-  ///////////////////////////////////////////////////////////////////////
-  //////////////// PLAY CONTINUES RECURSIVELY ///////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-
-  // playRound();
 
   ///////////////////////////////////////////////////////////////////////
   ////////////////////////////// END ////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////// END OF BUSINESS LOGIC MODULES ///////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  // };
-
-  ///////////////////////////////////////////////////////////////////////
-  /////////////// END OF DOM MANIPULATION MODULES ///////////////////////
-  ///////////////////////////////////////////////////////////////////////
-
-  // (function main() {
-  //   playRound();
-  // })();
 })();
