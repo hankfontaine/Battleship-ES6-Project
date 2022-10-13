@@ -1,4 +1,7 @@
 const initializeDom = () => {
+  const body = document.querySelector('.body');
+  body.innerHTML = '';
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////// BEGIN DOM MANIPULATION LOGIC MODULES ///////////////////////
   ///////////////////////////////////////////////////////////////////////
@@ -8,8 +11,6 @@ const initializeDom = () => {
   gameUpdates.classList.add('header-text');
   gameUpdates.append('B A T T L E S H I P');
   header.appendChild(gameUpdates);
-
-  const body = document.querySelector('.body');
 
   const topGameplayWindow = document.createElement('div');
   topGameplayWindow.classList.add('main-gameplay-window');
@@ -288,15 +289,15 @@ const fillUpdateArea = (input) => {
         return;
 
       let coordsArray = [];
+
       if (orientation === 'vertical') {
         for (let i = 0; i < length; i++) {
           coordsArray.push([startingCoord[0], startingCoord[1] + i]);
         }
-      } else if (orientation === 'horizontal') {
+      } else
         for (let i = 0; i < length; i++) {
           coordsArray.push([startingCoord[0] + i, startingCoord[1]]);
         }
-      }
 
       let arrayOfSquaresToOccupy = [];
       coordsArray.forEach((coordinates) => {
@@ -417,25 +418,25 @@ const fillUpdateArea = (input) => {
       playerTwo.defensiveBoard.setShipLengthToDeploy(),
       setShipOrientation(),
     );
-    playerTwo.defensiveBoard.placeShip(
-      [6, 1],
-      playerTwo.defensiveBoard.setShipLengthToDeploy(),
-      setShipOrientation(),
-    );
-    playerTwo.defensiveBoard.placeShip(
-      [2, 2],
-      playerTwo.defensiveBoard.setShipLengthToDeploy(),
-      setShipOrientation('X'),
-    );
-    playerTwo.defensiveBoard.placeShip(
-      [5, 5],
-      playerTwo.defensiveBoard.setShipLengthToDeploy(),
-      setShipOrientation(),
-    );
-    playerTwo.defensiveBoard.placeShip(
-      [5, 6],
-      playerTwo.defensiveBoard.setShipLengthToDeploy(),
-      setShipOrientation('X'),
-    );
+    // playerTwo.defensiveBoard.placeShip(
+    //   [6, 1],
+    //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
+    //   setShipOrientation(),
+    // );
+    // playerTwo.defensiveBoard.placeShip(
+    //   [2, 2],
+    //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
+    //   setShipOrientation('X'),
+    // );
+    // playerTwo.defensiveBoard.placeShip(
+    //   [5, 5],
+    //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
+    //   setShipOrientation(),
+    // );
+    // playerTwo.defensiveBoard.placeShip(
+    //   [5, 6],
+    //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
+    //   setShipOrientation('X'),
+    // );
   })();
 })();
