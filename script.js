@@ -360,26 +360,26 @@ const fillUpdateArea = (input) => {
       playerTwo.defensiveBoard.setShipLengthToDeploy(),
       setShipOrientation(),
     );
-    // playerTwo.defensiveBoard.placeShip(
-    //   [6, 1],
-    //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
-    //   setShipOrientation(),
-    // );
-    // playerTwo.defensiveBoard.placeShip(
-    //   [2, 2],
-    //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
-    //   setShipOrientation('X'),
-    // );
-    // playerTwo.defensiveBoard.placeShip(
-    //   [5, 5],
-    //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
-    //   setShipOrientation(),
-    // );
-    // playerTwo.defensiveBoard.placeShip(
-    //   [5, 6],
-    //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
-    //   setShipOrientation('X'),
-    // );
+    playerTwo.defensiveBoard.placeShip(
+      [6, 1],
+      playerTwo.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation(),
+    );
+    playerTwo.defensiveBoard.placeShip(
+      [2, 2],
+      playerTwo.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation('X'),
+    );
+    playerTwo.defensiveBoard.placeShip(
+      [5, 5],
+      playerTwo.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation(),
+    );
+    playerTwo.defensiveBoard.placeShip(
+      [5, 6],
+      playerTwo.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation('X'),
+    );
   })();
 
   ///////////////////////////////////////////////////////////////////////
