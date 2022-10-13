@@ -22,7 +22,7 @@ body {
   align-items: center;
   justify-content: center;
   margin-bottom: 7px;
-  opacity: 0.8;
+  opacity: 0.7;
   text-align: center;
   color: #00a935;
   font-size: 17pt;
@@ -32,13 +32,11 @@ body {
 @keyframes glow {
   from {
     text-shadow: 1.7px 1.7px 1px black;
-    /* background-color: #404042; */
     color: #14dd54;
   }
 
   to {
     text-shadow: 2px 2px 1px black;
-    /* background-color: #2f2f31f5; */
     color: #119a3c;
   }
 }
@@ -101,7 +99,6 @@ body {
 .unhit-peg,
 .hit-peg,
 .empty-peg {
-  border: 0.7px solid rgb(78, 72, 72);
   border-radius: 90px;
 }
 
@@ -113,12 +110,32 @@ body {
 }
 
 .unhit-peg {
-  background-color: rgb(206, 206, 206);
-  box-shadow: 1px 1px 1px rgba(88, 200, 187, 0.687);
+  border: 1px solid rgb(50, 43, 43);
+  animation: gray 0.9s infinite alternate;
 }
 
 .hit-peg {
   border: 0.7px solid rgb(78, 72, 72);
-  background-color: rgb(253, 85, 85);
   box-shadow: 1px 1px 1px rgba(24, 64, 59, 0.687);
+  animation: fiery 0.9s infinite alternate;
+}
+
+@keyframes fiery {
+  from {
+    background-color: rgb(253, 85, 85);
+  }
+
+  to {
+    background-color: rgb(242, 62, 62);
+  }
+}
+
+@keyframes gray {
+  from {
+    background-color: rgb(206, 206, 206);
+  }
+
+  to {
+    background-color: rgba(206, 206, 206, 0.807);
+  }
 }

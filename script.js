@@ -144,11 +144,10 @@ const fillUpdateArea = (input) => {
         assignedArea.appendChild(newSquare);
 
         if (this.player === 'HAL') {
+          ///////////////////////////////////////////////////////////////////////
+          ////////////////////// PLAYER ONE ATTACKS /////////////////////////////
+          ///////////////////////////////////////////////////////////////////////
           newSquare.addEventListener('click', function () {
-            ///////////////////////////////////////////////////////////////////////
-            ////////////////////// PLAYER ONE ATTACKS /////////////////////////////
-            ///////////////////////////////////////////////////////////////////////
-
             if (square.wasAttacked) return;
 
             let peg = document.createElement('div');
@@ -181,11 +180,11 @@ const fillUpdateArea = (input) => {
 
             playerTwo.defensiveBoard.checkForLoss();
 
-            function playerTwoResponds() {
-              ///////////////////////////////////////////////////////////////////////
-              ////////////////// PLAYER TWO COUNTERATTACKS //////////////////////////
-              ///////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////
+            ////////////////// PLAYER TWO COUNTERATTACKS //////////////////////////
+            ///////////////////////////////////////////////////////////////////////
 
+            const playerTwoResponds = () => {
               const generateComputerMove = (player) => {
                 let arrayOfLegalMoves = [];
                 let arrayOfSquares = player.offensiveBoard.squares;
@@ -260,7 +259,7 @@ const fillUpdateArea = (input) => {
                   }
                 }
               });
-            }
+            };
             setTimeout(() => {
               playerTwoResponds();
             }, 2500);
