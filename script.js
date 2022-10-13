@@ -7,10 +7,10 @@ const initializeDom = () => {
   ///////////////////////////////////////////////////////////////////////
 
   const header = document.querySelector('.header');
-  const gameTitle = document.createElement('div');
-  gameTitle.classList.add('header-text');
-  // gameTitle.append('BATTLESHIP');
-  header.appendChild(gameTitle);
+  const gameUpdates = document.createElement('div');
+  gameUpdates.classList.add('header-text');
+  gameUpdates.append('BATTLESHIP');
+  header.appendChild(gameUpdates);
 
   const body = document.querySelector('.body');
 
@@ -135,7 +135,13 @@ initializeDom();
         let newSquare = document.createElement('div');
         newSquare.classList.add('square');
         newSquare.id =
-          square.coordsOfSquare[0] + '-' + square.coordsOfSquare[1];
+          square.coordsOfSquare[0] +
+          '-' +
+          square.coordsOfSquare[1] +
+          '-' +
+          this.player +
+          '-' +
+          this.boardType;
         this.gridArray.push(newSquare);
         assignedArea.appendChild(newSquare);
 
@@ -148,22 +154,33 @@ initializeDom();
             let peg = document.createElement('div');
 
             if (square.isOccupiedBy) {
-              // const soughtShip = deployedShips.find(
-              //   (ship) => ship.name === square.isOccupiedBy,
-              // );
-              // soughtShip.hit(square.coordsOfSquare);
+              const soughtShip = playerTwo.defensiveBoard.deployedShips.find(
+                (ship) => ship.name === square.isOccupiedBy,
+              );
+              soughtShip.hit(square.coordsOfSquare);
+
+              const gameDescription = document.querySelector('.header-text');
+              gameDescription.innerHTML = '';
+              gameDescription.append(
+                playerTwo.name + "'s " + soughtShip.name + ' was hit!',
+              );
 
               peg.classList.add('hit-peg');
             } else {
               peg.classList.add('unhit-peg');
               square.isOccupiedBy = 'miss';
-              //   // console.log('that was a miss!');
+
+              const gameDescription = document.querySelector('.header-text');
+              gameDescription.innerHTML = '';
+              gameDescription.append('that was a miss!');
             }
             newSquare.appendChild(peg);
             square.wasAttacked = true;
-            console.log(square);
             // this.checkForLoss();
             // return attackedCoords.isOccupiedBy;
+
+            // this.checkForLoss();
+            // return square.isOccupiedBy;
           });
         }
       });
@@ -260,30 +277,6 @@ initializeDom();
       });
     };
 
-    recieveAttack = (coords) => {
-      const attackedCoords = this.squares.find(
-        (nodeOfShip) =>
-          nodeOfShip.coordsOfSquare[0] === coords[0] &&
-          nodeOfShip.coordsOfSquare[1] === coords[1],
-      );
-      if (attackedCoords.wasAttacked) return;
-
-      if (attackedCoords.isOccupiedBy) {
-        const soughtShip = this.deployedShips.find(
-          (ship) => ship.name === attackedCoords.isOccupiedBy,
-        );
-        soughtShip.hit(attackedCoords.coordsOfSquare);
-        // console.log(this.player + "'s " + soughtShip.name + ' was hit!');
-      } else {
-        attackedCoords.isOccupiedBy = 'miss';
-        // console.log('that was a miss!');
-      }
-
-      attackedCoords.wasAttacked = true;
-      this.checkForLoss();
-      return attackedCoords.isOccupiedBy;
-    };
-
     sendAttack = (coords, wasAHit) => {
       const attackedCoords = this.squares.find(
         (nodeOfShip) =>
@@ -339,70 +332,137 @@ initializeDom();
     ].coordsOfSquare;
   };
 
-  const playRound = () => {
-    const playerOne = new Player('Human');
-    const playerTwo = new Player('Computer');
+  // const playRound = () => {
+  const playerOne = new Player('Human');
+  const playerTwo = new Player('Computer');
 
-    ///////////////////////////////////////////////////////////////////////
-    /////////////////////// SET PIECES IN PLACE ///////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    (function setPiecesInPlace() {
-      playerOne.defensiveBoard.placeShip(
-        [1, 1],
-        playerOne.defensiveBoard.setShipLengthToDeploy(),
-        setShipOrientation(),
-      );
-      playerOne.defensiveBoard.placeShip(
-        [7, 1],
-        playerOne.defensiveBoard.setShipLengthToDeploy(),
-        setShipOrientation(),
-      );
-      playerOne.defensiveBoard.placeShip(
-        [2, 3],
-        playerOne.defensiveBoard.setShipLengthToDeploy(),
-        setShipOrientation('X'),
-      );
-      playerOne.defensiveBoard.placeShip(
-        [5, 5],
-        playerOne.defensiveBoard.setShipLengthToDeploy(),
-        setShipOrientation(),
-      );
-      playerOne.defensiveBoard.placeShip(
-        [5, 7],
-        playerOne.defensiveBoard.setShipLengthToDeploy(),
-        setShipOrientation('X'),
-      );
+  ///////////////////////////////////////////////////////////////////////
+  /////////////////////// SET PIECES IN PLACE ///////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  (function setPiecesInPlace() {
+    playerOne.defensiveBoard.placeShip(
+      [1, 1],
+      playerOne.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation(),
+    );
+    playerOne.defensiveBoard.placeShip(
+      [7, 1],
+      playerOne.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation(),
+    );
+    playerOne.defensiveBoard.placeShip(
+      [2, 3],
+      playerOne.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation('X'),
+    );
+    playerOne.defensiveBoard.placeShip(
+      [5, 5],
+      playerOne.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation(),
+    );
+    playerOne.defensiveBoard.placeShip(
+      [5, 7],
+      playerOne.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation('X'),
+    );
 
-      playerTwo.defensiveBoard.placeShip(
-        [1, 1],
-        playerTwo.defensiveBoard.setShipLengthToDeploy(),
-        setShipOrientation(),
-      );
-      playerTwo.defensiveBoard.placeShip(
-        [6, 1],
-        playerTwo.defensiveBoard.setShipLengthToDeploy(),
-        setShipOrientation(),
-      );
-      playerTwo.defensiveBoard.placeShip(
-        [2, 2],
-        playerTwo.defensiveBoard.setShipLengthToDeploy(),
-        setShipOrientation('X'),
-      );
-      playerTwo.defensiveBoard.placeShip(
-        [5, 5],
-        playerTwo.defensiveBoard.setShipLengthToDeploy(),
-        setShipOrientation(),
-      );
-      playerTwo.defensiveBoard.placeShip(
-        [5, 6],
-        playerTwo.defensiveBoard.setShipLengthToDeploy(),
-        setShipOrientation('X'),
-      );
-    })();
+    playerTwo.defensiveBoard.placeShip(
+      [1, 1],
+      playerTwo.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation(),
+    );
+    playerTwo.defensiveBoard.placeShip(
+      [6, 1],
+      playerTwo.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation(),
+    );
+    playerTwo.defensiveBoard.placeShip(
+      [2, 2],
+      playerTwo.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation('X'),
+    );
+    playerTwo.defensiveBoard.placeShip(
+      [5, 5],
+      playerTwo.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation(),
+    );
+    playerTwo.defensiveBoard.placeShip(
+      [5, 6],
+      playerTwo.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation('X'),
+    );
+  })();
 
-    ///////////////////////////////////////////////////////////////////////
-    /////////////////// CHECK FOR WIN CONDITION ///////////////////////////
-    ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  /////////////////// CHECK FOR WIN CONDITION ///////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  if (playerOne.defensiveBoard.checkForLoss() === 'loss') {
+    result = playerOne.name + ' won the game!';
+    // console.log(result);
+    return result;
+  }
+
+  if (playerTwo.defensiveBoard.checkForLoss() === 'loss') {
+    result = playerOne.name + ' won the game!';
+    // console.log(result);
+    return result;
+  }
+  ///////////////////////////////////////////////////////////////////////
+  /////////////////////// PLAYER ONE ATTACKS ////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+
+  // playerOne.offensiveBoard.squares.forEach((square) => {
+  //   // let newSquare = document.createElement('div');
+  //   // newSquare.classList.add('square');
+  //   // newSquare.id = square.coordsOfSquare[0] + '-' + square.coordsOfSquare[1];
+  //   // this.gridArray.push(newSquare);
+  //   // assignedArea.appendChild(newSquare);
+
+  //   // attack portion goes here
+  //   square.addEventListener('click', function () {
+  //     console.log(square);
+  //   });
+  // });
+
+  // let playerOneCoords = [10, 10];
+  // let playerOneAttack =
+  //   playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
+  // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
+
+  ///////////////////////////////////////////////////////////////////////
+  /////////////////////// PLAYER TWO ATTACKS ////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+
+  // let playerTwoCoords = generateComputerMove(playerTwo);
+  // let playerTwoAttack =
+  //   playerOne.defensiveBoard.recieveAttack(playerTwoCoords);
+  // playerTwo.offensiveBoard.sendAttack(playerTwoCoords, playerTwoAttack);
+
+  ///////////////////////////////////////////////////////////////////////
+  /////////////////// TEMP ESCAPE FROM RECURSION ////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+
+  (function keepGameGoingDuringTesting() {
+    // playerOneCoords = [1, 1];
+    // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
+    // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
+
+    // playerOneCoords = [2, 1];
+    // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
+    // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
+
+    // playerOneCoords = [3, 1];
+    // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
+    // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
+
+    // playerOneCoords = [4, 1];
+    // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
+    // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
+
+    // playerOneCoords = [5, 1];
+    // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
+    // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
+
     if (playerOne.defensiveBoard.checkForLoss() === 'loss') {
       result = playerOne.name + ' won the game!';
       // console.log(result);
@@ -414,95 +474,28 @@ initializeDom();
       // console.log(result);
       return result;
     }
-    ///////////////////////////////////////////////////////////////////////
-    /////////////////////// PLAYER ONE ATTACKS ////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
+  })();
 
-    // playerOne.offensiveBoard.squares.forEach((square) => {
-    //   // let newSquare = document.createElement('div');
-    //   // newSquare.classList.add('square');
-    //   // newSquare.id = square.coordsOfSquare[0] + '-' + square.coordsOfSquare[1];
-    //   // this.gridArray.push(newSquare);
-    //   // assignedArea.appendChild(newSquare);
+  ///////////////////////////////////////////////////////////////////////
+  //////////////// PLAY CONTINUES RECURSIVELY ///////////////////////////
+  ///////////////////////////////////////////////////////////////////////
 
-    //   // attack portion goes here
-    //   square.addEventListener('click', function () {
-    //     console.log(square);
-    //   });
-    // });
+  // playRound();
 
-    // let playerOneCoords = [10, 10];
-    // let playerOneAttack =
-    //   playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-    // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
+  ///////////////////////////////////////////////////////////////////////
+  ////////////////////////////// END ////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////////
-    /////////////////////// PLAYER TWO ATTACKS ////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-
-    // let playerTwoCoords = generateComputerMove(playerTwo);
-    // let playerTwoAttack =
-    //   playerOne.defensiveBoard.recieveAttack(playerTwoCoords);
-    // playerTwo.offensiveBoard.sendAttack(playerTwoCoords, playerTwoAttack);
-
-    ///////////////////////////////////////////////////////////////////////
-    /////////////////// TEMP ESCAPE FROM RECURSION ////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-
-    (function keepGameGoingDuringTesting() {
-      // playerOneCoords = [1, 1];
-      // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-      // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
-
-      // playerOneCoords = [2, 1];
-      // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-      // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
-
-      // playerOneCoords = [3, 1];
-      // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-      // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
-
-      // playerOneCoords = [4, 1];
-      // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-      // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
-
-      // playerOneCoords = [5, 1];
-      // playerOneAttack = playerTwo.defensiveBoard.recieveAttack(playerOneCoords);
-      // playerOne.offensiveBoard.sendAttack(playerOneCoords, playerOneAttack);
-
-      if (playerOne.defensiveBoard.checkForLoss() === 'loss') {
-        result = playerOne.name + ' won the game!';
-        // console.log(result);
-        return result;
-      }
-
-      if (playerTwo.defensiveBoard.checkForLoss() === 'loss') {
-        result = playerOne.name + ' won the game!';
-        // console.log(result);
-        return result;
-      }
-    })();
-
-    ///////////////////////////////////////////////////////////////////////
-    //////////////// PLAY CONTINUES RECURSIVELY ///////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-
-    // playRound();
-
-    ///////////////////////////////////////////////////////////////////////
-    ////////////////////////////// END ////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////// END OF BUSINESS LOGIC MODULES ///////////////////////
-    ///////////////////////////////////////////////////////////////////////
-  };
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////// END OF BUSINESS LOGIC MODULES ///////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  // };
 
   ///////////////////////////////////////////////////////////////////////
   /////////////// END OF DOM MANIPULATION MODULES ///////////////////////
   ///////////////////////////////////////////////////////////////////////
 
-  (function main() {
-    playRound();
-  })();
+  // (function main() {
+  //   playRound();
+  // })();
 })();
