@@ -91,7 +91,7 @@ body {
 }
 
 .empty-peg {
-  background-color: white;
+  background-color: rgb(65, 59, 59);
   height: 14px;
   width: 14px;
 }
@@ -132,10 +132,10 @@ body {
 
 @keyframes gray {
   from {
-    background-color: rgb(206, 206, 206);
+    background-color: rgba(57, 105, 201, 0.684);
   }
 
   to {
-    background-color: rgba(206, 206, 206, 0.807);
+    background-color: rgba(12, 69, 203, 0.369);
   }
 }

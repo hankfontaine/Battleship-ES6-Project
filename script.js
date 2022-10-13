@@ -122,12 +122,9 @@ const fillUpdateArea = (input) => {
 
       let assignedArea;
 
-      if (this.player === 'Hank') {
-        assignedArea = document.querySelector('#defense-area');
-      }
-      if (this.player === 'HAL') {
+      if (this.player === 'HAL')
         assignedArea = document.querySelector('#offense-area');
-      }
+      else assignedArea = document.querySelector('#defense-area');
 
       this.squares.forEach((square) => {
         let newSquare = document.createElement('div');
@@ -140,6 +137,7 @@ const fillUpdateArea = (input) => {
           this.player +
           '-' +
           this.boardType;
+
         this.gridArray.push(newSquare);
         assignedArea.appendChild(newSquare);
 
@@ -158,22 +156,19 @@ const fillUpdateArea = (input) => {
               );
               soughtShip.hit(square.coordsOfSquare);
 
-              fillUpdateArea(
-                playerTwo.name + "'s " + soughtShip.name + ' was hit!',
-              );
-
-              if (soughtShip.isSunk()) {
+              if (soughtShip.isSunk())
                 fillUpdateArea(
                   playerTwo.name + "'s " + soughtShip.name + ' was sunk!',
                 );
-              }
+              else
+                fillUpdateArea(
+                  playerTwo.name + "'s " + soughtShip.name + ' was hit!',
+                );
 
               peg.classList.add('hit-peg');
             } else {
-              peg.classList.add('unhit-peg');
-              square.isOccupiedBy = 'miss';
-
               fillUpdateArea('That was a miss by ' + playerOne.name + '!');
+              peg.classList.add('unhit-peg');
             }
             newSquare.appendChild(peg);
             square.wasAttacked = true;
@@ -187,12 +182,13 @@ const fillUpdateArea = (input) => {
             const playerTwoResponds = () => {
               const generateComputerMove = (player) => {
                 let arrayOfLegalMoves = [];
-                let arrayOfSquares = player.offensiveBoard.squares;
-                arrayOfSquares.forEach((square) => {
+
+                player.offensiveBoard.squares.forEach((square) => {
                   if (!square.wasAttacked) {
                     arrayOfLegalMoves.push(square);
                   }
                 });
+
                 return arrayOfLegalMoves[
                   Math.floor(Math.random() * arrayOfLegalMoves.length)
                 ].coordsOfSquare;
@@ -214,15 +210,18 @@ const fillUpdateArea = (input) => {
                           (ship) =>
                             ship.name === squareToRecieveAttack.isOccupiedBy,
                         );
+
                       soughtDefenseShip.hit(
                         squareToRecieveAttack.coordsOfSquare,
                       );
+
                       fillUpdateArea(
                         playerOne.name +
                           "'s " +
                           soughtDefenseShip.name +
                           ' was hit!',
                       );
+
                       if (soughtDefenseShip.isSunk()) {
                         fillUpdateArea(
                           playerOne.name +
@@ -231,13 +230,14 @@ const fillUpdateArea = (input) => {
                             ' was sunk!',
                         );
                       }
+
                       defensePeg.classList.add('hit-peg');
                     } else {
-                      defensePeg.classList.add('unhit-peg');
-                      squareToRecieveAttack.isOccupiedBy = 'miss';
                       fillUpdateArea(
                         'That was a miss by ' + playerTwo.name + '!',
                       );
+
+                      defensePeg.classList.add('unhit-peg');
                     }
 
                     const soughtSpaceToPeg = document.getElementById(
@@ -282,17 +282,10 @@ const fillUpdateArea = (input) => {
 
     placeShip = (startingCoord, length, orientation) => {
       if (
-        startingCoord[0] < 1 ||
-        startingCoord[0] > 10 ||
-        startingCoord[1] < 1 ||
-        startingCoord[1] > 10 ||
         (startingCoord[0] + length > 11 && orientation === 'horizontal') ||
-        (startingCoord[1] + length > 11 && orientation === 'vertical') ||
-        !length ||
-        !startingCoord ||
-        !orientation
+        (startingCoord[1] + length > 11 && orientation === 'vertical')
       )
-        return 'error';
+        return;
 
       let coordsArray = [];
       if (orientation === 'vertical') {
