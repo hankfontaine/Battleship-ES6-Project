@@ -90,7 +90,7 @@ const fillUpdateArea = (input) => {
     isSunk = () => {
       if (this.coordsWhereHit.length === this.coordsOccupied.length) {
         this.sunk = true;
-        fillUpdateArea(this.name + ' sunk!');
+        return this.name;
       }
     };
   }
@@ -164,7 +164,12 @@ const fillUpdateArea = (input) => {
               fillUpdateArea(
                 playerTwo.name + "'s " + soughtShip.name + ' was hit!',
               );
-              soughtShip.isSunk();
+
+              if (soughtShip.isSunk()) {
+                fillUpdateArea(
+                  playerTwo.name + "'s " + soughtShip.name + ' was sunk!',
+                );
+              }
 
               peg.classList.add('hit-peg');
             } else {
