@@ -213,11 +213,40 @@ const fillUpdateArea = (input) => {
 
             //
             //
-            //
-            // psuedo goes here
-            //
+            // needs to find corresponding dom manip square
             //
             //
+            // let defensePeg = document.createElement('div');
+
+            // if (squareToRecieveAttack.isOccupiedBy) {
+            //   let soughtDefenseShip =
+            //     playerOne.defensiveBoard.deployedShips.find(
+            //       (ship) => ship.name === squareToRecieveAttack.isOccupiedBy,
+            //     );
+            //   soughtDefenseShip.hit(squareToRecieveAttack.coordsOfSquare);
+
+            //   fillUpdateArea(
+            //     playerOne.name + "'s " + soughtDefenseShip.name + ' was hit!',
+            //   );
+
+            //   if (soughtDefenseShip.isSunk()) {
+            //     fillUpdateArea(
+            //       playerOne.name +
+            //         "'s " +
+            //         soughtDefenseShip.name +
+            //         ' was sunk!',
+            //     );
+            //   }
+            //   defensePeg.classList.add('hit-peg');
+            // } else {
+            //   defensePeg.classList.add('unhit-peg');
+            //   squareToRecieveAttack.isOccupiedBy = 'miss';
+            //   fillUpdateArea('That was a miss by ' + playerTwo.name + '!');
+            // }
+
+            // squareToRecieveAttack.appendChild(defensePeg);
+            // squareToRecieveAttack.wasAttacked = true;
+            // playerOne.defensiveBoard.checkForLoss();
           });
         }
       });
