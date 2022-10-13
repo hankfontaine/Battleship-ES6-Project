@@ -21,9 +21,9 @@ body {
   border-radius: 10px;
   align-items: center;
   justify-content: center;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
   opacity: 0.8;
-
+  text-align: center;
   color: #00a935;
   font-size: 17pt;
   animation: glow 0.9s infinite alternate;

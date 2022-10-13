@@ -1,6 +1,3 @@
-///////////////////////////////////////////////////////////////////////
-///////////// DOM MANIPULATION GOES HERE USING PLAYER ONE /////////////
-///////////////////////////////////////////////////////////////////////
 const initializeDom = () => {
   ///////////////////////////////////////////////////////////////////////
   ///////////////// BEGIN DOM MANIPULATION LOGIC MODULES ///////////////////////
@@ -60,9 +57,6 @@ const fillUpdateArea = (input) => {
 };
 
 (function runModulesOfGame() {
-  ///////////////////////////////////////////////////////////////////////
-  /////////////// BEGIN CODE OF MODULES PROJECT /////////////////////////
-  ///////////////////////////////////////////////////////////////////////
   class Square {
     constructor(coordsOfSquare) {
       this.coordsOfSquare = coordsOfSquare;
@@ -151,6 +145,10 @@ const fillUpdateArea = (input) => {
 
         if (this.player === 'Computer') {
           newSquare.addEventListener('click', function () {
+            ///////////////////////////////////////////////////////////////////////
+            ////////////////////// PLAYER ONE ATTACKS /////////////////////////////
+            ///////////////////////////////////////////////////////////////////////
+
             if (square.wasAttacked) return;
 
             let peg = document.createElement('div');
@@ -182,7 +180,29 @@ const fillUpdateArea = (input) => {
             square.wasAttacked = true;
 
             playerTwo.defensiveBoard.checkForLoss();
-            return square.isOccupiedBy;
+
+            ///////////////////////////////////////////////////////////////////////
+            ////////////////// PLAYER TWO COUNTERATTACKS //////////////////////////
+            ///////////////////////////////////////////////////////////////////////
+
+            const generateComputerMove = (player) => {
+              let arrayOfLegalMoves = [];
+              let arrayOfSquares = player.offensiveBoard.squares;
+              arrayOfSquares.forEach((square) => {
+                if (!square.wasAttacked) {
+                  arrayOfLegalMoves.push(square);
+                }
+              });
+              return arrayOfLegalMoves[
+                Math.floor(Math.random() * arrayOfLegalMoves.length)
+              ].coordsOfSquare;
+            };
+
+            let playerTwoCoords = generateComputerMove(playerTwo);
+
+            console.log(playerOne.defensiveBoard);
+            // let playerTwoAttack =
+            //   playerOne.defensiveBoard.recieveAttack(playerTwoCoords);
           });
         }
       });
@@ -309,25 +329,9 @@ const fillUpdateArea = (input) => {
     return 'horizontal';
   };
 
-  const generateComputerMove = (player) => {
-    let arrayOfLegalMoves = [];
-    let arrayOfSquares = player.offensiveBoard.squares;
-    arrayOfSquares.forEach((square) => {
-      if (!square.wasAttacked) {
-        arrayOfLegalMoves.push(square);
-      }
-    });
-    return arrayOfLegalMoves[
-      Math.floor(Math.random() * arrayOfLegalMoves.length)
-    ].coordsOfSquare;
-  };
-
   const playerOne = new Player('Hank');
   const playerTwo = new Player('Computer');
 
-  ///////////////////////////////////////////////////////////////////////
-  /////////////////////// SET PIECES IN PLACE ///////////////////////////
-  ///////////////////////////////////////////////////////////////////////
   (function setPiecesInPlace() {
     playerOne.defensiveBoard.placeShip(
       [1, 1],
@@ -381,15 +385,4 @@ const fillUpdateArea = (input) => {
       setShipOrientation('X'),
     );
   })();
-
-  ///////////////////////////////////////////////////////////////////////
-  /////////////////////// PLAYER TWO ATTACKS ////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-
-  // let playerTwoCoords = generateComputerMove(playerTwo);
-  // let playerTwoAttack = playerOne.defensiveBoard.recieveAttack(playerTwoCoords);
-
-  ///////////////////////////////////////////////////////////////////////
-  ////////////////////////////// END ////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
 })();
