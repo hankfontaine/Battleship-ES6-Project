@@ -125,7 +125,7 @@ const fillUpdateArea = (input) => {
       if (this.player === 'Hank') {
         assignedArea = document.querySelector('#defense-area');
       }
-      if (this.player === 'Computer') {
+      if (this.player === 'HAL') {
         assignedArea = document.querySelector('#offense-area');
       }
 
@@ -143,7 +143,7 @@ const fillUpdateArea = (input) => {
         this.gridArray.push(newSquare);
         assignedArea.appendChild(newSquare);
 
-        if (this.player === 'Computer') {
+        if (this.player === 'HAL') {
           newSquare.addEventListener('click', function () {
             ///////////////////////////////////////////////////////////////////////
             ////////////////////// PLAYER ONE ATTACKS /////////////////////////////
@@ -174,7 +174,7 @@ const fillUpdateArea = (input) => {
               peg.classList.add('unhit-peg');
               square.isOccupiedBy = 'miss';
 
-              fillUpdateArea('That was a miss!');
+              fillUpdateArea('That was a miss by ' + playerOne.name + '!');
             }
             newSquare.appendChild(peg);
             square.wasAttacked = true;
@@ -201,44 +201,62 @@ const fillUpdateArea = (input) => {
             let playerTwoCoords = generateComputerMove(playerTwo);
             let squareToRecieveAttack;
 
-            playerOne.defensiveBoard.squares.forEach((element) => {
-              if (element.coordsOfSquare[0] === playerTwoCoords[0]) {
-                if (element.coordsOfSquare[1] === playerTwoCoords[1]) {
-                  squareToRecieveAttack = element;
+            playerOne.defensiveBoard.squares.forEach((soughtSq) => {
+              if (soughtSq.coordsOfSquare[0] === playerTwoCoords[0]) {
+                if (soughtSq.coordsOfSquare[1] === playerTwoCoords[1]) {
+                  squareToRecieveAttack = soughtSq;
+
+                  let defensePeg = document.createElement('div');
+
+                  if (squareToRecieveAttack.isOccupiedBy) {
+                    let soughtDefenseShip =
+                      playerOne.defensiveBoard.deployedShips.find(
+                        (ship) =>
+                          ship.name === squareToRecieveAttack.isOccupiedBy,
+                      );
+                    soughtDefenseShip.hit(squareToRecieveAttack.coordsOfSquare);
+                    fillUpdateArea(
+                      playerOne.name +
+                        "'s " +
+                        soughtDefenseShip.name +
+                        ' was hit!',
+                    );
+                    if (soughtDefenseShip.isSunk()) {
+                      fillUpdateArea(
+                        playerOne.name +
+                          "'s " +
+                          soughtDefenseShip.name +
+                          ' was sunk!',
+                      );
+                    }
+                    defensePeg.classList.add('hit-peg');
+                  } else {
+                    defensePeg.classList.add('unhit-peg');
+                    squareToRecieveAttack.isOccupiedBy = 'miss';
+                    fillUpdateArea(
+                      'That was a miss by ' + playerTwo.name + '!',
+                    );
+                  }
+
+                  const soughtSpaceToPeg = document.getElementById(
+                    soughtSq.coordsOfSquare[0] +
+                      '-' +
+                      soughtSq.coordsOfSquare[1] +
+                      '-' +
+                      playerOne.name +
+                      '-' +
+                      'defensive',
+                  );
+
+                  soughtSpaceToPeg.innerHTML = '';
+
+                  soughtSpaceToPeg.appendChild(defensePeg);
+
+                  squareToRecieveAttack.wasAttacked = true;
+                  playerOne.defensiveBoard.checkForLoss();
                 }
               }
             });
-
-            let defensePeg = document.createElement('div');
-
-            if (squareToRecieveAttack.isOccupiedBy) {
-              let soughtDefenseShip =
-                playerOne.defensiveBoard.deployedShips.find(
-                  (ship) => ship.name === squareToRecieveAttack.isOccupiedBy,
-                );
-              soughtDefenseShip.hit(squareToRecieveAttack.coordsOfSquare);
-              fillUpdateArea(
-                playerOne.name + "'s " + soughtDefenseShip.name + ' was hit!',
-              );
-              if (soughtDefenseShip.isSunk()) {
-                fillUpdateArea(
-                  playerOne.name +
-                    "'s " +
-                    soughtDefenseShip.name +
-                    ' was sunk!',
-                );
-              }
-              defensePeg.classList.add('hit-peg');
-              // } else {
-              //   defensePeg.classList.add('unhit-peg');
-              //   squareToRecieveAttack.isOccupiedBy = 'miss';
-              //   fillUpdateArea('That was a miss by ' + playerTwo.name + '!');
-            }
-
-            squareToRecieveAttack.innerHTML = '';
-            // squareToRecieveAttack.appendChild(defensePeg);
-            squareToRecieveAttack.wasAttacked = true;
-            playerOne.defensiveBoard.checkForLoss();
           });
         }
       });
@@ -313,7 +331,7 @@ const fillUpdateArea = (input) => {
     };
 
     showShipOnscreen = (ship) => {
-      if (this.player === 'Computer' || this.boardType === 'Offensive') return;
+      if (this.player === 'HAL' || this.boardType === 'Offensive') return;
 
       let possibleGridSquares = [];
 
@@ -366,7 +384,7 @@ const fillUpdateArea = (input) => {
   };
 
   const playerOne = new Player('Hank');
-  const playerTwo = new Player('Computer');
+  const playerTwo = new Player('HAL');
 
   (function setPiecesInPlace() {
     playerOne.defensiveBoard.placeShip(
@@ -374,26 +392,26 @@ const fillUpdateArea = (input) => {
       playerOne.defensiveBoard.setShipLengthToDeploy(),
       setShipOrientation(),
     );
-    // playerOne.defensiveBoard.placeShip(
-    //   [7, 1],
-    //   playerOne.defensiveBoard.setShipLengthToDeploy(),
-    //   setShipOrientation(),
-    // );
-    // playerOne.defensiveBoard.placeShip(
-    //   [2, 3],
-    //   playerOne.defensiveBoard.setShipLengthToDeploy(),
-    //   setShipOrientation('X'),
-    // );
-    // playerOne.defensiveBoard.placeShip(
-    //   [5, 5],
-    //   playerOne.defensiveBoard.setShipLengthToDeploy(),
-    //   setShipOrientation(),
-    // );
-    // playerOne.defensiveBoard.placeShip(
-    //   [5, 7],
-    //   playerOne.defensiveBoard.setShipLengthToDeploy(),
-    //   setShipOrientation('X'),
-    // );
+    playerOne.defensiveBoard.placeShip(
+      [7, 1],
+      playerOne.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation(),
+    );
+    playerOne.defensiveBoard.placeShip(
+      [2, 3],
+      playerOne.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation('X'),
+    );
+    playerOne.defensiveBoard.placeShip(
+      [5, 5],
+      playerOne.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation(),
+    );
+    playerOne.defensiveBoard.placeShip(
+      [5, 7],
+      playerOne.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation('X'),
+    );
 
     playerTwo.defensiveBoard.placeShip(
       [1, 1],
