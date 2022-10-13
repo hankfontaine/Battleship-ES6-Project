@@ -209,44 +209,36 @@ const fillUpdateArea = (input) => {
               }
             });
 
-            console.log(squareToRecieveAttack);
+            let defensePeg = document.createElement('div');
 
-            //
-            //
-            // needs to find corresponding dom manip square
-            //
-            //
-            // let defensePeg = document.createElement('div');
+            if (squareToRecieveAttack.isOccupiedBy) {
+              let soughtDefenseShip =
+                playerOne.defensiveBoard.deployedShips.find(
+                  (ship) => ship.name === squareToRecieveAttack.isOccupiedBy,
+                );
+              soughtDefenseShip.hit(squareToRecieveAttack.coordsOfSquare);
+              fillUpdateArea(
+                playerOne.name + "'s " + soughtDefenseShip.name + ' was hit!',
+              );
+              if (soughtDefenseShip.isSunk()) {
+                fillUpdateArea(
+                  playerOne.name +
+                    "'s " +
+                    soughtDefenseShip.name +
+                    ' was sunk!',
+                );
+              }
+              defensePeg.classList.add('hit-peg');
+              // } else {
+              //   defensePeg.classList.add('unhit-peg');
+              //   squareToRecieveAttack.isOccupiedBy = 'miss';
+              //   fillUpdateArea('That was a miss by ' + playerTwo.name + '!');
+            }
 
-            // if (squareToRecieveAttack.isOccupiedBy) {
-            //   let soughtDefenseShip =
-            //     playerOne.defensiveBoard.deployedShips.find(
-            //       (ship) => ship.name === squareToRecieveAttack.isOccupiedBy,
-            //     );
-            //   soughtDefenseShip.hit(squareToRecieveAttack.coordsOfSquare);
-
-            //   fillUpdateArea(
-            //     playerOne.name + "'s " + soughtDefenseShip.name + ' was hit!',
-            //   );
-
-            //   if (soughtDefenseShip.isSunk()) {
-            //     fillUpdateArea(
-            //       playerOne.name +
-            //         "'s " +
-            //         soughtDefenseShip.name +
-            //         ' was sunk!',
-            //     );
-            //   }
-            //   defensePeg.classList.add('hit-peg');
-            // } else {
-            //   defensePeg.classList.add('unhit-peg');
-            //   squareToRecieveAttack.isOccupiedBy = 'miss';
-            //   fillUpdateArea('That was a miss by ' + playerTwo.name + '!');
-            // }
-
+            squareToRecieveAttack.innerHTML = '';
             // squareToRecieveAttack.appendChild(defensePeg);
-            // squareToRecieveAttack.wasAttacked = true;
-            // playerOne.defensiveBoard.checkForLoss();
+            squareToRecieveAttack.wasAttacked = true;
+            playerOne.defensiveBoard.checkForLoss();
           });
         }
       });
@@ -355,7 +347,7 @@ const fillUpdateArea = (input) => {
           (ship) => ship.sunk === false,
         )
       ) {
-        return fillUpdateArea(playerOne.name + ' won the game!');
+        return fillUpdateArea(playerTwo.name + ' won the game!');
       }
     };
   }
@@ -382,26 +374,26 @@ const fillUpdateArea = (input) => {
       playerOne.defensiveBoard.setShipLengthToDeploy(),
       setShipOrientation(),
     );
-    playerOne.defensiveBoard.placeShip(
-      [7, 1],
-      playerOne.defensiveBoard.setShipLengthToDeploy(),
-      setShipOrientation(),
-    );
-    playerOne.defensiveBoard.placeShip(
-      [2, 3],
-      playerOne.defensiveBoard.setShipLengthToDeploy(),
-      setShipOrientation('X'),
-    );
-    playerOne.defensiveBoard.placeShip(
-      [5, 5],
-      playerOne.defensiveBoard.setShipLengthToDeploy(),
-      setShipOrientation(),
-    );
-    playerOne.defensiveBoard.placeShip(
-      [5, 7],
-      playerOne.defensiveBoard.setShipLengthToDeploy(),
-      setShipOrientation('X'),
-    );
+    // playerOne.defensiveBoard.placeShip(
+    //   [7, 1],
+    //   playerOne.defensiveBoard.setShipLengthToDeploy(),
+    //   setShipOrientation(),
+    // );
+    // playerOne.defensiveBoard.placeShip(
+    //   [2, 3],
+    //   playerOne.defensiveBoard.setShipLengthToDeploy(),
+    //   setShipOrientation('X'),
+    // );
+    // playerOne.defensiveBoard.placeShip(
+    //   [5, 5],
+    //   playerOne.defensiveBoard.setShipLengthToDeploy(),
+    //   setShipOrientation(),
+    // );
+    // playerOne.defensiveBoard.placeShip(
+    //   [5, 7],
+    //   playerOne.defensiveBoard.setShipLengthToDeploy(),
+    //   setShipOrientation('X'),
+    // );
 
     playerTwo.defensiveBoard.placeShip(
       [1, 1],
