@@ -92,20 +92,33 @@ body {
   background-color: black;
 }
 
-.unhit-peg {
+.empty-peg {
+  background-color: white;
+  height: 14px;
+  width: 14px;
+}
+
+.unhit-peg,
+.hit-peg,
+.empty-peg {
   border: 0.7px solid rgb(78, 72, 72);
-  background-color: rgb(206, 206, 206);
-  box-shadow: 1px 1px 1px rgba(88, 200, 187, 0.687);
+  border-radius: 90px;
+}
+
+.unhit-peg,
+.hit-peg {
   border-radius: 90px;
   height: 12px;
   width: 12px;
+}
+
+.unhit-peg {
+  background-color: rgb(206, 206, 206);
+  box-shadow: 1px 1px 1px rgba(88, 200, 187, 0.687);
 }
 
 .hit-peg {
   border: 0.7px solid rgb(78, 72, 72);
   background-color: rgb(253, 85, 85);
   box-shadow: 1px 1px 1px rgba(24, 64, 59, 0.687);
-  border-radius: 90px;
-  height: 12px;
-  width: 12px;
 }

@@ -181,82 +181,89 @@ const fillUpdateArea = (input) => {
 
             playerTwo.defensiveBoard.checkForLoss();
 
-            ///////////////////////////////////////////////////////////////////////
-            ////////////////// PLAYER TWO COUNTERATTACKS //////////////////////////
-            ///////////////////////////////////////////////////////////////////////
+            function playerTwoResponds() {
+              ///////////////////////////////////////////////////////////////////////
+              ////////////////// PLAYER TWO COUNTERATTACKS //////////////////////////
+              ///////////////////////////////////////////////////////////////////////
 
-            const generateComputerMove = (player) => {
-              let arrayOfLegalMoves = [];
-              let arrayOfSquares = player.offensiveBoard.squares;
-              arrayOfSquares.forEach((square) => {
-                if (!square.wasAttacked) {
-                  arrayOfLegalMoves.push(square);
-                }
-              });
-              return arrayOfLegalMoves[
-                Math.floor(Math.random() * arrayOfLegalMoves.length)
-              ].coordsOfSquare;
-            };
+              const generateComputerMove = (player) => {
+                let arrayOfLegalMoves = [];
+                let arrayOfSquares = player.offensiveBoard.squares;
+                arrayOfSquares.forEach((square) => {
+                  if (!square.wasAttacked) {
+                    arrayOfLegalMoves.push(square);
+                  }
+                });
+                return arrayOfLegalMoves[
+                  Math.floor(Math.random() * arrayOfLegalMoves.length)
+                ].coordsOfSquare;
+              };
 
-            let playerTwoCoords = generateComputerMove(playerTwo);
-            let squareToRecieveAttack;
+              let playerTwoCoords = generateComputerMove(playerTwo);
+              let squareToRecieveAttack;
 
-            playerOne.defensiveBoard.squares.forEach((soughtSq) => {
-              if (soughtSq.coordsOfSquare[0] === playerTwoCoords[0]) {
-                if (soughtSq.coordsOfSquare[1] === playerTwoCoords[1]) {
-                  squareToRecieveAttack = soughtSq;
+              playerOne.defensiveBoard.squares.forEach((soughtSq) => {
+                if (soughtSq.coordsOfSquare[0] === playerTwoCoords[0]) {
+                  if (soughtSq.coordsOfSquare[1] === playerTwoCoords[1]) {
+                    squareToRecieveAttack = soughtSq;
 
-                  let defensePeg = document.createElement('div');
+                    let defensePeg = document.createElement('div');
 
-                  if (squareToRecieveAttack.isOccupiedBy) {
-                    let soughtDefenseShip =
-                      playerOne.defensiveBoard.deployedShips.find(
-                        (ship) =>
-                          ship.name === squareToRecieveAttack.isOccupiedBy,
+                    if (squareToRecieveAttack.isOccupiedBy) {
+                      let soughtDefenseShip =
+                        playerOne.defensiveBoard.deployedShips.find(
+                          (ship) =>
+                            ship.name === squareToRecieveAttack.isOccupiedBy,
+                        );
+                      soughtDefenseShip.hit(
+                        squareToRecieveAttack.coordsOfSquare,
                       );
-                    soughtDefenseShip.hit(squareToRecieveAttack.coordsOfSquare);
-                    fillUpdateArea(
-                      playerOne.name +
-                        "'s " +
-                        soughtDefenseShip.name +
-                        ' was hit!',
-                    );
-                    if (soughtDefenseShip.isSunk()) {
                       fillUpdateArea(
                         playerOne.name +
                           "'s " +
                           soughtDefenseShip.name +
-                          ' was sunk!',
+                          ' was hit!',
+                      );
+                      if (soughtDefenseShip.isSunk()) {
+                        fillUpdateArea(
+                          playerOne.name +
+                            "'s " +
+                            soughtDefenseShip.name +
+                            ' was sunk!',
+                        );
+                      }
+                      defensePeg.classList.add('hit-peg');
+                    } else {
+                      defensePeg.classList.add('unhit-peg');
+                      squareToRecieveAttack.isOccupiedBy = 'miss';
+                      fillUpdateArea(
+                        'That was a miss by ' + playerTwo.name + '!',
                       );
                     }
-                    defensePeg.classList.add('hit-peg');
-                  } else {
-                    defensePeg.classList.add('unhit-peg');
-                    squareToRecieveAttack.isOccupiedBy = 'miss';
-                    fillUpdateArea(
-                      'That was a miss by ' + playerTwo.name + '!',
+
+                    const soughtSpaceToPeg = document.getElementById(
+                      soughtSq.coordsOfSquare[0] +
+                        '-' +
+                        soughtSq.coordsOfSquare[1] +
+                        '-' +
+                        playerOne.name +
+                        '-' +
+                        'defensive',
                     );
+
+                    soughtSpaceToPeg.innerHTML = '';
+
+                    soughtSpaceToPeg.appendChild(defensePeg);
+
+                    squareToRecieveAttack.wasAttacked = true;
+                    playerOne.defensiveBoard.checkForLoss();
                   }
-
-                  const soughtSpaceToPeg = document.getElementById(
-                    soughtSq.coordsOfSquare[0] +
-                      '-' +
-                      soughtSq.coordsOfSquare[1] +
-                      '-' +
-                      playerOne.name +
-                      '-' +
-                      'defensive',
-                  );
-
-                  soughtSpaceToPeg.innerHTML = '';
-
-                  soughtSpaceToPeg.appendChild(defensePeg);
-
-                  squareToRecieveAttack.wasAttacked = true;
-                  playerOne.defensiveBoard.checkForLoss();
                 }
-              }
-            });
+              });
+            }
+            setTimeout(() => {
+              playerTwoResponds();
+            }, 2500);
           });
         }
       });
@@ -348,7 +355,7 @@ const fillUpdateArea = (input) => {
         );
         soughtSpace.classList.add('occupied-square');
         const pegSlot = document.createElement('div');
-        pegSlot.classList = 'unhit-peg';
+        pegSlot.classList = 'empty-peg';
         soughtSpace.appendChild(pegSlot);
       });
     };
