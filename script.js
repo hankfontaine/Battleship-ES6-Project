@@ -57,7 +57,7 @@ const fillUpdateArea = (input) => {
   gameDescription.append(input);
 };
 
-(function runModulesOfGame() {
+const runModulesOfGame = () => {
   class Square {
     constructor(coordsOfSquare) {
       this.coordsOfSquare = coordsOfSquare;
@@ -174,7 +174,7 @@ const fillUpdateArea = (input) => {
             newSquare.appendChild(peg);
             square.wasAttacked = true;
 
-            playerTwo.defensiveBoard.checkForLoss();
+            if (playerTwo.defensiveBoard.checkForLoss()) return;
 
             ///////////////////////////////////////////////////////////////////////
             ////////////////// PLAYER TWO COUNTERATTACKS //////////////////////////
@@ -256,7 +256,7 @@ const fillUpdateArea = (input) => {
                     soughtSpaceToPeg.appendChild(defensePeg);
 
                     squareToRecieveAttack.wasAttacked = true;
-                    playerOne.defensiveBoard.checkForLoss();
+                    if (playerOne.defensiveBoard.checkForLoss()) return;
                   }
                 }
               });
@@ -354,23 +354,40 @@ const fillUpdateArea = (input) => {
     };
 
     checkForLoss = () => {
+      let winner;
       if (
         !playerTwo.defensiveBoard.deployedShips.find(
           (ship) => ship.sunk === false,
         )
       ) {
-        return fillUpdateArea(playerOne.name + ' won the game!');
+        winner = playerOne;
+        fillUpdateArea(playerOne.name + ' won the game!');
       } else if (
         !playerOne.defensiveBoard.deployedShips.find(
           (ship) => ship.sunk === false,
         )
       ) {
-        return fillUpdateArea(playerTwo.name + ' won the game!');
+        winner = playerTwo;
+        fillUpdateArea(playerTwo.name + ' won the game!');
       }
+      if (winner) {
+        const body = document.querySelector('.body');
+        body.innerHTML = '';
+
+        const header = document.querySelector('.header');
+
+        const playAgainButton = document.createElement('button');
+        playAgainButton.classList.add('play-again');
+        playAgainButton.append('PLAY AGAIN');
+        header.appendChild(playAgainButton);
+
+        playAgainButton.onclick = () => {
+          window.location.reload();
+        };
+      }
+      return winner;
     };
   }
-
-  console.log('test');
 
   class Player {
     constructor(name) {
@@ -441,4 +458,5 @@ const fillUpdateArea = (input) => {
     //   setShipOrientation('X'),
     // );
   })();
-})();
+};
+runModulesOfGame();

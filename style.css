@@ -1,5 +1,6 @@
 body {
-  background-color: rgb(103, 103, 222);
+  animation: water 0.9s infinite alternate;
+  /* background-color: rgb(103, 103, 222); */
   font-family: 'Poly', serif;
 }
 
@@ -11,6 +12,12 @@ body {
   height: 100vh;
   width: 100vw;
   margin: 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .header-text {
@@ -138,4 +145,31 @@ body {
   to {
     background-color: rgba(12, 69, 203, 0.369);
   }
+}
+
+@keyframes water {
+  from {
+    background-color: rgba(38, 87, 184, 0.684);
+  }
+
+  to {
+    background-color: rgba(19, 77, 191, 0.684);
+  }
+}
+
+.play-again {
+  text-shadow: 1.3px 1.3px 1px black;
+  height: 4vh;
+  font-style: italic;
+  width: 160px;
+  display: flex;
+  border-radius: 10px;
+  justify-content: center;
+  margin-bottom: 7px;
+  opacity: 0.7;
+  text-align: center;
+  color: #67b780;
+  font-size: 17pt;
+  animation: glow 0.9s infinite alternate;
+  animation: water 0.9s infinite alternate;
 }
