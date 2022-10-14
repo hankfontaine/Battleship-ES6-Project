@@ -370,6 +370,8 @@ const fillUpdateArea = (input) => {
     };
   }
 
+  console.log('test');
+
   class Player {
     constructor(name) {
       this.name = name;
