@@ -106,6 +106,7 @@ const runModulesOfGame = () => {
       this.shipCount = 0;
       this.gridArray = [];
       this.gridSquares = this.makeGridSquares();
+      this.turnCount = 0;
     }
 
     makeSquares = () => {
@@ -147,6 +148,12 @@ const runModulesOfGame = () => {
           ////////////////////// PLAYER ONE ATTACKS /////////////////////////////
           ///////////////////////////////////////////////////////////////////////
           newSquare.addEventListener('click', function () {
+            if (
+              playerTwo.defensiveBoard.turnCount !==
+                playerOne.defensiveBoard.turnCount &&
+              playerOne.defensiveBoard.turnCount > 0
+            )
+              return;
             if (square.wasAttacked) return;
 
             let peg = document.createElement('div');
@@ -173,6 +180,7 @@ const runModulesOfGame = () => {
             }
             newSquare.appendChild(peg);
             square.wasAttacked = true;
+            playerOne.defensiveBoard.turnCount++;
 
             if (playerTwo.defensiveBoard.checkForLoss()) return;
 
@@ -255,6 +263,8 @@ const runModulesOfGame = () => {
 
                     soughtSpaceToPeg.appendChild(defensePeg);
 
+                    playerTwo.defensiveBoard.turnCount++;
+
                     squareToRecieveAttack.wasAttacked = true;
                     if (playerOne.defensiveBoard.checkForLoss()) return;
                   }
@@ -264,6 +274,10 @@ const runModulesOfGame = () => {
             setTimeout(() => {
               playerTwoResponds();
             }, 2500);
+            console.log(
+              playerOne.defensiveBoard.turnCount,
+              playerTwo.defensiveBoard.turnCount,
+            );
           });
         }
       });
