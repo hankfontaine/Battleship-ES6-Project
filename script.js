@@ -107,6 +107,7 @@ const runModulesOfGame = () => {
       this.gridArray = [];
       this.gridSquares = this.makeGridSquares();
       this.turnCount = 0;
+      this.mostRecentComputerHit = null;
     }
 
     makeSquares = () => {
@@ -198,18 +199,62 @@ const runModulesOfGame = () => {
                   }
                 });
 
+                if (playerOne.defensiveBoard.mostRecentComputerHit) {
+                  let returnedMove;
+                  arrayOfLegalMoves.forEach((move) => {
+                    if (
+                      move.coordsOfSquare[0] ==
+                        playerOne.defensiveBoard.mostRecentComputerHit
+                          .coordsOfSquare[0] &&
+                      move.coordsOfSquare[1] ==
+                        playerOne.defensiveBoard.mostRecentComputerHit
+                          .coordsOfSquare[1] +
+                          1
+                    ) {
+                      returnedMove = move.coordsOfSquare;
+                    }
+                    // else if (
+                    //   move.coordsOfSquare[0] ==
+                    //     playerOne.defensiveBoard.mostRecentComputerHit
+                    //       .coordsOfSquare[0] &&
+                    //   move.coordsOfSquare[1] + 1 ==
+                    //     playerOne.defensiveBoard.mostRecentComputerHit
+                    //       .coordsOfSquare[1]
+                    // ) {
+                    //   returnedMove = move.coordsOfSquare;
+                    // }
+                  });
+
+                  //   // else repeat
+                  //   // need way to call function again after finding value
+                  //   // return arrayOfLegalMoves[selected value]
+                  // return playerOne.defensiveBoard.mostRecentComputerHit
+                  // .coordsOfSquare;
+                  return returnedMove;
+                }
                 return arrayOfLegalMoves[
                   Math.floor(Math.random() * arrayOfLegalMoves.length)
                 ].coordsOfSquare;
               };
 
-              let playerTwoCoords = generateComputerMove(playerTwo);
+              let playerTwoCoords;
+              if (playerOne.defensiveBoard.nextComputerTurn) {
+                console.log(playerOne.defensiveBoard.nextComputerTurn);
+                // generateComputerMove(playerOne.defensiveBoard.nextComputerTurn);
+              } else {
+                playerTwoCoords = generateComputerMove(playerTwo);
+              }
               let squareToRecieveAttack;
 
               playerOne.defensiveBoard.squares.forEach((soughtSq) => {
                 if (soughtSq.coordsOfSquare[0] === playerTwoCoords[0]) {
                   if (soughtSq.coordsOfSquare[1] === playerTwoCoords[1]) {
                     squareToRecieveAttack = soughtSq;
+
+                    if (squareToRecieveAttack.isOccupiedBy) {
+                      playerOne.defensiveBoard.mostRecentComputerHit =
+                        squareToRecieveAttack;
+                    }
 
                     let defensePeg = document.createElement('div');
 
@@ -273,11 +318,7 @@ const runModulesOfGame = () => {
             };
             setTimeout(() => {
               playerTwoResponds();
-            }, 2500);
-            console.log(
-              playerOne.defensiveBoard.turnCount,
-              playerTwo.defensiveBoard.turnCount,
-            );
+            }, 500);
           });
         }
       });
