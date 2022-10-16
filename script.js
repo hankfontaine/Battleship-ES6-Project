@@ -209,24 +209,49 @@ const runModulesOfGame = () => {
                   arrayOfLegalMoves.forEach((move) => {
                     if (
                       move.coordsOfSquare[0] ==
+                        playerOne.defensiveBoard.mostRecentComputerHit[0] - 1 &&
+                      move.coordsOfSquare[1] ==
+                        playerOne.defensiveBoard.mostRecentComputerHit[1]
+                    ) {
+                      returnedValue = [
+                        playerOne.defensiveBoard.mostRecentComputerHit[0] - 1,
+                        playerOne.defensiveBoard.mostRecentComputerHit[1],
+                      ];
+                      return;
+                    } else if (
+                      move.coordsOfSquare[0] ==
                         playerOne.defensiveBoard.mostRecentComputerHit[0] &&
                       move.coordsOfSquare[1] ==
                         playerOne.defensiveBoard.mostRecentComputerHit[1] + 1
-                    )
+                    ) {
                       returnedValue = [
                         playerOne.defensiveBoard.mostRecentComputerHit[0],
                         playerOne.defensiveBoard.mostRecentComputerHit[1] + 1,
                       ];
-                    // else if (
-                    //   move.coordsOfSquare[0] ==
-                    //     playerOne.defensiveBoard.mostRecentComputerHit[0] + 1 &&
-                    //   move.coordsOfSquare[1] ==
-                    //     playerOne.defensiveBoard.mostRecentComputerHit[1]
-                    // )
-                    //   returnedValue = [
-                    //     playerOne.defensiveBoard.mostRecentComputerHit[0] + 1,
-                    //     playerOne.defensiveBoard.mostRecentComputerHit[1],
-                    //   ];
+                      return;
+                    } else if (
+                      move.coordsOfSquare[0] ==
+                        playerOne.defensiveBoard.mostRecentComputerHit[0] + 1 &&
+                      move.coordsOfSquare[1] ==
+                        playerOne.defensiveBoard.mostRecentComputerHit[1]
+                    ) {
+                      returnedValue = [
+                        playerOne.defensiveBoard.mostRecentComputerHit[0] + 1,
+                        playerOne.defensiveBoard.mostRecentComputerHit[1],
+                      ];
+                      return;
+                    } else if (
+                      move.coordsOfSquare[0] ==
+                        playerOne.defensiveBoard.mostRecentComputerHit[0] &&
+                      move.coordsOfSquare[1] ==
+                        playerOne.defensiveBoard.mostRecentComputerHit[1] - 1
+                    ) {
+                      returnedValue = [
+                        playerOne.defensiveBoard.mostRecentComputerHit[0],
+                        playerOne.defensiveBoard.mostRecentComputerHit[1] - 1,
+                      ];
+                      return;
+                    }
                   });
                   //
                   //
