@@ -200,23 +200,49 @@ const runModulesOfGame = () => {
                 });
 
                 if (playerOne.defensiveBoard.mostRecentComputerHit) {
-                  console.log(playerOne.defensiveBoard.mostRecentComputerHit);
-                  arrayOfLegalMoves.forEach((move) => {
-                    // do work to determine next move using array method
-                  });
-                  // happens on all moves after open moves have been used up
-                  return arrayOfLegalMoves[
-                    Math.floor(Math.random() * arrayOfLegalMoves.length)
-                  ].coordsOfSquare;
+                  // let returnedValue;
+                  // arrayOfLegalMoves.forEach((move) => {
+                  //   if (
+                  //     move.coordsOfSquare[0] ===
+                  //       playerOne.defensiveBoard.mostRecentComputerHit
+                  //         .coordsOfSquare[0] &&
+                  //     move.coordsOfSquare[1] ===
+                  //       playerOne.defensiveBoard.mostRecentComputerHit
+                  //         .coordsOfSquare[1] +
+                  //         1
+                  //   ) {
+                  //     let updatedArray = [];
+                  //     // console.log('test3');
+                  //     returnedValue = move.coordsOfSquare;
+                  //     // remove move from arrayOfLegaLMoves
+
+                  //     console.log(arrayOfLegalMoves.length);
+                  //     const index = arrayOfLegalMoves.indexOf(move);
+                  //     arrayOfLegalMoves.splice(index, 1);
+                  //     console.log(arrayOfLegalMoves.length);
+                  //   }
+                  //   // do work to determine next move using array method
+                  // });
+                  // // happens on all moves after open moves have been used up
+                  // if (returnedValue) {
+                  //   let temp = returnedValue;
+                  //   returnedValue = null;
+                  //   console.log(returnedValue);
+                  //   return temp;
+                  // } else
+                  {
+                    console.log('test2');
+                    return arrayOfLegalMoves[
+                      Math.floor(Math.random() * arrayOfLegalMoves.length)
+                    ].coordsOfSquare;
+                  }
                 }
                 // only happens on moves until first hit
-                else
-                  return arrayOfLegalMoves[
-                    Math.floor(Math.random() * arrayOfLegalMoves.length)
-                  ].coordsOfSquare;
+                else console.log('test1');
+                return arrayOfLegalMoves[
+                  Math.floor(Math.random() * arrayOfLegalMoves.length)
+                ].coordsOfSquare;
               };
-
-              // run program, then need way to "reset"
 
               let playerTwoCoords = generateComputerMove(playerTwo);
 
