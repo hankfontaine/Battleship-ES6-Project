@@ -192,7 +192,6 @@ const runModulesOfGame = () => {
             const playerTwoResponds = () => {
               const generateComputerMove = (player) => {
                 let arrayOfLegalMoves = [];
-                let returnedMove;
 
                 player.offensiveBoard.squares.forEach((square) => {
                   if (!square.wasAttacked) {
@@ -201,65 +200,25 @@ const runModulesOfGame = () => {
                 });
 
                 if (playerOne.defensiveBoard.mostRecentComputerHit) {
+                  console.log(playerOne.defensiveBoard.mostRecentComputerHit);
                   arrayOfLegalMoves.forEach((move) => {
-                    if (
-                      move.coordsOfSquare[0] ==
-                        playerOne.defensiveBoard.mostRecentComputerHit
-                          .coordsOfSquare[0] &&
-                      move.coordsOfSquare[1] ==
-                        playerOne.defensiveBoard.mostRecentComputerHit
-                          .coordsOfSquare[1] +
-                          1
-                    ) {
-                      returnedMove = move.coordsOfSquare;
-                    }
-                    // else if (
-                    //     move.coordsOfSquare[0] ==
-                    //       playerOne.defensiveBoard.mostRecentComputerHit
-                    //         .coordsOfSquare[0] +
-                    //         1 &&
-                    //     move.coordsOfSquare[1] ==
-                    //       playerOne.defensiveBoard.mostRecentComputerHit
-                    //         .coordsOfSquare[1]
-                    //   ) {
-                    //     returnedMove = move.coordsOfSquare;
-                    //   } else if (
-                    //     move.coordsOfSquare[0] ==
-                    //       playerOne.defensiveBoard.mostRecentComputerHit
-                    //         .coordsOfSquare[0] &&
-                    //     move.coordsOfSquare[1] ==
-                    //       playerOne.defensiveBoard.mostRecentComputerHit
-                    //         .coordsOfSquare[1] -
-                    //         1
-                    //   ) {
-                    //     returnedMove = move.coordsOfSquare;
-                    //   } else if (
-                    //     move.coordsOfSquare[0] ==
-                    //       playerOne.defensiveBoard.mostRecentComputerHit
-                    //         .coordsOfSquare[0] -
-                    //         1 &&
-                    //     move.coordsOfSquare[1] ==
-                    //       playerOne.defensiveBoard.mostRecentComputerHit
-                    //         .coordsOfSquare[1]
-                    //   ) {
-                    //     returnedMove = move.coordsOfSquare;
-                    //   }
+                    // do work to determine next move using array method
                   });
+                  // happens on all moves after open moves have been used up
+                  return arrayOfLegalMoves[
+                    Math.floor(Math.random() * arrayOfLegalMoves.length)
+                  ].coordsOfSquare;
                 }
-
-                if (returnedMove) {
-                  let tempValue = returnedMove;
-                  returnedMove = null;
-                  return tempValue;
-                } else
+                // only happens on moves until first hit
+                else
                   return arrayOfLegalMoves[
                     Math.floor(Math.random() * arrayOfLegalMoves.length)
                   ].coordsOfSquare;
               };
 
-              let playerTwoCoords;
+              // run program, then need way to "reset"
 
-              playerTwoCoords = generateComputerMove(playerTwo);
+              let playerTwoCoords = generateComputerMove(playerTwo);
 
               let squareToRecieveAttack;
 
