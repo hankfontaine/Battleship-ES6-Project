@@ -200,38 +200,45 @@ const runModulesOfGame = () => {
                 });
 
                 if (playerOne.defensiveBoard.mostRecentComputerHit) {
-                  // let returnedValue;
-                  // arrayOfLegalMoves.forEach((move) => {
-                  //   if (
-                  //     move.coordsOfSquare[0] ===
-                  //       playerOne.defensiveBoard.mostRecentComputerHit
-                  //         .coordsOfSquare[0] &&
-                  //     move.coordsOfSquare[1] ===
-                  //       playerOne.defensiveBoard.mostRecentComputerHit
-                  //         .coordsOfSquare[1] +
-                  //         1
-                  //   ) {
-                  //     let updatedArray = [];
-                  //     // console.log('test3');
-                  //     returnedValue = move.coordsOfSquare;
-                  //     // remove move from arrayOfLegaLMoves
+                  let returnedValue;
 
-                  //     console.log(arrayOfLegalMoves.length);
-                  //     const index = arrayOfLegalMoves.indexOf(move);
-                  //     arrayOfLegalMoves.splice(index, 1);
-                  //     console.log(arrayOfLegalMoves.length);
-                  //   }
-                  //   // do work to determine next move using array method
-                  // });
-                  // // happens on all moves after open moves have been used up
-                  // if (returnedValue) {
-                  //   let temp = returnedValue;
-                  //   returnedValue = null;
-                  //   console.log(returnedValue);
-                  //   return temp;
-                  // } else
-                  {
+                  // returnedValue = [
+                  //   playerOne.defensiveBoard.mostRecentComputerHit[0],
+                  //   playerOne.defensiveBoard.mostRecentComputerHit[1] + 1,
+                  // ];
+                  arrayOfLegalMoves.forEach((move) => {
+                    if (
+                      move.coordsOfSquare[0] ==
+                        playerOne.defensiveBoard.mostRecentComputerHit[0] &&
+                      move.coordsOfSquare[1] ==
+                        playerOne.defensiveBoard.mostRecentComputerHit[1] + 1
+                    )
+                      returnedValue = [
+                        playerOne.defensiveBoard.mostRecentComputerHit[0],
+                        playerOne.defensiveBoard.mostRecentComputerHit[1] + 1,
+                      ];
+                    // else if (
+                    //   move.coordsOfSquare[0] ==
+                    //     playerOne.defensiveBoard.mostRecentComputerHit[0] + 1 &&
+                    //   move.coordsOfSquare[1] ==
+                    //     playerOne.defensiveBoard.mostRecentComputerHit[1]
+                    // )
+                    //   returnedValue = [
+                    //     playerOne.defensiveBoard.mostRecentComputerHit[0] + 1,
+                    //     playerOne.defensiveBoard.mostRecentComputerHit[1],
+                    //   ];
+                  });
+                  //
+                  //
+                  //
+                  if (returnedValue) {
+                    console.log('test3');
+                    playerOne.defensiveBoard.mostRecentComputerHit = null;
+                    return returnedValue;
+                  } else {
+                    //
                     console.log('test2');
+                    playerOne.defensiveBoard.mostRecentComputerHit = null;
                     return arrayOfLegalMoves[
                       Math.floor(Math.random() * arrayOfLegalMoves.length)
                     ].coordsOfSquare;
@@ -253,14 +260,12 @@ const runModulesOfGame = () => {
                   if (soughtSq.coordsOfSquare[1] === playerTwoCoords[1]) {
                     squareToRecieveAttack = soughtSq;
 
-                    if (squareToRecieveAttack.isOccupiedBy) {
-                      playerOne.defensiveBoard.mostRecentComputerHit =
-                        squareToRecieveAttack;
-                    }
-
                     let defensePeg = document.createElement('div');
 
                     if (squareToRecieveAttack.isOccupiedBy) {
+                      playerOne.defensiveBoard.mostRecentComputerHit =
+                        squareToRecieveAttack.coordsOfSquare;
+
                       let soughtDefenseShip =
                         playerOne.defensiveBoard.deployedShips.find(
                           (ship) =>
