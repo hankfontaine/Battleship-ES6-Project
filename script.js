@@ -253,27 +253,19 @@ const runModulesOfGame = () => {
                       return;
                     }
                   });
-                  //
-                  //
-                  //
                   if (returnedValue) {
-                    console.log('test3');
                     playerOne.defensiveBoard.mostRecentComputerHit = null;
                     return returnedValue;
                   } else {
-                    //
-                    console.log('test2');
                     playerOne.defensiveBoard.mostRecentComputerHit = null;
                     return arrayOfLegalMoves[
                       Math.floor(Math.random() * arrayOfLegalMoves.length)
                     ].coordsOfSquare;
                   }
-                }
-                // only happens on moves until first hit
-                else console.log('test1');
-                return arrayOfLegalMoves[
-                  Math.floor(Math.random() * arrayOfLegalMoves.length)
-                ].coordsOfSquare;
+                } else
+                  return arrayOfLegalMoves[
+                    Math.floor(Math.random() * arrayOfLegalMoves.length)
+                  ].coordsOfSquare;
               };
 
               let playerTwoCoords = generateComputerMove(playerTwo);
