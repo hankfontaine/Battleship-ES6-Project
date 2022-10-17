@@ -204,9 +204,9 @@ const runModulesOfGame = () => {
 
                   arrayOfLegalMoves.forEach((move) => {
                     if (
-                      move.coordsOfSquare[0] ==
+                      move.coordsOfSquare[0] ===
                         playerOne.defensiveBoard.mostRecentComputerHit[0] - 1 &&
-                      move.coordsOfSquare[1] ==
+                      move.coordsOfSquare[1] ===
                         playerOne.defensiveBoard.mostRecentComputerHit[1]
                     ) {
                       returnedValue = [
@@ -217,9 +217,9 @@ const runModulesOfGame = () => {
                       return;
                     }
                     if (
-                      move.coordsOfSquare[0] ==
+                      move.coordsOfSquare[0] ===
                         playerOne.defensiveBoard.mostRecentComputerHit[0] &&
-                      move.coordsOfSquare[1] ==
+                      move.coordsOfSquare[1] ===
                         playerOne.defensiveBoard.mostRecentComputerHit[1] + 1
                     ) {
                       returnedValue = [
@@ -230,9 +230,9 @@ const runModulesOfGame = () => {
                       return;
                     }
                     if (
-                      move.coordsOfSquare[0] ==
+                      move.coordsOfSquare[0] ===
                         playerOne.defensiveBoard.mostRecentComputerHit[0] + 1 &&
-                      move.coordsOfSquare[1] ==
+                      move.coordsOfSquare[1] ===
                         playerOne.defensiveBoard.mostRecentComputerHit[1]
                     ) {
                       returnedValue = [
@@ -243,9 +243,9 @@ const runModulesOfGame = () => {
                       return;
                     }
                     if (
-                      move.coordsOfSquare[0] ==
+                      move.coordsOfSquare[0] ===
                         playerOne.defensiveBoard.mostRecentComputerHit[0] &&
-                      move.coordsOfSquare[1] ==
+                      move.coordsOfSquare[1] ===
                         playerOne.defensiveBoard.mostRecentComputerHit[1] - 1
                     ) {
                       returnedValue = [
@@ -262,29 +262,17 @@ const runModulesOfGame = () => {
                     arrayOfLegalMoves.splice(index, 1);
 
                     return returnedValue;
-                  } else {
-                    playerOne.defensiveBoard.mostRecentComputerHit = null;
-
-                    const value =
-                      arrayOfLegalMoves[
-                        Math.floor(Math.random() * arrayOfLegalMoves.length)
-                      ].coordsOfSquare;
-
-                    const index = arrayOfLegalMoves.indexOf(value);
-                    arrayOfLegalMoves.splice(index, 1);
-
-                    // console.log(arrayOfLegalMoves.length);
-                    return value;
                   }
                 } else {
+                  playerOne.defensiveBoard.mostRecentComputerHit = null;
+
                   const value =
                     arrayOfLegalMoves[
                       Math.floor(Math.random() * arrayOfLegalMoves.length)
                     ].coordsOfSquare;
-
                   const index = arrayOfLegalMoves.indexOf(value);
                   arrayOfLegalMoves.splice(index, 1);
-                  // console.log(arrayOfLegalMoves.length);
+
                   return value;
                 }
               };
@@ -332,6 +320,9 @@ const runModulesOfGame = () => {
 
                       defensePeg.classList.add('hit-peg');
                     } else {
+                      // ideally find a way to revert to previous hit, but currently acts buggy w/o this:
+                      playerOne.defensiveBoard.mostRecentComputerHit = null;
+
                       fillUpdateArea(
                         'That was a miss by ' + playerTwo.name + '!',
                       );
