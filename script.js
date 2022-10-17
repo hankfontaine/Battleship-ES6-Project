@@ -1,3 +1,5 @@
+const firstBoatCoords = [1, 1];
+
 const initializeDom = () => {
   const body = document.querySelector('.body');
   body.innerHTML = '';
@@ -516,7 +518,7 @@ const runModulesOfGame = () => {
 
   (function setPiecesInPlace() {
     playerOne.defensiveBoard.placeShip(
-      [1, 1],
+      firstBoatCoords,
       playerOne.defensiveBoard.setShipLengthToDeploy(),
       setShipOrientation(),
     );
@@ -546,26 +548,26 @@ const runModulesOfGame = () => {
       playerTwo.defensiveBoard.setShipLengthToDeploy(),
       setShipOrientation(),
     );
-    // playerTwo.defensiveBoard.placeShip(
-    //   [6, 1],
-    //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
-    //   setShipOrientation(),
-    // );
-    // playerTwo.defensiveBoard.placeShip(
-    //   [2, 2],
-    //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
-    //   setShipOrientation('X'),
-    // );
-    // playerTwo.defensiveBoard.placeShip(
-    //   [5, 5],
-    //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
-    //   setShipOrientation(),
-    // );
-    // playerTwo.defensiveBoard.placeShip(
-    //   [5, 6],
-    //   playerTwo.defensiveBoard.setShipLengthToDeploy(),
-    //   setShipOrientation('X'),
-    // );
+    playerTwo.defensiveBoard.placeShip(
+      [6, 1],
+      playerTwo.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation(),
+    );
+    playerTwo.defensiveBoard.placeShip(
+      [2, 2],
+      playerTwo.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation('X'),
+    );
+    playerTwo.defensiveBoard.placeShip(
+      [5, 5],
+      playerTwo.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation(),
+    );
+    playerTwo.defensiveBoard.placeShip(
+      [5, 6],
+      playerTwo.defensiveBoard.setShipLengthToDeploy(),
+      setShipOrientation('X'),
+    );
   })();
 };
 runModulesOfGame();
