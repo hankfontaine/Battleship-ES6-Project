@@ -1,38 +1,54 @@
-const firstBoatCoords = [
-  Number(prompt('first boat x?')),
-  Number(prompt('first boat Y?')),
-];
-const firstBoatOrientation = prompt(
-  'first boat orientation? Type "horizontal" or "vertical."',
-);
-const secondBoatCoords = [
-  Number(prompt('second boat x?')),
-  Number(prompt('second boat Y?')),
-];
-const secondBoatOrientation = prompt(
-  'second boat orientation? Type "horizontal" or "vertical."',
-);
-const thirdBoatCoords = [
-  Number(prompt('third boat x?')),
-  Number(prompt('third boat Y?')),
-];
-const thirdBoatOrientation = prompt(
-  'third boat orientation? Type "horizontal" or "vertical."',
-);
-const fourthBoatCoords = [
-  Number(prompt('fourth boat x?')),
-  Number(prompt('fourth boat Y?')),
-];
-const fourthBoatOrientation = prompt(
-  'fourth boat orientation? Type "horizontal" or "vertical."',
-);
-const fifthBoatCoords = [
-  Number(prompt('fifth boat x?')),
-  Number(prompt('fifth boat Y?')),
-];
-const fifthBoatOrientation = prompt(
-  'fifth boat orientation? Type "horizontal" or "vertical."',
-);
+const firstBoatCoords = [1, 1];
+const firstBoatOrientation = '';
+const secondBoatCoords = [7, 1];
+const secondBoatOrientation = '';
+const thirdBoatCoords = [2, 3];
+const thirdBoatOrientation = 'vertical';
+const fourthBoatCoords = [4, 3];
+const fourthBoatOrientation = '';
+const fifthBoatCoords = [5, 5];
+const fifthBoatOrientation = 'vertical';
+
+const createBoatSetupModal = () => {
+  // upon click, create game for real
+};
+
+createBoatSetupModal();
+// const firstBoatCoords = [
+//   Number(prompt('first boat x?')),
+//   Number(prompt('first boat Y?')),
+// ];
+// const firstBoatOrientation = prompt(
+//   'first boat orientation? Type "horizontal" or "vertical."',
+// );
+// const secondBoatCoords = [
+//   Number(prompt('second boat x?')),
+//   Number(prompt('second boat Y?')),
+// ];
+// const secondBoatOrientation = prompt(
+//   'second boat orientation? Type "horizontal" or "vertical."',
+// );
+// const thirdBoatCoords = [
+//   Number(prompt('third boat x?')),
+//   Number(prompt('third boat Y?')),
+// ];
+// const thirdBoatOrientation = prompt(
+//   'third boat orientation? Type "horizontal" or "vertical."',
+// );
+// const fourthBoatCoords = [
+//   Number(prompt('fourth boat x?')),
+//   Number(prompt('fourth boat Y?')),
+// ];
+// const fourthBoatOrientation = prompt(
+//   'fourth boat orientation? Type "horizontal" or "vertical."',
+// );
+// const fifthBoatCoords = [
+//   Number(prompt('fifth boat x?')),
+//   Number(prompt('fifth boat Y?')),
+// ];
+// const fifthBoatOrientation = prompt(
+//   'fifth boat orientation? Type "horizontal" or "vertical."',
+// );
 
 const initializeDom = () => {
   const body = document.querySelector('.body');
@@ -81,7 +97,7 @@ const initializeDom = () => {
   footer.appendChild(footerText);
 
   ///////////////////////////////////////////////////////////////////////
-  ///////////////// END DOM MANIPULATION LOGIC MODULES ///////////////////////
+  ///////////////// END DOM MANIPULATION LOGIC MODULES //////////////////
   ///////////////////////////////////////////////////////////////////////
 };
 
@@ -257,8 +273,6 @@ const runModulesOfGame = () => {
                 if (playerOne.defensiveBoard.mostRecentComputerHit) {
                   let returnedValue;
 
-                  // console.log(playerOne.defensiveBoard.mostRecentComputerHit);
-
                   arrayOfLegalMoves.forEach((move) => {
                     if (
                       move.coordsOfSquare[0] ===
@@ -266,7 +280,6 @@ const runModulesOfGame = () => {
                       move.coordsOfSquare[1] ===
                         playerOne.defensiveBoard.mostRecentComputerHit[1] &&
                       playerOne.defensiveBoard.mostRecentComputerHit[0] - 1 >= 1
-                      // && ship at location of most recent hit is not sunk
                     ) {
                       returnedValue = [
                         playerOne.defensiveBoard.mostRecentComputerHit[0] - 1,
@@ -280,7 +293,6 @@ const runModulesOfGame = () => {
                         playerOne.defensiveBoard.mostRecentComputerHit[1] + 1 &&
                       playerOne.defensiveBoard.mostRecentComputerHit[1] + 1 <=
                         10
-                      // && ship at location of most recent hit is not sunk
                     ) {
                       returnedValue = [
                         playerOne.defensiveBoard.mostRecentComputerHit[0],
@@ -294,7 +306,6 @@ const runModulesOfGame = () => {
                         playerOne.defensiveBoard.mostRecentComputerHit[1] &&
                       playerOne.defensiveBoard.mostRecentComputerHit[1] + 1 <=
                         10
-                      // && ship at location of most recent hit is not sunk
                     ) {
                       returnedValue = [
                         playerOne.defensiveBoard.mostRecentComputerHit[0] + 1,
@@ -307,7 +318,6 @@ const runModulesOfGame = () => {
                       move.coordsOfSquare[1] ===
                         playerOne.defensiveBoard.mostRecentComputerHit[1] - 1 &&
                       playerOne.defensiveBoard.mostRecentComputerHit[1] + 1 >= 1
-                      // && ship at location of most recent hit is not sunk
                     ) {
                       returnedValue = [
                         playerOne.defensiveBoard.mostRecentComputerHit[0],
@@ -318,7 +328,6 @@ const runModulesOfGame = () => {
                   });
 
                   if (returnedValue) {
-                    console.log('newtest');
                     return returnedValue;
                   }
                 }
@@ -326,8 +335,6 @@ const runModulesOfGame = () => {
                   Math.floor(Math.random() * arrayOfLegalMoves.length)
                 ].coordsOfSquare;
               };
-
-              console.log(arrayOfLegalMoves.length);
 
               let playerTwoCoords = generateComputerMove(playerTwo);
 
