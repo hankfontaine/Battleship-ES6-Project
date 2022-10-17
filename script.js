@@ -1,4 +1,38 @@
-const firstBoatCoords = [1, 1];
+const firstBoatCoords = [
+  Number(prompt('first boat x?')),
+  Number(prompt('first boat Y?')),
+];
+const firstBoatOrientation = prompt(
+  'first boat orientation? Type "horizontal" or "vertical."',
+);
+const secondBoatCoords = [
+  Number(prompt('second boat x?')),
+  Number(prompt('second boat Y?')),
+];
+const secondBoatOrientation = prompt(
+  'second boat orientation? Type "horizontal" or "vertical."',
+);
+const thirdBoatCoords = [
+  Number(prompt('third boat x?')),
+  Number(prompt('third boat Y?')),
+];
+const thirdBoatOrientation = prompt(
+  'third boat orientation? Type "horizontal" or "vertical."',
+);
+const fourthBoatCoords = [
+  Number(prompt('fourth boat x?')),
+  Number(prompt('fourth boat Y?')),
+];
+const fourthBoatOrientation = prompt(
+  'fourth boat orientation? Type "horizontal" or "vertical."',
+);
+const fifthBoatCoords = [
+  Number(prompt('fifth boat x?')),
+  Number(prompt('fifth boat Y?')),
+];
+const fifthBoatOrientation = prompt(
+  'fifth boat orientation? Type "horizontal" or "vertical."',
+);
 
 const initializeDom = () => {
   const body = document.querySelector('.body');
@@ -509,8 +543,8 @@ const runModulesOfGame = () => {
   }
 
   const setShipOrientation = (input) => {
-    if (input) return 'vertical';
-    return 'horizontal';
+    if (input !== 'vertical') return 'horizontal';
+    return 'vertical';
   };
 
   const playerOne = new Player('Hank');
@@ -520,33 +554,33 @@ const runModulesOfGame = () => {
     playerOne.defensiveBoard.placeShip(
       firstBoatCoords,
       playerOne.defensiveBoard.setShipLengthToDeploy(),
-      setShipOrientation(),
+      setShipOrientation(firstBoatOrientation),
     );
     playerOne.defensiveBoard.placeShip(
-      [7, 1],
+      secondBoatCoords,
       playerOne.defensiveBoard.setShipLengthToDeploy(),
-      setShipOrientation(),
+      setShipOrientation(secondBoatOrientation),
     );
     playerOne.defensiveBoard.placeShip(
-      [2, 3],
+      thirdBoatCoords,
       playerOne.defensiveBoard.setShipLengthToDeploy(),
-      setShipOrientation('X'),
+      setShipOrientation(thirdBoatOrientation),
     );
     playerOne.defensiveBoard.placeShip(
-      [5, 5],
+      fourthBoatCoords,
       playerOne.defensiveBoard.setShipLengthToDeploy(),
-      setShipOrientation(),
+      setShipOrientation(fourthBoatOrientation),
     );
     playerOne.defensiveBoard.placeShip(
-      [5, 7],
+      fifthBoatCoords,
       playerOne.defensiveBoard.setShipLengthToDeploy(),
-      setShipOrientation('X'),
+      setShipOrientation(fifthBoatOrientation),
     );
 
     playerTwo.defensiveBoard.placeShip(
       [1, 1],
       playerTwo.defensiveBoard.setShipLengthToDeploy(),
-      setShipOrientation(),
+      setShipOrientation(firstBoatOrientation),
     );
     playerTwo.defensiveBoard.placeShip(
       [6, 1],
