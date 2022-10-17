@@ -321,7 +321,7 @@ const runModulesOfGame = () => {
                       defensePeg.classList.add('hit-peg');
                     } else {
                       // ideally find a way to revert to previous hit, but currently acts buggy w/o this:
-                      playerOne.defensiveBoard.mostRecentComputerHit = null;
+                      // playerOne.defensiveBoard.mostRecentComputerHit = null;
 
                       fillUpdateArea(
                         'That was a miss by ' + playerTwo.name + '!',
