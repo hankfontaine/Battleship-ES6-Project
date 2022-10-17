@@ -90,11 +90,29 @@ const runModulesOfGame = () => {
     };
   }
 
+  let shipCounter = 0;
   const setShipName = (input) => {
-    if (input === 5) return 'carrier';
-    if (input === 4) return 'battleship';
-    if (input === 3) return 'cruiser';
-    if (input === 2) return 'destroyer';
+    if (input === 5) {
+      shipCounter++;
+      return 'carrier';
+    }
+
+    if (input === 4) {
+      shipCounter++;
+      return 'battleship';
+    }
+    if (input === 3 && shipCounter === 2) {
+      shipCounter++;
+      return 'submarine';
+    }
+    if (input === 3 && shipCounter === 3) {
+      shipCounter++;
+      return 'cruiser';
+    }
+    if (input === 2) {
+      shipCounter++;
+      return 'destroyer';
+    }
   };
 
   class Gameboard {
@@ -163,6 +181,7 @@ const runModulesOfGame = () => {
               const soughtShip = playerTwo.defensiveBoard.deployedShips.find(
                 (ship) => ship.name === square.isOccupiedBy,
               );
+
               soughtShip.hit(square.coordsOfSquare);
 
               if (soughtShip.isSunk())
@@ -307,6 +326,8 @@ const runModulesOfGame = () => {
                       );
 
                       if (soughtDefenseShip.isSunk()) {
+                        playerOne.defensiveBoard.mostRecentComputerHit = null;
+
                         fillUpdateArea(
                           playerOne.name +
                             "'s " +
