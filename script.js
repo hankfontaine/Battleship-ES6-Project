@@ -140,9 +140,9 @@ const createBoatSetupModal = () => {
   body.appendChild(submitButton);
 };
 
-// createBoatSetupModal();
+createBoatSetupModal();
 
-initializeDom();
+// initializeDom();
 
 const runModulesOfGame = () => {
   class Square {
@@ -645,4 +645,4 @@ const runModulesOfGame = () => {
     );
   })();
 };
-runModulesOfGame();
+// runModulesOfGame();
