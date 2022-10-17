@@ -9,11 +9,6 @@ const fourthBoatOrientation = '';
 const fifthBoatCoords = [5, 5];
 const fifthBoatOrientation = 'vertical';
 
-const createBoatSetupModal = () => {
-  // upon click, create game for real
-};
-
-createBoatSetupModal();
 // const firstBoatCoords = [
 //   Number(prompt('first boat x?')),
 //   Number(prompt('first boat Y?')),
@@ -49,6 +44,12 @@ createBoatSetupModal();
 // const fifthBoatOrientation = prompt(
 //   'fifth boat orientation? Type "horizontal" or "vertical."',
 // );
+
+const fillUpdateArea = (input) => {
+  const gameDescription = document.querySelector('.header-text');
+  gameDescription.innerHTML = '';
+  gameDescription.append(input);
+};
 
 const initializeDom = () => {
   const body = document.querySelector('.body');
@@ -101,13 +102,47 @@ const initializeDom = () => {
   ///////////////////////////////////////////////////////////////////////
 };
 
-initializeDom();
+const createBoatSetupModal = () => {
+  //
+  //
+  // rename all elements
+  // create dummy grid
+  // get input from user w drag and drop
+  // submit to create board
+  //
+  //
 
-const fillUpdateArea = (input) => {
-  const gameDescription = document.querySelector('.header-text');
-  gameDescription.innerHTML = '';
-  gameDescription.append(input);
+  const header = document.querySelector('.header');
+  const gameUpdates = document.createElement('div');
+  gameUpdates.classList.add('header-text');
+  gameUpdates.append('Place your ships! Get ready!');
+  header.appendChild(gameUpdates);
+
+  const body = document.querySelector('.body');
+  body.innerHTML = '';
+
+  const bottomGameplayWindow = document.createElement('div');
+  bottomGameplayWindow.classList.add('main-gameplay-window');
+  body.appendChild(bottomGameplayWindow);
+
+  const playerDefenseBoardContainer = document.createElement('div');
+  playerDefenseBoardContainer.classList.add('player-defense-board-container');
+  bottomGameplayWindow.appendChild(playerDefenseBoardContainer);
+
+  const playerDefensiveGridArea = document.createElement('div');
+  playerDefensiveGridArea.classList.add('grid-area');
+  playerDefensiveGridArea.id = 'defense-area';
+  playerDefenseBoardContainer.appendChild(playerDefensiveGridArea);
+
+  const submitButton = document.createElement('button');
+  submitButton.append('Submit to begin');
+  submitButton.onclick = initializeDom;
+  body.appendChild(submitButton);
 };
+
+// createBoatSetupModal();
+
+initializeDom();
 
 const runModulesOfGame = () => {
   class Square {
@@ -133,7 +168,6 @@ const runModulesOfGame = () => {
         }
       });
     };
-
     isSunk = () => {
       if (this.coordsWhereHit.length === this.coordsOccupied.length) {
         this.sunk = true;
