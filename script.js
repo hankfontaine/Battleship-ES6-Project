@@ -191,7 +191,7 @@ const runModulesOfGame = () => {
 
             let arrayOfLegalMoves = [];
 
-            playerTwo.defensiveBoard.squares.forEach((square) => {
+            playerOne.defensiveBoard.squares.forEach((square) => {
               if (!square.wasAttacked) {
                 arrayOfLegalMoves.push(square);
               }
@@ -202,80 +202,77 @@ const runModulesOfGame = () => {
                 if (playerOne.defensiveBoard.mostRecentComputerHit) {
                   let returnedValue;
 
+                  // console.log(playerOne.defensiveBoard.mostRecentComputerHit);
+
                   arrayOfLegalMoves.forEach((move) => {
                     if (
                       move.coordsOfSquare[0] ===
                         playerOne.defensiveBoard.mostRecentComputerHit[0] - 1 &&
                       move.coordsOfSquare[1] ===
-                        playerOne.defensiveBoard.mostRecentComputerHit[1]
+                        playerOne.defensiveBoard.mostRecentComputerHit[1] &&
+                      playerOne.defensiveBoard.mostRecentComputerHit[0] - 1 >= 1
+                      // && ship at location of most recent hit is not sunk
                     ) {
                       returnedValue = [
                         playerOne.defensiveBoard.mostRecentComputerHit[0] - 1,
                         playerOne.defensiveBoard.mostRecentComputerHit[1],
                       ];
-
-                      return;
-                    }
-                    if (
+                      return returnedValue;
+                    } else if (
                       move.coordsOfSquare[0] ===
                         playerOne.defensiveBoard.mostRecentComputerHit[0] &&
                       move.coordsOfSquare[1] ===
-                        playerOne.defensiveBoard.mostRecentComputerHit[1] + 1
+                        playerOne.defensiveBoard.mostRecentComputerHit[1] + 1 &&
+                      playerOne.defensiveBoard.mostRecentComputerHit[1] + 1 <=
+                        10
+                      // && ship at location of most recent hit is not sunk
                     ) {
                       returnedValue = [
                         playerOne.defensiveBoard.mostRecentComputerHit[0],
                         playerOne.defensiveBoard.mostRecentComputerHit[1] + 1,
                       ];
-
-                      return;
-                    }
-                    if (
+                      return returnedValue;
+                    } else if (
                       move.coordsOfSquare[0] ===
                         playerOne.defensiveBoard.mostRecentComputerHit[0] + 1 &&
                       move.coordsOfSquare[1] ===
-                        playerOne.defensiveBoard.mostRecentComputerHit[1]
+                        playerOne.defensiveBoard.mostRecentComputerHit[1] &&
+                      playerOne.defensiveBoard.mostRecentComputerHit[1] + 1 <=
+                        10
+                      // && ship at location of most recent hit is not sunk
                     ) {
                       returnedValue = [
                         playerOne.defensiveBoard.mostRecentComputerHit[0] + 1,
                         playerOne.defensiveBoard.mostRecentComputerHit[1],
                       ];
-
-                      return;
-                    }
-                    if (
+                      return returnedValue;
+                    } else if (
                       move.coordsOfSquare[0] ===
                         playerOne.defensiveBoard.mostRecentComputerHit[0] &&
                       move.coordsOfSquare[1] ===
-                        playerOne.defensiveBoard.mostRecentComputerHit[1] - 1
+                        playerOne.defensiveBoard.mostRecentComputerHit[1] - 1 &&
+                      playerOne.defensiveBoard.mostRecentComputerHit[1] + 1 >= 1
+                      // && ship at location of most recent hit is not sunk
                     ) {
                       returnedValue = [
                         playerOne.defensiveBoard.mostRecentComputerHit[0],
                         playerOne.defensiveBoard.mostRecentComputerHit[1] - 1,
                       ];
-
-                      return;
+                      return returnedValue;
                     }
                   });
 
                   if (returnedValue) {
-                    const index = arrayOfLegalMoves.indexOf(returnedValue);
-                    arrayOfLegalMoves.splice(index, 1);
-
+                    console.log('newtest');
                     return returnedValue;
                   }
-                } else {
-                  playerOne.defensiveBoard.mostRecentComputerHit = null;
-
-                  const value =
-                    arrayOfLegalMoves[
-                      Math.floor(Math.random() * arrayOfLegalMoves.length)
-                    ].coordsOfSquare;
-                  const index = arrayOfLegalMoves.indexOf(value);
-                  arrayOfLegalMoves.splice(index, 1);
-
-                  return value;
                 }
+                return arrayOfLegalMoves[
+                  Math.floor(Math.random() * arrayOfLegalMoves.length)
+                ].coordsOfSquare;
               };
+
+              console.log(arrayOfLegalMoves.length);
 
               let playerTwoCoords = generateComputerMove(playerTwo);
 
