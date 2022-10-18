@@ -127,6 +127,7 @@ body {
   border-radius: 5px;
   background-color: rgb(177, 183, 189);
   border: 2px solid rgb(177, 183, 189);
+  cursor: pointer;
 }
 
 .dummy-ship-horizontal {
@@ -134,6 +135,7 @@ body {
   border-radius: 5px;
   background-color: rgb(177, 183, 189);
   border: 2px solid rgb(177, 183, 189);
+  cursor: pointer;
 }
 
 .empty-peg {
@@ -218,4 +220,23 @@ body {
   font-size: 17pt;
   animation: glow 0.9s infinite alternate;
   animation: water 0.9s infinite alternate;
+}
+
+.fill {
+  background-color: blue;
+}
+
+.hold {
+  background-color: rgba(211, 211, 211, 0.737);
+  border: 1px dashed rgb(77, 50, 50);
+  box-shadow: 1px 1px 1px black;
+}
+
+.hover {
+  background-color: whitesmoke;
+  border: 3px dotted black;
+}
+
+.invisible {
+  display: none;
 }
