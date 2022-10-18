@@ -9,6 +9,36 @@ const fourthBoatOrientation = '';
 const fifthBoatCoords = [5, 5];
 const fifthBoatOrientation = 'vertical';
 
+let shipCounter = 0;
+const setShipName = (input) => {
+  if (input === 5) {
+    shipCounter++;
+    return 'carrier';
+  }
+
+  if (input === 4) {
+    shipCounter++;
+    return 'battleship';
+  }
+  if (input === 3 && shipCounter === 2) {
+    shipCounter++;
+    return 'submarine';
+  }
+  if (input === 3 && shipCounter === 3) {
+    shipCounter++;
+    return 'cruiser';
+  }
+  if (input === 2) {
+    shipCounter++;
+    return 'destroyer';
+  }
+};
+
+const setShipOrientation = (input) => {
+  if (input !== 'vertical') return 'horizontal';
+  return 'vertical';
+};
+
 // const firstBoatCoords = [
 //   Number(prompt('first boat x?')),
 //   Number(prompt('first boat Y?')),
@@ -105,12 +135,9 @@ const initializeDom = () => {
 const createBoatSetupModal = () => {
   //
   //
-  // rename all elements
-  // create container to house ship
-  // create dummy grid
   // get input from user w drag and drop
+  // might need event listeners on squares?
   // submit to create board
-  //
   //
   const header = document.querySelector('.header');
 
@@ -147,7 +174,48 @@ const createBoatSetupModal = () => {
   submitButton.onclick = initializeDom;
   footer.appendChild(submitButton);
 
+  for (let x = 10; x >= 1; x--) {
+    for (let y = 10; y >= 1; y--) {
+      const setupSquare = document.createElement('div');
+      setupSquare.classList.add('square');
+      setupSquare.id = x + '-' + y;
+      placementGridArea.appendChild(setupSquare);
+    }
+  }
+
   // need function to get size of ship to update in dragcontainer
+
+  let shipCounter = 0;
+  const setShipName = (input) => {
+    if (input === 5) {
+      shipCounter++;
+      return 'carrier';
+    }
+
+    if (input === 4) {
+      shipCounter++;
+      return 'battleship';
+    }
+    if (input === 3 && shipCounter === 2) {
+      shipCounter++;
+      return 'submarine';
+    }
+    if (input === 3 && shipCounter === 3) {
+      shipCounter++;
+      return 'cruiser';
+    }
+    if (input === 2) {
+      shipCounter++;
+      return 'destroyer';
+    }
+  };
+
+  // function createDummyShipToDrag(shipCounter) {
+  //
+  // uses for loop to create square elements shipCounter number of
+  //times in a container w flex direction column
+  //
+  // }
 };
 
 createBoatSetupModal();
@@ -185,31 +253,6 @@ const runModulesOfGame = () => {
       }
     };
   }
-
-  let shipCounter = 0;
-  const setShipName = (input) => {
-    if (input === 5) {
-      shipCounter++;
-      return 'carrier';
-    }
-
-    if (input === 4) {
-      shipCounter++;
-      return 'battleship';
-    }
-    if (input === 3 && shipCounter === 2) {
-      shipCounter++;
-      return 'submarine';
-    }
-    if (input === 3 && shipCounter === 3) {
-      shipCounter++;
-      return 'cruiser';
-    }
-    if (input === 2) {
-      shipCounter++;
-      return 'destroyer';
-    }
-  };
 
   class Gameboard {
     constructor(player, boardType) {
@@ -592,11 +635,6 @@ const runModulesOfGame = () => {
       this.defensiveBoard = new Gameboard(this.name, 'defensive');
     }
   }
-
-  const setShipOrientation = (input) => {
-    if (input !== 'vertical') return 'horizontal';
-    return 'vertical';
-  };
 
   const playerOne = new Player('Hank');
   const playerTwo = new Player('HAL');
