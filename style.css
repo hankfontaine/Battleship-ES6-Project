@@ -52,6 +52,7 @@ body {
 }
 
 .drag-container {
+  width: 25vw;
   border-radius: 90px;
   margin: 2vw;
   display: flex;

@@ -204,15 +204,16 @@ const createBoatSetupModal = () => {
       return 3;
     }
     if (dummyShipCounter === 5) {
-      dummyShipCounter++;
-      return;
+      return 2;
     }
   };
 
   function createDummyShipToDrag(input) {
+    const area = document.querySelector('.drag-container');
+    area.innerHTML = '';
+
     const dummyShip = document.createElement('div');
     dummyShip.classList.add('dummy-ship');
-    const area = document.querySelector('.drag-container');
     area.appendChild(dummyShip);
 
     for (let i = 1; i <= input; i++) {
@@ -228,14 +229,19 @@ const createBoatSetupModal = () => {
     }
 
     dummyShip.addEventListener('click', () => {
-      console.log(dummyShip.classList);
       if (dummyShip.classList.contains('dummy-ship')) {
         dummyShip.classList.add('dummy-ship-horizontal');
         dummyShip.classList.remove('dummy-ship');
-      } else dummyShip.classList.add('dummy-ship');
-      dummyShip.classList.remove('dummy-ship-horizontal');
+      } else {
+        dummyShip.classList.add('dummy-ship');
+        dummyShip.classList.remove('dummy-ship-horizontal');
+      }
     });
   }
+  createDummyShipToDrag(setDummyShipLength());
+  createDummyShipToDrag(setDummyShipLength());
+  createDummyShipToDrag(setDummyShipLength());
+  createDummyShipToDrag(setDummyShipLength());
   createDummyShipToDrag(setDummyShipLength());
 };
 
