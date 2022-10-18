@@ -1,13 +1,24 @@
-const firstBoatCoords = [1, 1];
-const firstBoatOrientation = '';
-const secondBoatCoords = [7, 1];
-const secondBoatOrientation = '';
-const thirdBoatCoords = [2, 3];
-const thirdBoatOrientation = 'vertical';
-const fourthBoatCoords = [4, 3];
-const fourthBoatOrientation = '';
-const fifthBoatCoords = [5, 5];
-const fifthBoatOrientation = 'vertical';
+// const firstBoatCoords = [1, 1];
+// const firstBoatOrientation = '';
+// const secondBoatCoords = [7, 1];
+// const secondBoatOrientation = '';
+// const thirdBoatCoords = [2, 3];
+// const thirdBoatOrientation = 'vertical';
+// const fourthBoatCoords = [4, 3];
+// const fourthBoatOrientation = '';
+// const fifthBoatCoords = [5, 5];
+// const fifthBoatOrientation = 'vertical';
+
+let firstBoatCoords;
+let firstBoatOrientation;
+let secondBoatCoords;
+let secondBoatOrientation;
+let thirdBoatCoords;
+let thirdBoatOrientation;
+let fourthBoatCoords;
+let fourthBoatOrientation;
+let fifthBoatCoords;
+let fifthBoatOrientation;
 
 let shipCounter = 0;
 
@@ -134,19 +145,12 @@ const initializeDom = () => {
 };
 
 const createBoatSetupModal = () => {
-  //
-  //
-  // get input from user w drag and drop
-  // might need event listeners on squares?
-  // submit to create board
-  //
   const header = document.querySelector('.header');
 
   const setupUpdates = document.createElement('div');
   setupUpdates.classList.add('header-text');
   setupUpdates.append('Place your ships! Get ready!');
   header.appendChild(setupUpdates);
-  //
 
   const mainContainer = document.querySelector('.container');
 
@@ -204,6 +208,7 @@ const createBoatSetupModal = () => {
       return 3;
     }
     if (dummyShipCounter === 5) {
+      dummyShipCounter++;
       return 2;
     }
   };
@@ -238,11 +243,47 @@ const createBoatSetupModal = () => {
       }
     });
   }
-  createDummyShipToDrag(setDummyShipLength());
-  createDummyShipToDrag(setDummyShipLength());
-  createDummyShipToDrag(setDummyShipLength());
-  createDummyShipToDrag(setDummyShipLength());
-  createDummyShipToDrag(setDummyShipLength());
+
+  // get input from user w drag and drop
+  //
+  (function getShipPlacementFromUser() {
+    createDummyShipToDrag(setDummyShipLength());
+    let dummyBoatCoords;
+    let dummyBoatOrientation;
+    // might need event listeners on squares?
+    // store returned values
+    //
+    // submit to create board
+
+    if ('test for orient - maybe using classlist on div?')
+      dummyBoatOrientation = 'horizontal';
+    else dummyBoatOrientation = 'vertical';
+
+    if (!firstBoatCoords) {
+      firstBoatCoords = dummyBoatCoords;
+      firstBoatOrientation = dummyBoatOrientation;
+    } else if (!secondBoatCoords) {
+      secondBoatCoords = dummyBoatCoords;
+      secondBoatOrientation = dummyBoatOrientation;
+    } else if (!thirdBoatCoords) {
+      thirdBoatCoords = dummyBoatCoords;
+      thirdBoatOrientation = dummyBoatOrientation;
+    } else if (!fourthBoatCoords) {
+      fourthBoatCoords = dummyBoatCoords;
+      fourthBoatOrientation = dummyBoatOrientation;
+    } else if (!fifthBoatCoords) {
+      fifthBoatCoords = dummyBoatCoords;
+      fifthBoatOrientation = dummyBoatOrientation;
+    }
+
+    console.log(firstBoatCoords, firstBoatOrientation);
+    console.log(secondBoatCoords, secondBoatOrientation);
+    console.log(thirdBoatCoords, thirdBoatOrientation);
+    console.log(fourthBoatCoords, fourthBoatOrientation);
+    console.log(fifthBoatCoords, fifthBoatOrientation);
+
+    // on submit, initializeDom();
+  })();
 };
 
 createBoatSetupModal();
