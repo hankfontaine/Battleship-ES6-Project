@@ -1,6 +1,5 @@
 body {
   animation: water 0.9s infinite alternate;
-  /* background-color: rgb(103, 103, 222); */
   font-family: 'Poly', serif;
 }
 
@@ -52,6 +51,16 @@ body {
   display: flex;
 }
 
+.drag-container {
+  border-radius: 90px;
+  width: 6vw;
+  margin: 1vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .main-gameplay-window {
   border: 2px solid black;
   border-radius: 9px;
@@ -101,15 +110,33 @@ body {
   background-color: black;
 }
 
+.occupied-square-setup {
+  background-color: black;
+  border-radius: 5px;
+}
+
+.dummy-ship {
+  border-radius: 5px;
+  background-color: rgb(177, 183, 189);
+  border: 2px solid rgb(177, 183, 189);
+}
+
 .empty-peg {
   background-color: rgb(65, 59, 59);
   height: 14px;
   width: 14px;
 }
 
+.empty-peg-setup {
+  background-color: rgb(161, 157, 157);
+  height: 14px;
+  width: 14px;
+}
+
 .unhit-peg,
 .hit-peg,
-.empty-peg {
+.empty-peg,
+.empty-peg-setup {
   border-radius: 90px;
 }
 

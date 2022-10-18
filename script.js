@@ -154,7 +154,7 @@ const createBoatSetupModal = () => {
   mainContainer.appendChild(containerForSetup);
 
   const dragContainer = document.createElement('div');
-  dragContainer.append('test');
+  dragContainer.classList.add('drag-container');
   containerForSetup.appendChild(dragContainer);
 
   const dropContainer = document.createElement('div');
@@ -183,39 +183,29 @@ const createBoatSetupModal = () => {
     }
   }
 
-  // need function to get size of ship to update in dragcontainer
+  function createDummyShipToDrag(input) {
+    const dummyShip = document.createElement('div');
+    dummyShip.classList.add('dummy-ship');
+    const area = document.querySelector('.drag-container');
+    area.appendChild(dummyShip);
 
-  let shipCounter = 0;
-  const setShipName = (input) => {
-    if (input === 5) {
-      shipCounter++;
-      return 'carrier';
-    }
+    for (let i = 1; i <= input; i++) {
+      console.log('test');
 
-    if (input === 4) {
-      shipCounter++;
-      return 'battleship';
-    }
-    if (input === 3 && shipCounter === 2) {
-      shipCounter++;
-      return 'submarine';
-    }
-    if (input === 3 && shipCounter === 3) {
-      shipCounter++;
-      return 'cruiser';
-    }
-    if (input === 2) {
-      shipCounter++;
-      return 'destroyer';
-    }
-  };
+      const squareOfShip = document.createElement('div');
+      squareOfShip.classList.add('square');
+      squareOfShip.classList.add('occupied-square-setup');
 
-  // function createDummyShipToDrag(shipCounter) {
-  //
-  // uses for loop to create square elements shipCounter number of
-  //times in a container w flex direction column
-  //
-  // }
+      const pegOfSquare = document.createElement('div');
+      pegOfSquare.classList.add('empty-peg-setup');
+      squareOfShip.appendChild(pegOfSquare);
+
+      const area = document.querySelector('.drag-container');
+      dummyShip.appendChild(squareOfShip);
+    }
+  }
+  createDummyShipToDrag(Number(5));
+  // createDummyShipToDrag(shipCounter);
 };
 
 createBoatSetupModal();
