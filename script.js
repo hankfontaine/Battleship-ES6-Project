@@ -9,16 +9,16 @@
 // const fifthBoatCoords = [5, 5];
 // const fifthBoatOrientation = 'vertical';
 
-// let firstBoatCoords;
-// let firstBoatOrientation;
-// let secondBoatCoords;
-// let secondBoatOrientation;
-// let thirdBoatCoords;
-// let thirdBoatOrientation;
-// let fourthBoatCoords;
-// let fourthBoatOrientation;
-// let fifthBoatCoords;
-// let fifthBoatOrientation;
+let firstBoatCoords;
+let firstBoatOrientation;
+let secondBoatCoords;
+let secondBoatOrientation;
+let thirdBoatCoords;
+let thirdBoatOrientation;
+let fourthBoatCoords;
+let fourthBoatOrientation;
+let fifthBoatCoords;
+let fifthBoatOrientation;
 
 let shipCounter = 0;
 
@@ -629,27 +629,22 @@ const createBoatSetupModal = () => {
     }
   }
 
-  let dummyShipCounter = 5;
+  let dummyShipCounter = 1;
 
   const setDummyShipLength = () => {
     if (dummyShipCounter === 1) {
-      dummyShipCounter++;
       return 5;
     }
     if (dummyShipCounter === 2) {
-      dummyShipCounter++;
       return 4;
     }
     if (dummyShipCounter === 3) {
-      dummyShipCounter++;
       return 3;
     }
     if (dummyShipCounter === 4) {
-      dummyShipCounter++;
       return 3;
     }
     if (dummyShipCounter === 5) {
-      dummyShipCounter++;
       return 2;
     }
   };
@@ -671,9 +666,9 @@ const createBoatSetupModal = () => {
       pegOfSquare.classList.add('empty-peg-setup');
       squareOfShip.appendChild(pegOfSquare);
 
-      // if (i === input) {
-      //   squareOfShip.classList.add('fill');
-      // }
+      if (i === input) {
+        squareOfShip.classList.add('setter-square');
+      }
 
       dummyShip.appendChild(squareOfShip);
     }
@@ -683,8 +678,8 @@ const createBoatSetupModal = () => {
         dummyShip.classList.add('dummy-ship-horizontal');
         dummyShip.classList.remove('dummy-ship');
       } else {
-        dummyShip.classList.add('dummy-ship');
         dummyShip.classList.remove('dummy-ship-horizontal');
+        dummyShip.classList.add('dummy-ship');
       }
     });
     dummyShip.setAttribute('draggable', 'true');
@@ -699,17 +694,16 @@ const createBoatSetupModal = () => {
     createDummyShipToDrag(setDummyShipLength());
     let dummyBoatCoords;
     let dummyBoatOrientation;
-    // might need event listeners on squares?
 
-    // drag and drop goes here
+    // query selector needs to work specific to set boat - so needs to change each time
 
     const fill = document.querySelector('.fill');
+    const setter = document.querySelector('.setter-square');
     const empties = document.querySelectorAll('.empty');
 
     fill.addEventListener('dragstart', dragStart);
     fill.addEventListener('dragend', dragEnd);
 
-    // loop through empties, call drag events
     for (const empty of empties) {
       empty.addEventListener('dragover', dragOver);
       empty.addEventListener('dragenter', dragEnter);
@@ -735,61 +729,63 @@ const createBoatSetupModal = () => {
     function dragEnter(e) {
       e.preventDefault();
       this.classList.add('hover');
-      // console.log(this.id);
     }
     function dragLeave() {
       this.classList.remove('hover');
     }
     function dragDrop() {
-      const valueArray = this.id.split('-');
-      const firstValue = valueArray[0];
-      const secondValue = valueArray[1];
+      dummyBoatCoords = [
+        Number(this.id.split('-')[0]),
+        Number(this.id.split('-')[1]),
+      ];
 
-      dummyBoatCoords = [Number(firstValue), Number(secondValue)];
+      const horizontalShip = document.querySelector('.dummy-ship-horizontal');
 
-      if ('test for orient - maybe using classlist on div?')
-        dummyBoatOrientation = 'horizontal';
-      // coords need to be adjusted to END not start of ship
+      if (horizontalShip) dummyBoatOrientation = 'horizontal';
       else dummyBoatOrientation = 'vertical';
 
       if (!firstBoatCoords) {
         firstBoatCoords = dummyBoatCoords;
         firstBoatOrientation = dummyBoatOrientation;
+        console.log(dummyShipCounter);
+
+        dummyShipCounter++;
       } else if (!secondBoatCoords) {
         secondBoatCoords = dummyBoatCoords;
         secondBoatOrientation = dummyBoatOrientation;
+        console.log(dummyShipCounter);
+
+        dummyShipCounter++;
       } else if (!thirdBoatCoords) {
         thirdBoatCoords = dummyBoatCoords;
         thirdBoatOrientation = dummyBoatOrientation;
+        console.log(dummyShipCounter);
+
+        dummyShipCounter++;
       } else if (!fourthBoatCoords) {
         fourthBoatCoords = dummyBoatCoords;
         fourthBoatOrientation = dummyBoatOrientation;
+        console.log(dummyShipCounter);
+
+        dummyShipCounter++;
       } else if (!fifthBoatCoords) {
         fifthBoatCoords = dummyBoatCoords;
         fifthBoatOrientation = dummyBoatOrientation;
+        console.log(dummyShipCounter);
+
+        dummyShipCounter++;
       }
 
-      this.classList.remove('hold');
-      this.classList.remove('hover');
-      // buggy but works
-      this.append(fill);
+      // coords need to be adjusted to END not start of ship
 
-      // fill.classList.remove('fill');
-      // needs to remove classes from object
-      // needs way to "reset which boat is being placed"
+      // // needs to remove classes from object
+      // // needs way to "reset which boat is being placed"
       getShipPlacementFromUser();
     }
 
     // store returned values
     // display returned values on dummy board by looking up
     // corresponding squares
-
-    // console.log(firstBoatCoords, firstBoatOrientation);
-    // console.log(secondBoatCoords, secondBoatOrientation);
-    // console.log(thirdBoatCoords, thirdBoatOrientation);
-    // console.log(fourthBoatCoords, fourthBoatOrientation);
-    // console.log(fifthBoatCoords, fifthBoatOrientation);
-    // getShipPlacementFromUser();
   })();
 };
 

@@ -69,6 +69,10 @@ body {
   justify-content: center;
 }
 
+.drag-container-dropped {
+  border: 10px solid red;
+}
+
 .main-gameplay-window {
   border: 2px solid black;
   border-radius: 9px;
@@ -132,6 +136,7 @@ body {
 
 .dummy-ship-horizontal {
   display: flex;
+  flex-direction: row-reverse;
   border-radius: 5px;
   background-color: rgb(177, 183, 189);
   border: 2px solid rgb(177, 183, 189);
@@ -239,4 +244,8 @@ body {
 
 .invisible {
   display: none;
+}
+
+.setter-square {
+  background-color: red;
 }
