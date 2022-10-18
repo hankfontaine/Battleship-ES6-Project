@@ -297,42 +297,53 @@ const createBoatSetupModal = () => {
     function dragEnter(e) {
       e.preventDefault();
       this.classList.add('hover');
-      console.log(this.id);
+      // console.log(this.id);
     }
     function dragLeave() {
       this.classList.remove('hover');
     }
     function dragDrop() {
+      const valueArray = this.id.split('-');
+      const firstValue = valueArray[0];
+      const secondValue = valueArray[1];
+
+      dummyBoatCoords = [Number(firstValue), Number(secondValue)];
+
+      if ('test for orient - maybe using classlist on div?')
+        dummyBoatOrientation = 'horizontal';
+      // coords need to be adjusted to END not start of ship
+      else dummyBoatOrientation = 'vertical';
+
+      if (!firstBoatCoords) {
+        firstBoatCoords = dummyBoatCoords;
+        firstBoatOrientation = dummyBoatOrientation;
+        console.log(firstBoatCoords, firstBoatOrientation);
+      }
+
+      // else if (!secondBoatCoords) {
+      //   secondBoatCoords = dummyBoatCoords;
+      //   secondBoatOrientation = dummyBoatOrientation;
+      // } else if (!thirdBoatCoords) {
+      //   thirdBoatCoords = dummyBoatCoords;
+      //   thirdBoatOrientation = dummyBoatOrientation;
+      // } else if (!fourthBoatCoords) {
+      //   fourthBoatCoords = dummyBoatCoords;
+      //   fourthBoatOrientation = dummyBoatOrientation;
+      // } else if (!fifthBoatCoords) {
+      //   fifthBoatCoords = dummyBoatCoords;
+      //   fifthBoatOrientation = dummyBoatOrientation;
+      // }
+
       this.classList.remove('hold');
       this.classList.remove('hover');
       // buggy but works
       this.append(fill);
+
       // fill.classList.remove('fill');
+      // needs to remove classes from object
       // needs way to "reset which boat is being placed"
       getShipPlacementFromUser();
     }
-
-    if ('test for orient - maybe using classlist on div?')
-      dummyBoatOrientation = 'horizontal';
-    // coords need to be adjusted to END not start of ship
-    else dummyBoatOrientation = 'vertical';
-
-    // if (!firstBoatCoords) {
-    //   firstBoatCoords = dummyBoatCoords;
-    //   firstBoatOrientation = dummyBoatOrientation;
-    // } else if (!secondBoatCoords) {
-    //   secondBoatCoords = dummyBoatCoords;
-    //   secondBoatOrientation = dummyBoatOrientation;
-    // } else if (!thirdBoatCoords) {
-    //   thirdBoatCoords = dummyBoatCoords;
-    //   thirdBoatOrientation = dummyBoatOrientation;
-    // } else if (!fourthBoatCoords) {
-    //   fourthBoatCoords = dummyBoatCoords;
-    //   fourthBoatOrientation = dummyBoatOrientation;
-    // } else if (!fifthBoatCoords) {
-    //   fifthBoatCoords = dummyBoatCoords;
-    //   fifthBoatOrientation = dummyBoatOrientation;
-    // }
 
     // store returned values
     // display returned values on dummy board by looking up
