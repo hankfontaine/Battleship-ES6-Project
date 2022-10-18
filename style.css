@@ -48,6 +48,10 @@ body {
   }
 }
 
+.container-for-setup {
+  display: flex;
+}
+
 .main-gameplay-window {
   border: 2px solid black;
   border-radius: 9px;

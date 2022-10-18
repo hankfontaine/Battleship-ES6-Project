@@ -52,8 +52,8 @@ const fillUpdateArea = (input) => {
 };
 
 const initializeDom = () => {
-  const body = document.querySelector('.body');
-  body.innerHTML = '';
+  const mainContainer = document.querySelector('.container');
+  mainContainer.innerHTML = '';
 
   ///////////////////////////////////////////////////////////////////////
   ///////////////// BEGIN DOM MANIPULATION LOGIC MODULES ///////////////////////
@@ -67,11 +67,11 @@ const initializeDom = () => {
 
   const topGameplayWindow = document.createElement('div');
   topGameplayWindow.classList.add('main-gameplay-window');
-  body.appendChild(topGameplayWindow);
+  mainContainer.appendChild(topGameplayWindow);
 
   const bottomGameplayWindow = document.createElement('div');
   bottomGameplayWindow.classList.add('main-gameplay-window');
-  body.appendChild(bottomGameplayWindow);
+  mainContainer.appendChild(bottomGameplayWindow);
 
   const playerOffenseBoardContainer = document.createElement('div');
   playerOffenseBoardContainer.classList.add('player-offense-board-container');
@@ -106,38 +106,48 @@ const createBoatSetupModal = () => {
   //
   //
   // rename all elements
+  // create container to house ship
   // create dummy grid
   // get input from user w drag and drop
   // submit to create board
   //
   //
-
   const header = document.querySelector('.header');
-  const gameUpdates = document.createElement('div');
-  gameUpdates.classList.add('header-text');
-  gameUpdates.append('Place your ships! Get ready!');
-  header.appendChild(gameUpdates);
 
-  const body = document.querySelector('.body');
-  body.innerHTML = '';
+  const setupUpdates = document.createElement('div');
+  setupUpdates.classList.add('header-text');
+  setupUpdates.append('Place your ships! Get ready!');
+  header.appendChild(setupUpdates);
+  //
 
-  const bottomGameplayWindow = document.createElement('div');
-  bottomGameplayWindow.classList.add('main-gameplay-window');
-  body.appendChild(bottomGameplayWindow);
+  const mainContainer = document.querySelector('.container');
 
-  const playerDefenseBoardContainer = document.createElement('div');
-  playerDefenseBoardContainer.classList.add('player-defense-board-container');
-  bottomGameplayWindow.appendChild(playerDefenseBoardContainer);
+  const containerForSetup = document.createElement('div');
+  containerForSetup.classList.add('container-for-setup');
+  mainContainer.appendChild(containerForSetup);
 
-  const playerDefensiveGridArea = document.createElement('div');
-  playerDefensiveGridArea.classList.add('grid-area');
-  playerDefensiveGridArea.id = 'defense-area';
-  playerDefenseBoardContainer.appendChild(playerDefensiveGridArea);
+  const dragContainer = document.createElement('div');
+  dragContainer.append('test');
+  containerForSetup.appendChild(dragContainer);
+
+  const dropContainer = document.createElement('div');
+  dropContainer.classList.add('player-defense-board-container');
+  containerForSetup.appendChild(dropContainer);
+
+  const placementGridArea = document.createElement('div');
+  placementGridArea.classList.add('grid-area');
+  dropContainer.classList.add('main-gameplay-window');
+  placementGridArea.id = 'defense-area';
+  dropContainer.appendChild(placementGridArea);
+
+  const footer = document.querySelector('.footer');
 
   const submitButton = document.createElement('button');
   submitButton.append('Submit to begin');
   submitButton.onclick = initializeDom;
-  body.appendChild(submitButton);
+  footer.appendChild(submitButton);
+
+  // need function to get size of ship to update in dragcontainer
 };
 
 createBoatSetupModal();
@@ -557,8 +567,8 @@ const runModulesOfGame = () => {
         fillUpdateArea(playerTwo.name + ' won the game!');
       }
       if (winner) {
-        const body = document.querySelector('.body');
-        body.innerHTML = '';
+        const mainContainer = document.querySelector('.container');
+        mainContainer.innerHTML = '';
 
         const header = document.querySelector('.header');
 
