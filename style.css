@@ -53,10 +53,17 @@ body {
 
 .drag-container {
   border-radius: 90px;
-  width: 6vw;
-  margin: 1vw;
+  margin: 2vw;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.drag-container-horizontal {
+  border-radius: 90px;
+  margin: 2vw;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -116,6 +123,13 @@ body {
 }
 
 .dummy-ship {
+  border-radius: 5px;
+  background-color: rgb(177, 183, 189);
+  border: 2px solid rgb(177, 183, 189);
+}
+
+.dummy-ship-horizontal {
+  display: flex;
   border-radius: 5px;
   background-color: rgb(177, 183, 189);
   border: 2px solid rgb(177, 183, 189);

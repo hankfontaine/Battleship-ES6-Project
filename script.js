@@ -10,6 +10,7 @@ const fifthBoatCoords = [5, 5];
 const fifthBoatOrientation = 'vertical';
 
 let shipCounter = 0;
+
 const setShipName = (input) => {
   if (input === 5) {
     shipCounter++;
@@ -183,6 +184,31 @@ const createBoatSetupModal = () => {
     }
   }
 
+  let dummyShipCounter = 1;
+
+  const setDummyShipLength = () => {
+    if (dummyShipCounter === 1) {
+      dummyShipCounter++;
+      return 5;
+    }
+    if (dummyShipCounter === 2) {
+      dummyShipCounter++;
+      return 4;
+    }
+    if (dummyShipCounter === 3) {
+      dummyShipCounter++;
+      return 3;
+    }
+    if (dummyShipCounter === 4) {
+      dummyShipCounter++;
+      return 3;
+    }
+    if (dummyShipCounter === 5) {
+      dummyShipCounter++;
+      return;
+    }
+  };
+
   function createDummyShipToDrag(input) {
     const dummyShip = document.createElement('div');
     dummyShip.classList.add('dummy-ship');
@@ -190,8 +216,6 @@ const createBoatSetupModal = () => {
     area.appendChild(dummyShip);
 
     for (let i = 1; i <= input; i++) {
-      console.log('test');
-
       const squareOfShip = document.createElement('div');
       squareOfShip.classList.add('square');
       squareOfShip.classList.add('occupied-square-setup');
@@ -200,12 +224,19 @@ const createBoatSetupModal = () => {
       pegOfSquare.classList.add('empty-peg-setup');
       squareOfShip.appendChild(pegOfSquare);
 
-      const area = document.querySelector('.drag-container');
       dummyShip.appendChild(squareOfShip);
     }
+
+    dummyShip.addEventListener('click', () => {
+      console.log(dummyShip.classList);
+      if (dummyShip.classList.contains('dummy-ship')) {
+        dummyShip.classList.add('dummy-ship-horizontal');
+        dummyShip.classList.remove('dummy-ship');
+      } else dummyShip.classList.add('dummy-ship');
+      dummyShip.classList.remove('dummy-ship-horizontal');
+    });
   }
-  createDummyShipToDrag(Number(5));
-  // createDummyShipToDrag(shipCounter);
+  createDummyShipToDrag(setDummyShipLength());
 };
 
 createBoatSetupModal();
