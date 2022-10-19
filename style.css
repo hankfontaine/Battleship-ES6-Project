@@ -1,3 +1,9 @@
+/*  */
+/*  */
+/* LAYOUT */
+/*  */
+/*  */
+
 body {
   animation: water 0.9s infinite alternate;
   font-family: 'Poly', serif;
@@ -47,6 +53,34 @@ body {
   }
 }
 
+.grid-area {
+  height: 280px;
+  width: 280px;
+  display: grid;
+  background-color: white;
+  grid-auto-flow: column;
+  direction: rtl;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.square {
+  box-sizing: border-box;
+  border: 1.7px solid black;
+  border-radius: 2px;
+  height: 28px;
+  width: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/*  */
+/*  */
+/* SETUP */
+/*  */
+/*  */
+
 .container-for-setup {
   display: flex;
 }
@@ -73,6 +107,66 @@ body {
   border: 10px solid red;
 }
 
+.occupied-square-setup {
+  box-sizing: border-box;
+  border: 1.7px solid black;
+  border-radius: 2px;
+  height: 28px;
+  width: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: black;
+  border-radius: 5px;
+}
+
+.empty-peg-setup {
+  background-color: rgb(161, 157, 157);
+  height: 14px;
+  width: 14px;
+  border-radius: 90px;
+}
+
+.dummy-ship-vertical,
+.dummy-ship-horizontal {
+  border-radius: 5px;
+  background-color: rgb(177, 183, 189);
+  border: 2px solid rgb(177, 183, 189);
+  cursor: pointer;
+}
+
+.dummy-ship-horizontal {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.hold {
+  background-color: rgba(211, 211, 211, 0.737);
+  border: 1px dashed black;
+  box-shadow: 1px 1px 1px black;
+}
+
+.hover {
+  background-color: whitesmoke;
+  border: 3px dotted black;
+}
+
+.invisible {
+  display: none;
+}
+
+.setter-square {
+  background-color: red;
+}
+
+/*  */
+/*  */
+/* GAMEPLAY */
+/*  */
+/*  */
+
 .main-gameplay-window {
   border: 2px solid black;
   border-radius: 9px;
@@ -96,51 +190,8 @@ body {
   box-sizing: border-box;
 }
 
-.grid-area {
-  height: 280px;
-  width: 280px;
-  display: grid;
-  background-color: white;
-  grid-auto-flow: column;
-  direction: rtl;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-}
-
-.square {
-  box-sizing: border-box;
-  border: 1.7px solid black;
-  border-radius: 2px;
-  height: 28px;
-  width: 28px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .occupied-square {
   background-color: black;
-}
-
-.occupied-square-setup {
-  background-color: black;
-  border-radius: 5px;
-}
-
-.dummy-ship {
-  border-radius: 5px;
-  background-color: rgb(177, 183, 189);
-  border: 2px solid rgb(177, 183, 189);
-  cursor: pointer;
-}
-
-.dummy-ship-horizontal {
-  display: flex;
-  flex-direction: row-reverse;
-  border-radius: 5px;
-  background-color: rgb(177, 183, 189);
-  border: 2px solid rgb(177, 183, 189);
-  cursor: pointer;
 }
 
 .empty-peg {
@@ -149,16 +200,9 @@ body {
   width: 14px;
 }
 
-.empty-peg-setup {
-  background-color: rgb(161, 157, 157);
-  height: 14px;
-  width: 14px;
-}
-
 .unhit-peg,
 .hit-peg,
-.empty-peg,
-.empty-peg-setup {
+.empty-peg {
   border-radius: 90px;
 }
 
@@ -210,6 +254,12 @@ body {
   }
 }
 
+/*  */
+/*  */
+/* WIN CONDITION */
+/*  */
+/*  */
+
 .play-again {
   text-shadow: 1.3px 1.3px 1px black;
   height: 4vh;
@@ -225,27 +275,4 @@ body {
   font-size: 17pt;
   animation: glow 0.9s infinite alternate;
   animation: water 0.9s infinite alternate;
-}
-
-.fill {
-  background-color: blue;
-}
-
-.hold {
-  background-color: rgba(211, 211, 211, 0.737);
-  border: 1px dashed rgb(77, 50, 50);
-  box-shadow: 1px 1px 1px black;
-}
-
-.hover {
-  background-color: whitesmoke;
-  border: 3px dotted black;
-}
-
-.invisible {
-  display: none;
-}
-
-.setter-square {
-  background-color: red;
 }

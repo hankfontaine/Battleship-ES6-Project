@@ -635,18 +635,18 @@ const createBoatSetupModal = () => {
     if (dummyShipCounter === 1) {
       return 5;
     }
-    if (dummyShipCounter === 2) {
-      return 4;
-    }
-    if (dummyShipCounter === 3) {
-      return 3;
-    }
-    if (dummyShipCounter === 4) {
-      return 3;
-    }
-    if (dummyShipCounter === 5) {
-      return 2;
-    }
+    // if (dummyShipCounter === 2) {
+    //   return 4;
+    // }
+    // if (dummyShipCounter === 3) {
+    //   return 3;
+    // }
+    // if (dummyShipCounter === 4) {
+    //   return 3;
+    // }
+    // if (dummyShipCounter === 5) {
+    //   return 2;
+    // }
   };
 
   function createDummyShipToDrag(input) {
@@ -655,11 +655,14 @@ const createBoatSetupModal = () => {
 
     const dummyShip = document.createElement('div');
     dummyShip.classList.add('dummy-ship');
+    dummyShip.classList.add('dummy-ship-vertical');
+    dummyShip.id = 'dummy-ship-' + setShipName(setDummyShipLength());
     area.appendChild(dummyShip);
+    dummyShip.setAttribute('draggable', 'true');
+    dummyShip.classList.add('fill');
 
     for (let i = 1; i <= input; i++) {
       const squareOfShip = document.createElement('div');
-      squareOfShip.classList.add('square');
       squareOfShip.classList.add('occupied-square-setup');
 
       const pegOfSquare = document.createElement('div');
@@ -669,25 +672,22 @@ const createBoatSetupModal = () => {
       if (i === input) {
         squareOfShip.classList.add('setter-square');
       }
-
       dummyShip.appendChild(squareOfShip);
     }
 
     dummyShip.addEventListener('click', () => {
-      if (dummyShip.classList.contains('dummy-ship')) {
+      if (dummyShip.classList.contains('dummy-ship-vertical')) {
         dummyShip.classList.add('dummy-ship-horizontal');
-        dummyShip.classList.remove('dummy-ship');
+        dummyShip.classList.remove('dummy-ship-vertical');
       } else {
         dummyShip.classList.remove('dummy-ship-horizontal');
-        dummyShip.classList.add('dummy-ship');
+        dummyShip.classList.add('dummy-ship-vertical');
       }
     });
-    dummyShip.setAttribute('draggable', 'true');
-    dummyShip.classList.add('fill');
   }
 
   // get input from user w drag and drop
-  //
+
   (function getShipPlacementFromUser() {
     if (dummyShipCounter > 5) return initializeDom();
 
@@ -695,7 +695,11 @@ const createBoatSetupModal = () => {
     let dummyBoatCoords;
     let dummyBoatOrientation;
 
-    // query selector needs to work specific to set boat - so needs to change each time
+    const dummyCarrier = document.querySelector('#dummy-ship-carrier');
+    // const dummyBattleship = document.querySelector('#dummy-ship-battleship');
+    // const dummySubmarine = document.querySelector('#dummy-ship-submarine');
+    // const dummyCruiser = document.querySelector('#dummy-ship-cruiser');
+    // const dummyDestroyer = document.querySelector('#dummy-ship-destroyer');
 
     const fill = document.querySelector('.fill');
     const setter = document.querySelector('.setter-square');
@@ -733,55 +737,69 @@ const createBoatSetupModal = () => {
     function dragLeave() {
       this.classList.remove('hover');
     }
+
     function dragDrop() {
+      this.classList.remove('hover');
+
+      const horizontalShip = document.querySelector('.dummy-ship-horizontal');
+      if (horizontalShip) dummyBoatOrientation = 'horizontal';
+      else dummyBoatOrientation = 'vertical';
+
       dummyBoatCoords = [
         Number(this.id.split('-')[0]),
         Number(this.id.split('-')[1]),
       ];
-
-      const horizontalShip = document.querySelector('.dummy-ship-horizontal');
-
-      if (horizontalShip) dummyBoatOrientation = 'horizontal';
-      else dummyBoatOrientation = 'vertical';
-
       if (!firstBoatCoords) {
         firstBoatCoords = dummyBoatCoords;
         firstBoatOrientation = dummyBoatOrientation;
-        console.log(dummyShipCounter);
-
-        dummyShipCounter++;
-      } else if (!secondBoatCoords) {
-        secondBoatCoords = dummyBoatCoords;
-        secondBoatOrientation = dummyBoatOrientation;
-        console.log(dummyShipCounter);
-
-        dummyShipCounter++;
-      } else if (!thirdBoatCoords) {
-        thirdBoatCoords = dummyBoatCoords;
-        thirdBoatOrientation = dummyBoatOrientation;
-        console.log(dummyShipCounter);
-
-        dummyShipCounter++;
-      } else if (!fourthBoatCoords) {
-        fourthBoatCoords = dummyBoatCoords;
-        fourthBoatOrientation = dummyBoatOrientation;
-        console.log(dummyShipCounter);
-
-        dummyShipCounter++;
-      } else if (!fifthBoatCoords) {
-        fifthBoatCoords = dummyBoatCoords;
-        fifthBoatOrientation = dummyBoatOrientation;
-        console.log(dummyShipCounter);
-
         dummyShipCounter++;
       }
 
-      // coords need to be adjusted to END not start of ship
+      function removeAttributesFromDummyShip(ship) {
+        ship.classList.remove('dummy-ship');
+        ship.classList.remove('dummy-ship-vertical');
+        ship.classList.remove('dummy-ship-horizontal');
+        ship.classList.remove('fill');
+        ship.setAttribute('draggable', 'false');
+      }
+      removeAttributesFromDummyShip(dummyCarrier);
 
-      // // needs to remove classes from object
-      // // needs way to "reset which boat is being placed"
+      // need to remove all attributes that mess up game from ship
+      console.log(dummyCarrier);
+
       getShipPlacementFromUser();
     }
+
+    // else if (!secondBoatCoords) {
+    //   secondBoatCoords = dummyBoatCoords;
+    //   secondBoatOrientation = dummyBoatOrientation;
+    //   console.log(dummyShipCounter);
+
+    //   dummyShipCounter++;
+    // } else if (!thirdBoatCoords) {
+    //   thirdBoatCoords = dummyBoatCoords;
+    //   thirdBoatOrientation = dummyBoatOrientation;
+    //   console.log(dummyShipCounter);
+
+    //   dummyShipCounter++;
+    // } else if (!fourthBoatCoords) {
+    //   fourthBoatCoords = dummyBoatCoords;
+    //   fourthBoatOrientation = dummyBoatOrientation;
+    //   console.log(dummyShipCounter);
+
+    //   dummyShipCounter++;
+    // } else if (!fifthBoatCoords) {
+    //   fifthBoatCoords = dummyBoatCoords;
+    //   fifthBoatOrientation = dummyBoatOrientation;
+    //   console.log(dummyShipCounter);
+
+    //   dummyShipCounter++;
+    // }
+
+    // coords need to be adjusted to END not start of ship
+
+    // // needs to remove classes from object
+    // // needs way to "reset which boat is being placed"
 
     // store returned values
     // display returned values on dummy board by looking up
