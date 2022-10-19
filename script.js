@@ -21,6 +21,7 @@ let fifthBoatCoords;
 let fifthBoatOrientation;
 
 let shipCounter = 0;
+let dummyShipCounter = 0;
 
 const setShipName = (input) => {
   if (input === 5) {
@@ -629,8 +630,6 @@ const createBoatSetupModal = () => {
     }
   }
 
-  let dummyShipCounter = 1;
-
   const setDummyShipLength = () => {
     if (dummyShipCounter === 1) {
       return 5;
@@ -686,9 +685,9 @@ const createBoatSetupModal = () => {
     });
   }
 
-  // get input from user w drag and drop
-
   (function getShipPlacementFromUser() {
+    dummyShipCounter++;
+
     if (dummyShipCounter > 5) return initializeDom();
 
     createDummyShipToDrag(setDummyShipLength());
@@ -743,7 +742,7 @@ const createBoatSetupModal = () => {
 
       // console.log(this.id);
       // needs to account for placement of fill - cannot be outside borders
-      this.append(fill);
+      // this.append(fill);
 
       const horizontalShip = document.querySelector('.dummy-ship-horizontal');
       if (horizontalShip) dummyBoatOrientation = 'horizontal';
@@ -754,24 +753,23 @@ const createBoatSetupModal = () => {
         Number(this.id.split('-')[1]),
       ];
 
-      if (!firstBoatCoords) {
+      if (!dummyCarrier) {
         firstBoatCoords = dummyBoatCoords;
         firstBoatOrientation = dummyBoatOrientation;
-      } else if (!secondBoatCoords) {
+      } else if (!dummyBattleship) {
         secondBoatCoords = dummyBoatCoords;
         secondBoatOrientation = dummyBoatOrientation;
-      } else if (!thirdBoatCoords) {
+      } else if (!dummySubmarine) {
         thirdBoatCoords = dummyBoatCoords;
         thirdBoatOrientation = dummyBoatOrientation;
-      } else if (!fourthBoatCoords) {
+      } else if (!dummyCruiser) {
         fourthBoatCoords = dummyBoatCoords;
         fourthBoatOrientation = dummyBoatOrientation;
-      } else if (!fifthBoatCoords) {
+      } else if (!dummyDestroyer) {
         fifthBoatCoords = dummyBoatCoords;
         fifthBoatOrientation = dummyBoatOrientation;
       }
       console.log(dummyShipCounter);
-      dummyShipCounter++;
 
       function removeAttributesFromDummyShip(ship) {
         ship.classList.remove('dummy-ship');
@@ -780,11 +778,9 @@ const createBoatSetupModal = () => {
         ship.classList.remove('fill');
         ship.setAttribute('draggable', 'false');
       }
-      removeAttributesFromDummyShip(dummyCarrier);
-      removeAttributesFromDummyShip(dummyBattleship);
-      removeAttributesFromDummyShip(dummySubmarine);
-      removeAttributesFromDummyShip(dummyCruiser);
-      removeAttributesFromDummyShip(dummyDestroyer);
+      removeAttributesFromDummyShip(fill);
+
+      this.classList.remove('empty');
 
       getShipPlacementFromUser();
     }
