@@ -635,18 +635,18 @@ const createBoatSetupModal = () => {
     if (dummyShipCounter === 1) {
       return 5;
     }
-    // if (dummyShipCounter === 2) {
-    //   return 4;
-    // }
-    // if (dummyShipCounter === 3) {
-    //   return 3;
-    // }
-    // if (dummyShipCounter === 4) {
-    //   return 3;
-    // }
-    // if (dummyShipCounter === 5) {
-    //   return 2;
-    // }
+    if (dummyShipCounter === 2) {
+      return 4;
+    }
+    if (dummyShipCounter === 3) {
+      return 3;
+    }
+    if (dummyShipCounter === 4) {
+      return 3;
+    }
+    if (dummyShipCounter === 5) {
+      return 2;
+    }
   };
 
   function createDummyShipToDrag(input) {
@@ -696,10 +696,10 @@ const createBoatSetupModal = () => {
     let dummyBoatOrientation;
 
     const dummyCarrier = document.querySelector('#dummy-ship-carrier');
-    // const dummyBattleship = document.querySelector('#dummy-ship-battleship');
-    // const dummySubmarine = document.querySelector('#dummy-ship-submarine');
-    // const dummyCruiser = document.querySelector('#dummy-ship-cruiser');
-    // const dummyDestroyer = document.querySelector('#dummy-ship-destroyer');
+    const dummyBattleship = document.querySelector('#dummy-ship-battleship');
+    const dummySubmarine = document.querySelector('#dummy-ship-submarine');
+    const dummyCruiser = document.querySelector('#dummy-ship-cruiser');
+    const dummyDestroyer = document.querySelector('#dummy-ship-destroyer');
 
     const fill = document.querySelector('.fill');
     const setter = document.querySelector('.setter-square');
@@ -741,6 +741,10 @@ const createBoatSetupModal = () => {
     function dragDrop() {
       this.classList.remove('hover');
 
+      // console.log(this.id);
+      // needs to account for placement of fill - cannot be outside borders
+      this.append(fill);
+
       const horizontalShip = document.querySelector('.dummy-ship-horizontal');
       if (horizontalShip) dummyBoatOrientation = 'horizontal';
       else dummyBoatOrientation = 'vertical';
@@ -749,11 +753,25 @@ const createBoatSetupModal = () => {
         Number(this.id.split('-')[0]),
         Number(this.id.split('-')[1]),
       ];
+
       if (!firstBoatCoords) {
         firstBoatCoords = dummyBoatCoords;
         firstBoatOrientation = dummyBoatOrientation;
-        dummyShipCounter++;
+      } else if (!secondBoatCoords) {
+        secondBoatCoords = dummyBoatCoords;
+        secondBoatOrientation = dummyBoatOrientation;
+      } else if (!thirdBoatCoords) {
+        thirdBoatCoords = dummyBoatCoords;
+        thirdBoatOrientation = dummyBoatOrientation;
+      } else if (!fourthBoatCoords) {
+        fourthBoatCoords = dummyBoatCoords;
+        fourthBoatOrientation = dummyBoatOrientation;
+      } else if (!fifthBoatCoords) {
+        fifthBoatCoords = dummyBoatCoords;
+        fifthBoatOrientation = dummyBoatOrientation;
       }
+      console.log(dummyShipCounter);
+      dummyShipCounter++;
 
       function removeAttributesFromDummyShip(ship) {
         ship.classList.remove('dummy-ship');
@@ -763,38 +781,13 @@ const createBoatSetupModal = () => {
         ship.setAttribute('draggable', 'false');
       }
       removeAttributesFromDummyShip(dummyCarrier);
-
-      // need to remove all attributes that mess up game from ship
-      console.log(dummyCarrier);
+      removeAttributesFromDummyShip(dummyBattleship);
+      removeAttributesFromDummyShip(dummySubmarine);
+      removeAttributesFromDummyShip(dummyCruiser);
+      removeAttributesFromDummyShip(dummyDestroyer);
 
       getShipPlacementFromUser();
     }
-
-    // else if (!secondBoatCoords) {
-    //   secondBoatCoords = dummyBoatCoords;
-    //   secondBoatOrientation = dummyBoatOrientation;
-    //   console.log(dummyShipCounter);
-
-    //   dummyShipCounter++;
-    // } else if (!thirdBoatCoords) {
-    //   thirdBoatCoords = dummyBoatCoords;
-    //   thirdBoatOrientation = dummyBoatOrientation;
-    //   console.log(dummyShipCounter);
-
-    //   dummyShipCounter++;
-    // } else if (!fourthBoatCoords) {
-    //   fourthBoatCoords = dummyBoatCoords;
-    //   fourthBoatOrientation = dummyBoatOrientation;
-    //   console.log(dummyShipCounter);
-
-    //   dummyShipCounter++;
-    // } else if (!fifthBoatCoords) {
-    //   fifthBoatCoords = dummyBoatCoords;
-    //   fifthBoatOrientation = dummyBoatOrientation;
-    //   console.log(dummyShipCounter);
-
-    //   dummyShipCounter++;
-    // }
 
     // coords need to be adjusted to END not start of ship
 
