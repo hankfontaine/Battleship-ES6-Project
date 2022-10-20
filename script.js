@@ -1,50 +1,51 @@
-const firstBoatCoords = [1, 1];
-const firstBoatOrientation = '';
-const secondBoatCoords = [7, 1];
-const secondBoatOrientation = '';
-const thirdBoatCoords = [2, 3];
-const thirdBoatOrientation = 'vertical';
-const fourthBoatCoords = [4, 3];
-const fourthBoatOrientation = '';
-const fifthBoatCoords = [5, 5];
-const fifthBoatOrientation = 'vertical';
+// const firstBoatCoords = [1, 1];
+// const firstBoatOrientation = '';
+// const secondBoatCoords = [7, 1];
+// const secondBoatOrientation = '';
+// const thirdBoatCoords = [2, 3];
+// const thirdBoatOrientation = 'vertical';
+// const fourthBoatCoords = [4, 3];
+// const fourthBoatOrientation = '';
+// const fifthBoatCoords = [5, 5];
+// const fifthBoatOrientation = 'vertical';
 
-// let firstBoatCoords;
-// let firstBoatOrientation;
-// let secondBoatCoords;
-// let secondBoatOrientation;
-// let thirdBoatCoords;
-// let thirdBoatOrientation;
-// let fourthBoatCoords;
-// let fourthBoatOrientation;
-// let fifthBoatCoords;
-// let fifthBoatOrientation;
+let firstBoatCoords;
+let firstBoatOrientation;
+let secondBoatCoords;
+let secondBoatOrientation;
+let thirdBoatCoords;
+let thirdBoatOrientation;
+let fourthBoatCoords;
+let fourthBoatOrientation;
+let fifthBoatCoords;
+let fifthBoatOrientation;
 
-// let shipCounter = 0;
+let shipCounter = 0;
 
-// const setShipName = (input) => {
-//   if (input === 5) {
-//     shipCounter++;
-//     return 'carrier';
-//   }
+// NEEDS TO BE RENAMED AND RE IMPLEMENTED
+const setShipName = (input) => {
+  if (input === 5) {
+    shipCounter++;
+    return 'carrier';
+  }
 
-//   if (input === 4) {
-//     shipCounter++;
-//     return 'battleship';
-//   }
-//   if (input === 3 && shipCounter === 2) {
-//     shipCounter++;
-//     return 'submarine';
-//   }
-//   if (input === 3 && shipCounter === 3) {
-//     shipCounter++;
-//     return 'cruiser';
-//   }
-//   if (input === 2) {
-//     shipCounter++;
-//     return 'destroyer';
-//   }
-// };
+  if (input === 4) {
+    shipCounter++;
+    return 'battleship';
+  }
+  if (input === 3 && shipCounter === 2) {
+    shipCounter++;
+    return 'submarine';
+  }
+  if (input === 3 && shipCounter === 3) {
+    shipCounter++;
+    return 'cruiser';
+  }
+  if (input === 2) {
+    shipCounter++;
+    return 'destroyer';
+  }
+};
 
 const setShipOrientation = (input) => {
   if (input !== 'vertical') return 'horizontal';
@@ -598,222 +599,218 @@ const initializeDom = () => {
   runModulesOfGame();
 };
 
-initializeDom();
+(function createBoatSetupModal() {
+  const header = document.querySelector('.header');
 
-// const createBoatSetupModal = () => {
-//   const header = document.querySelector('.header');
+  const setupUpdates = document.createElement('div');
+  setupUpdates.classList.add('header-text');
+  setupUpdates.append('Place your ships! Get ready!');
+  header.appendChild(setupUpdates);
 
-//   const setupUpdates = document.createElement('div');
-//   setupUpdates.classList.add('header-text');
-//   setupUpdates.append('Place your ships! Get ready!');
-//   header.appendChild(setupUpdates);
+  const mainContainer = document.querySelector('.container');
 
-//   const mainContainer = document.querySelector('.container');
+  const containerForSetup = document.createElement('div');
+  containerForSetup.classList.add('container-for-setup');
+  mainContainer.appendChild(containerForSetup);
 
-//   const containerForSetup = document.createElement('div');
-//   containerForSetup.classList.add('container-for-setup');
-//   mainContainer.appendChild(containerForSetup);
+  const dragContainer = document.createElement('div');
+  dragContainer.classList.add('drag-container');
+  containerForSetup.appendChild(dragContainer);
 
-//   const dragContainer = document.createElement('div');
-//   dragContainer.classList.add('drag-container');
-//   containerForSetup.appendChild(dragContainer);
+  const dropContainer = document.createElement('div');
+  dropContainer.classList.add('player-defense-board-container');
+  containerForSetup.appendChild(dropContainer);
 
-//   const dropContainer = document.createElement('div');
-//   dropContainer.classList.add('player-defense-board-container');
-//   containerForSetup.appendChild(dropContainer);
+  const placementGridArea = document.createElement('div');
+  placementGridArea.classList.add('grid-area');
+  dropContainer.classList.add('main-gameplay-window');
+  placementGridArea.id = 'defense-area';
+  dropContainer.appendChild(placementGridArea);
 
-//   const placementGridArea = document.createElement('div');
-//   placementGridArea.classList.add('grid-area');
-//   dropContainer.classList.add('main-gameplay-window');
-//   placementGridArea.id = 'defense-area';
-//   dropContainer.appendChild(placementGridArea);
+  for (let x = 10; x >= 1; x--) {
+    for (let y = 10; y >= 1; y--) {
+      const setupSquare = document.createElement('div');
+      setupSquare.classList.add('square');
+      setupSquare.classList.add('empty');
+      setupSquare.id = x + '-' + y;
+      placementGridArea.appendChild(setupSquare);
+    }
+  }
 
-//   for (let x = 10; x >= 1; x--) {
-//     for (let y = 10; y >= 1; y--) {
-//       const setupSquare = document.createElement('div');
-//       setupSquare.classList.add('square');
-//       setupSquare.classList.add('empty');
-//       setupSquare.id = x + '-' + y;
-//       placementGridArea.appendChild(setupSquare);
-//     }
-//   }
+  let dummyShipCounter = 1;
 
-//   let dummyShipCounter = 1;
+  const setDummyShipLength = () => {
+    if (dummyShipCounter === 1) {
+      return 5;
+    }
+    // if (dummyShipCounter === 2) {
+    //   return 4;
+    // }
+    // if (dummyShipCounter === 3) {
+    //   return 3;
+    // }
+    // if (dummyShipCounter === 4) {
+    //   return 3;
+    // }
+    // if (dummyShipCounter === 5) {
+    //   return 2;
+    // }
+  };
 
-//   const setDummyShipLength = () => {
-//     if (dummyShipCounter === 1) {
-//       return 5;
-//     }
-//     // if (dummyShipCounter === 2) {
-//     //   return 4;
-//     // }
-//     // if (dummyShipCounter === 3) {
-//     //   return 3;
-//     // }
-//     // if (dummyShipCounter === 4) {
-//     //   return 3;
-//     // }
-//     // if (dummyShipCounter === 5) {
-//     //   return 2;
-//     // }
-//   };
+  function createDummyShipToDrag(input) {
+    const area = document.querySelector('.drag-container');
+    area.innerHTML = '';
 
-//   function createDummyShipToDrag(input) {
-//     const area = document.querySelector('.drag-container');
-//     area.innerHTML = '';
+    const dummyShip = document.createElement('div');
+    dummyShip.classList.add('dummy-ship');
+    dummyShip.classList.add('dummy-ship-vertical');
+    dummyShip.id = 'dummy-ship-' + setShipName(setDummyShipLength());
+    area.appendChild(dummyShip);
+    dummyShip.setAttribute('draggable', 'true');
+    dummyShip.classList.add('fill');
 
-//     const dummyShip = document.createElement('div');
-//     dummyShip.classList.add('dummy-ship');
-//     dummyShip.classList.add('dummy-ship-vertical');
-//     dummyShip.id = 'dummy-ship-' + setShipName(setDummyShipLength());
-//     area.appendChild(dummyShip);
-//     dummyShip.setAttribute('draggable', 'true');
-//     dummyShip.classList.add('fill');
+    for (let i = 1; i <= input; i++) {
+      const squareOfShip = document.createElement('div');
+      squareOfShip.classList.add('occupied-square-setup');
 
-//     for (let i = 1; i <= input; i++) {
-//       const squareOfShip = document.createElement('div');
-//       squareOfShip.classList.add('occupied-square-setup');
+      const pegOfSquare = document.createElement('div');
+      pegOfSquare.classList.add('empty-peg-setup');
+      squareOfShip.appendChild(pegOfSquare);
 
-//       const pegOfSquare = document.createElement('div');
-//       pegOfSquare.classList.add('empty-peg-setup');
-//       squareOfShip.appendChild(pegOfSquare);
+      if (i === input) {
+        squareOfShip.classList.add('setter-square');
+      }
+      dummyShip.appendChild(squareOfShip);
+    }
 
-//       if (i === input) {
-//         squareOfShip.classList.add('setter-square');
-//       }
-//       dummyShip.appendChild(squareOfShip);
-//     }
+    dummyShip.addEventListener('click', () => {
+      if (dummyShip.classList.contains('dummy-ship-vertical')) {
+        dummyShip.classList.add('dummy-ship-horizontal');
+        dummyShip.classList.remove('dummy-ship-vertical');
+      } else {
+        dummyShip.classList.remove('dummy-ship-horizontal');
+        dummyShip.classList.add('dummy-ship-vertical');
+      }
+    });
+  }
 
-//     dummyShip.addEventListener('click', () => {
-//       if (dummyShip.classList.contains('dummy-ship-vertical')) {
-//         dummyShip.classList.add('dummy-ship-horizontal');
-//         dummyShip.classList.remove('dummy-ship-vertical');
-//       } else {
-//         dummyShip.classList.remove('dummy-ship-horizontal');
-//         dummyShip.classList.add('dummy-ship-vertical');
-//       }
-//     });
-//   }
+  // get input from user w drag and drop
 
-//   // get input from user w drag and drop
+  (function getShipPlacementFromUser() {
+    if (dummyShipCounter > 5) return initializeDom();
 
-//   (function getShipPlacementFromUser() {
-//     if (dummyShipCounter > 0) return initializeDom();
+    createDummyShipToDrag(setDummyShipLength());
+    let dummyBoatCoords;
+    let dummyBoatOrientation;
 
-//     createDummyShipToDrag(setDummyShipLength());
-//     let dummyBoatCoords;
-//     let dummyBoatOrientation;
+    const dummyCarrier = document.querySelector('#dummy-ship-carrier');
+    // const dummyBattleship = document.querySelector('#dummy-ship-battleship');
+    // const dummySubmarine = document.querySelector('#dummy-ship-submarine');
+    // const dummyCruiser = document.querySelector('#dummy-ship-cruiser');
+    // const dummyDestroyer = document.querySelector('#dummy-ship-destroyer');
 
-//     const dummyCarrier = document.querySelector('#dummy-ship-carrier');
-//     // const dummyBattleship = document.querySelector('#dummy-ship-battleship');
-//     // const dummySubmarine = document.querySelector('#dummy-ship-submarine');
-//     // const dummyCruiser = document.querySelector('#dummy-ship-cruiser');
-//     // const dummyDestroyer = document.querySelector('#dummy-ship-destroyer');
+    const fill = document.querySelector('.fill');
+    const setter = document.querySelector('.setter-square');
+    const empties = document.querySelectorAll('.empty');
 
-//     const fill = document.querySelector('.fill');
-//     const setter = document.querySelector('.setter-square');
-//     const empties = document.querySelectorAll('.empty');
+    fill.addEventListener('dragstart', dragStart);
+    fill.addEventListener('dragend', dragEnd);
 
-//     fill.addEventListener('dragstart', dragStart);
-//     fill.addEventListener('dragend', dragEnd);
+    for (const empty of empties) {
+      empty.addEventListener('dragover', dragOver);
+      empty.addEventListener('dragenter', dragEnter);
+      empty.addEventListener('dragleave', dragLeave);
+      empty.addEventListener('drop', dragDrop);
+    }
 
-//     for (const empty of empties) {
-//       empty.addEventListener('dragover', dragOver);
-//       empty.addEventListener('dragenter', dragEnter);
-//       empty.addEventListener('dragleave', dragLeave);
-//       empty.addEventListener('drop', dragDrop);
-//     }
+    function dragStart() {
+      this.classList.add('hold');
+      setTimeout(() => {
+        this.classList.add('invisible');
+      }, 0);
+    }
 
-//     function dragStart() {
-//       this.classList.add('hold');
-//       setTimeout(() => {
-//         this.classList.add('invisible');
-//       }, 0);
-//     }
+    function dragEnd() {
+      this.classList.remove('hold');
+      this.classList.remove('invisible');
+    }
 
-//     function dragEnd() {
-//       this.classList.remove('hold');
-//       this.classList.remove('invisible');
-//     }
+    function dragOver(e) {
+      e.preventDefault();
+    }
+    function dragEnter(e) {
+      e.preventDefault();
+      this.classList.add('hover');
+    }
+    function dragLeave() {
+      this.classList.remove('hover');
+    }
 
-//     function dragOver(e) {
-//       e.preventDefault();
-//     }
-//     function dragEnter(e) {
-//       e.preventDefault();
-//       this.classList.add('hover');
-//     }
-//     function dragLeave() {
-//       this.classList.remove('hover');
-//     }
+    function dragDrop() {
+      this.classList.remove('hover');
 
-//     function dragDrop() {
-//       this.classList.remove('hover');
+      const horizontalShip = document.querySelector('.dummy-ship-horizontal');
+      if (horizontalShip) dummyBoatOrientation = 'horizontal';
+      else dummyBoatOrientation = 'vertical';
 
-//       const horizontalShip = document.querySelector('.dummy-ship-horizontal');
-//       if (horizontalShip) dummyBoatOrientation = 'horizontal';
-//       else dummyBoatOrientation = 'vertical';
+      dummyBoatCoords = [
+        Number(this.id.split('-')[0]),
+        Number(this.id.split('-')[1]),
+      ];
+      if (!firstBoatCoords) {
+        firstBoatCoords = dummyBoatCoords;
+        firstBoatOrientation = dummyBoatOrientation;
+        dummyShipCounter++;
+      }
 
-//       dummyBoatCoords = [
-//         Number(this.id.split('-')[0]),
-//         Number(this.id.split('-')[1]),
-//       ];
-//       if (!firstBoatCoords) {
-//         firstBoatCoords = dummyBoatCoords;
-//         firstBoatOrientation = dummyBoatOrientation;
-//         dummyShipCounter++;
-//       }
+      function removeAttributesFromDummyShip(ship) {
+        ship.classList.remove('dummy-ship');
+        ship.classList.remove('dummy-ship-vertical');
+        ship.classList.remove('dummy-ship-horizontal');
+        ship.classList.remove('fill');
+        ship.setAttribute('draggable', 'false');
+      }
+      removeAttributesFromDummyShip(dummyCarrier);
 
-//       function removeAttributesFromDummyShip(ship) {
-//         ship.classList.remove('dummy-ship');
-//         ship.classList.remove('dummy-ship-vertical');
-//         ship.classList.remove('dummy-ship-horizontal');
-//         ship.classList.remove('fill');
-//         ship.setAttribute('draggable', 'false');
-//       }
-//       removeAttributesFromDummyShip(dummyCarrier);
+      // need to remove all attributes that mess up game from ship
+      console.log(dummyCarrier);
 
-//       // need to remove all attributes that mess up game from ship
-//       console.log(dummyCarrier);
+      getShipPlacementFromUser();
+    }
 
-//       getShipPlacementFromUser();
-//     }
+    // else if (!secondBoatCoords) {
+    //   secondBoatCoords = dummyBoatCoords;
+    //   secondBoatOrientation = dummyBoatOrientation;
+    //   console.log(dummyShipCounter);
 
-//     // else if (!secondBoatCoords) {
-//     //   secondBoatCoords = dummyBoatCoords;
-//     //   secondBoatOrientation = dummyBoatOrientation;
-//     //   console.log(dummyShipCounter);
+    //   dummyShipCounter++;
+    // } else if (!thirdBoatCoords) {
+    //   thirdBoatCoords = dummyBoatCoords;
+    //   thirdBoatOrientation = dummyBoatOrientation;
+    //   console.log(dummyShipCounter);
 
-//     //   dummyShipCounter++;
-//     // } else if (!thirdBoatCoords) {
-//     //   thirdBoatCoords = dummyBoatCoords;
-//     //   thirdBoatOrientation = dummyBoatOrientation;
-//     //   console.log(dummyShipCounter);
+    //   dummyShipCounter++;
+    // } else if (!fourthBoatCoords) {
+    //   fourthBoatCoords = dummyBoatCoords;
+    //   fourthBoatOrientation = dummyBoatOrientation;
+    //   console.log(dummyShipCounter);
 
-//     //   dummyShipCounter++;
-//     // } else if (!fourthBoatCoords) {
-//     //   fourthBoatCoords = dummyBoatCoords;
-//     //   fourthBoatOrientation = dummyBoatOrientation;
-//     //   console.log(dummyShipCounter);
+    //   dummyShipCounter++;
+    // } else if (!fifthBoatCoords) {
+    //   fifthBoatCoords = dummyBoatCoords;
+    //   fifthBoatOrientation = dummyBoatOrientation;
+    //   console.log(dummyShipCounter);
 
-//     //   dummyShipCounter++;
-//     // } else if (!fifthBoatCoords) {
-//     //   fifthBoatCoords = dummyBoatCoords;
-//     //   fifthBoatOrientation = dummyBoatOrientation;
-//     //   console.log(dummyShipCounter);
+    //   dummyShipCounter++;
+    // }
 
-//     //   dummyShipCounter++;
-//     // }
+    // coords need to be adjusted to END not start of ship
 
-//     // coords need to be adjusted to END not start of ship
+    // // needs to remove classes from object
+    // // needs way to "reset which boat is being placed"
 
-//     // // needs to remove classes from object
-//     // // needs way to "reset which boat is being placed"
-
-//     // store returned values
-//     // display returned values on dummy board by looking up
-//     // corresponding squares
-//   })();
-// };
-
-// createBoatSetupModal();
+    // store returned values
+    // display returned values on dummy board by looking up
+    // corresponding squares
+  })();
+})();
