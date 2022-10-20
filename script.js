@@ -600,42 +600,44 @@ const initializeDom = () => {
 };
 
 (function createBoatSetupModal() {
-  const header = document.querySelector('.header');
+  (function buildSetupLayout() {
+    const header = document.querySelector('.header');
 
-  const setupUpdates = document.createElement('div');
-  setupUpdates.classList.add('header-text');
-  setupUpdates.append('Place your ships! Get ready!');
-  header.appendChild(setupUpdates);
+    const setupUpdates = document.createElement('div');
+    setupUpdates.classList.add('header-text');
+    setupUpdates.append('Place your ships! Get ready!');
+    header.appendChild(setupUpdates);
 
-  const mainContainer = document.querySelector('.container');
+    const mainContainer = document.querySelector('.container');
 
-  const containerForSetup = document.createElement('div');
-  containerForSetup.classList.add('container-for-setup');
-  mainContainer.appendChild(containerForSetup);
+    const containerForSetup = document.createElement('div');
+    containerForSetup.classList.add('container-for-setup');
+    mainContainer.appendChild(containerForSetup);
 
-  const dragContainer = document.createElement('div');
-  dragContainer.classList.add('drag-container');
-  containerForSetup.appendChild(dragContainer);
+    const dragContainer = document.createElement('div');
+    dragContainer.classList.add('drag-container');
+    containerForSetup.appendChild(dragContainer);
 
-  const dropContainer = document.createElement('div');
-  dropContainer.classList.add('player-defense-board-container');
-  containerForSetup.appendChild(dropContainer);
+    const dropContainer = document.createElement('div');
+    dropContainer.classList.add('player-defense-board-container');
+    containerForSetup.appendChild(dropContainer);
 
-  const placementGridArea = document.createElement('div');
-  placementGridArea.classList.add('grid-area');
-  dropContainer.classList.add('main-gameplay-window');
-  placementGridArea.id = 'defense-area';
-  dropContainer.appendChild(placementGridArea);
+    const placementGridArea = document.createElement('div');
+    placementGridArea.classList.add('grid-area');
+    dropContainer.classList.add('main-gameplay-window');
+    placementGridArea.id = 'defense-area';
+    dropContainer.appendChild(placementGridArea);
 
-  for (let x = 10; x >= 1; x--) {
-    for (let y = 10; y >= 1; y--) {
-      const setupSquare = document.createElement('div');
-      setupSquare.classList.add('square');
-      setupSquare.classList.add('empty');
-      setupSquare.id = x + '-' + y;
-      placementGridArea.appendChild(setupSquare);
+    for (let x = 10; x >= 1; x--) {
+      for (let y = 10; y >= 1; y--) {
+        const setupSquare = document.createElement('div');
+        setupSquare.classList.add('square');
+        setupSquare.classList.add('empty');
+        setupSquare.id = x + '-' + y;
+        placementGridArea.appendChild(setupSquare);
+      }
     }
-  }
+  })();
 
   let dummyShipCounter = 1;
 
@@ -652,9 +654,9 @@ const initializeDom = () => {
     if (dummyShipCounter === 4) {
       return 3;
     }
-    if (dummyShipCounter === 5) {
-      return 2;
-    }
+    // if (dummyShipCounter === 5) {
+    //   return 2;
+    // }
   };
 
   function createDummyShipToDrag(input) {
@@ -697,17 +699,29 @@ const initializeDom = () => {
   // get input from user w drag and drop
 
   (function getShipPlacementFromUser() {
-    if (dummyShipCounter > 5) return initializeDom();
+    if (dummyShipCounter > 6) return initializeDom();
 
-    createDummyShipToDrag(setDummyShipLength());
-    let dummyBoatCoords;
-    let dummyBoatOrientation;
-
-    const dummyCarrier = document.querySelector('#dummy-ship-carrier');
+    // const dummyCarrier = document.querySelector('#dummy-ship-carrier');
     // const dummyBattleship = document.querySelector('#dummy-ship-battleship');
     // const dummySubmarine = document.querySelector('#dummy-ship-submarine');
     // const dummyCruiser = document.querySelector('#dummy-ship-cruiser');
     // const dummyDestroyer = document.querySelector('#dummy-ship-destroyer');
+
+    // if (dummyDestroyer) console.log(dummyDestroyer);
+    // if (dummyCruiser) console.log(dummyCruiser);
+    // if (dummySubmarine) console.log(dummySubmarine);
+    // if (dummyBattleship) console.log(dummyBattleship);
+    // if (dummyCarrier) console.log(dummyCarrier);
+
+    // if (!dummyCarrier) dummyShipCounter = 1;
+    // else if (!dummyBattleship) dummyShipCounter = 2;
+    // else if (!dummySubmarine) dummyShipCounter = 3;
+    // else if (!dummyCruiser) dummyShipCounter = 4;
+    // else if (!dummyDestroyer) dummyShipCounter = 5;
+
+    createDummyShipToDrag(setDummyShipLength());
+    let dummyBoatCoords;
+    let dummyBoatOrientation;
 
     const fill = document.querySelector('.fill');
     const setter = document.querySelector('.setter-square');
@@ -757,34 +771,34 @@ const initializeDom = () => {
         Number(this.id.split('-')[0]),
         Number(this.id.split('-')[1]),
       ];
+
       if (!firstBoatCoords) {
         firstBoatCoords = dummyBoatCoords;
         firstBoatOrientation = dummyBoatOrientation;
-        dummyShipCounter++;
       } else if (!secondBoatCoords) {
         secondBoatCoords = dummyBoatCoords;
         secondBoatOrientation = dummyBoatOrientation;
         console.log(dummyShipCounter);
 
-        dummyShipCounter++;
+        // dummyShipCounter = 3;
       } else if (!thirdBoatCoords) {
         thirdBoatCoords = dummyBoatCoords;
         thirdBoatOrientation = dummyBoatOrientation;
         console.log(dummyShipCounter);
 
-        dummyShipCounter++;
+        // dummyShipCounter = 4;
       } else if (!fourthBoatCoords) {
         fourthBoatCoords = dummyBoatCoords;
         fourthBoatOrientation = dummyBoatOrientation;
         console.log(dummyShipCounter);
 
-        dummyShipCounter++;
+        // dummyShipCounter = 5;
       } else if (!fifthBoatCoords) {
         fifthBoatCoords = dummyBoatCoords;
         fifthBoatOrientation = dummyBoatOrientation;
         console.log(dummyShipCounter);
 
-        dummyShipCounter++;
+        // dummyShipCounter = 6;
       }
 
       function removeAttributesFromDummyShip(ship) {
@@ -795,6 +809,7 @@ const initializeDom = () => {
         ship.setAttribute('draggable', 'false');
       }
       removeAttributesFromDummyShip(fill);
+      console.log(fill);
 
       // need to remove all attributes that mess up game from ship
 
