@@ -1,28 +1,27 @@
-// const firstBoatCoords = [1, 1];
-// const firstBoatOrientation = '';
-// const secondBoatCoords = [7, 1];
-// const secondBoatOrientation = '';
-// const thirdBoatCoords = [2, 3];
-// const thirdBoatOrientation = 'vertical';
-// const fourthBoatCoords = [4, 3];
-// const fourthBoatOrientation = '';
-// const fifthBoatCoords = [5, 5];
-// const fifthBoatOrientation = 'vertical';
+const firstBoatCoords = [1, 1];
+const firstBoatOrientation = '';
+const secondBoatCoords = [7, 1];
+const secondBoatOrientation = '';
+const thirdBoatCoords = [2, 3];
+const thirdBoatOrientation = 'vertical';
+const fourthBoatCoords = [4, 3];
+const fourthBoatOrientation = '';
+const fifthBoatCoords = [5, 5];
+const fifthBoatOrientation = 'vertical';
 
-let firstBoatCoords;
-let firstBoatOrientation;
-let secondBoatCoords;
-let secondBoatOrientation;
-let thirdBoatCoords;
-let thirdBoatOrientation;
-let fourthBoatCoords;
-let fourthBoatOrientation;
-let fifthBoatCoords;
-let fifthBoatOrientation;
+// let firstBoatCoords;
+// let firstBoatOrientation;
+// let secondBoatCoords;
+// let secondBoatOrientation;
+// let thirdBoatCoords;
+// let thirdBoatOrientation;
+// let fourthBoatCoords;
+// let fourthBoatOrientation;
+// let fifthBoatCoords;
+// let fifthBoatOrientation;
 
 let dummyShipNameCounter = 0;
 
-// NEEDS TO BE RENAMED AND RE IMPLEMENTED
 const setDummyShipName = (input) => {
   if (input === 5) {
     dummyShipNameCounter++;
@@ -599,230 +598,226 @@ const initializeDom = () => {
   runModulesOfGame();
 };
 
-(function createBoatSetupModal() {
-  (function buildSetupLayout() {
-    const header = document.querySelector('.header');
+// initializeDom();
 
-    const setupUpdates = document.createElement('div');
-    setupUpdates.classList.add('header-text');
-    setupUpdates.append('Place your ships! Get ready!');
-    header.appendChild(setupUpdates);
+// (function createBoatSetupModal() {
+//   (function buildSetupLayout() {
+//     const header = document.querySelector('.header');
 
-    const mainContainer = document.querySelector('.container');
+//     const setupUpdates = document.createElement('div');
+//     setupUpdates.classList.add('header-text');
+//     setupUpdates.append('Place your ships! Get ready!');
+//     header.appendChild(setupUpdates);
 
-    const containerForSetup = document.createElement('div');
-    containerForSetup.classList.add('container-for-setup');
-    mainContainer.appendChild(containerForSetup);
+//     const mainContainer = document.querySelector('.container');
 
-    const dragContainer = document.createElement('div');
-    dragContainer.classList.add('drag-container');
-    containerForSetup.appendChild(dragContainer);
+//     const containerForSetup = document.createElement('div');
+//     containerForSetup.classList.add('container-for-setup');
+//     mainContainer.appendChild(containerForSetup);
 
-    const dropContainer = document.createElement('div');
-    dropContainer.classList.add('player-defense-board-container');
-    containerForSetup.appendChild(dropContainer);
+//     const dragContainer = document.createElement('div');
+//     dragContainer.classList.add('drag-container');
+//     containerForSetup.appendChild(dragContainer);
 
-    const placementGridArea = document.createElement('div');
-    placementGridArea.classList.add('grid-area');
-    dropContainer.classList.add('main-gameplay-window');
-    placementGridArea.id = 'defense-area';
-    dropContainer.appendChild(placementGridArea);
+//     const dropContainer = document.createElement('div');
+//     dropContainer.classList.add('player-defense-board-container');
+//     containerForSetup.appendChild(dropContainer);
 
-    for (let x = 10; x >= 1; x--) {
-      for (let y = 10; y >= 1; y--) {
-        const setupSquare = document.createElement('div');
-        setupSquare.classList.add('square');
-        setupSquare.classList.add('empty');
-        setupSquare.id = x + '-' + y;
-        placementGridArea.appendChild(setupSquare);
-      }
-    }
-  })();
+//     const placementGridArea = document.createElement('div');
+//     placementGridArea.classList.add('grid-area');
+//     dropContainer.classList.add('main-gameplay-window');
+//     placementGridArea.id = 'defense-area';
+//     dropContainer.appendChild(placementGridArea);
 
-  let dummyShipCounter = 1;
+//     for (let x = 10; x >= 1; x--) {
+//       for (let y = 10; y >= 1; y--) {
+//         const setupSquare = document.createElement('div');
+//         setupSquare.classList.add('square');
+//         setupSquare.classList.add('empty');
+//         setupSquare.id = x + '-' + y;
+//         placementGridArea.appendChild(setupSquare);
+//       }
+//     }
+//   })();
 
-  const setDummyShipLength = () => {
-    if (dummyShipCounter === 1) {
-      return 5;
-    }
-    if (dummyShipCounter === 2) {
-      return 4;
-    }
-    if (dummyShipCounter === 3) {
-      return 3;
-    }
-    if (dummyShipCounter === 4) {
-      return 3;
-    }
-    // if (dummyShipCounter === 5) {
-    //   return 2;
-    // }
-  };
+//   let dummyShipCounter = 1;
 
-  function createDummyShipToDrag(input) {
-    const area = document.querySelector('.drag-container');
-    area.innerHTML = '';
+//   const setDummyShipLength = () => {
+//     if (dummyShipCounter === 1) {
+//       return 5;
+//     }
+//     if (dummyShipCounter === 2) {
+//       return 4;
+//     }
+//     if (dummyShipCounter === 3) {
+//       return 3;
+//     }
+//     if (dummyShipCounter === 4) {
+//       return 3;
+//     }
+//     // if (dummyShipCounter === 5) {
+//     //   return 2;
+//     // }
+//   };
 
-    const dummyShip = document.createElement('div');
-    dummyShip.classList.add('dummy-ship');
-    dummyShip.classList.add('dummy-ship-vertical');
-    dummyShip.id = 'dummy-ship-' + setDummyShipName(setDummyShipLength());
-    area.appendChild(dummyShip);
-    dummyShip.setAttribute('draggable', 'true');
-    dummyShip.classList.add('fill');
+//   function createDummyShipToDrag(input) {
+//     const area = document.querySelector('.drag-container');
+//     area.innerHTML = '';
 
-    for (let i = 1; i <= input; i++) {
-      const squareOfShip = document.createElement('div');
-      squareOfShip.classList.add('occupied-square-setup');
+//     const dummyShip = document.createElement('div');
+//     dummyShip.classList.add('dummy-ship');
+//     dummyShip.classList.add('dummy-ship-vertical');
+//     dummyShip.id = 'dummy-ship-' + setDummyShipName(setDummyShipLength());
+//     area.appendChild(dummyShip);
+//     dummyShip.setAttribute('draggable', 'true');
+//     dummyShip.classList.add('fill');
 
-      const pegOfSquare = document.createElement('div');
-      pegOfSquare.classList.add('empty-peg-setup');
-      squareOfShip.appendChild(pegOfSquare);
+//     for (let i = 1; i <= input; i++) {
+//       const squareOfShip = document.createElement('div');
+//       squareOfShip.classList.add('occupied-square-setup');
 
-      if (i === input) {
-        squareOfShip.classList.add('setter-square');
-      }
-      dummyShip.appendChild(squareOfShip);
-    }
+//       const pegOfSquare = document.createElement('div');
+//       pegOfSquare.classList.add('empty-peg-setup');
+//       squareOfShip.appendChild(pegOfSquare);
 
-    dummyShip.addEventListener('click', () => {
-      if (dummyShip.classList.contains('dummy-ship-vertical')) {
-        dummyShip.classList.add('dummy-ship-horizontal');
-        dummyShip.classList.remove('dummy-ship-vertical');
-      } else {
-        dummyShip.classList.remove('dummy-ship-horizontal');
-        dummyShip.classList.add('dummy-ship-vertical');
-      }
-    });
-  }
+//       if (i === input) {
+//         squareOfShip.classList.add('setter-square');
+//       }
+//       dummyShip.appendChild(squareOfShip);
+//     }
 
-  // get input from user w drag and drop
+//     dummyShip.addEventListener('click', () => {
+//       if (dummyShip.classList.contains('dummy-ship-vertical')) {
+//         dummyShip.classList.add('dummy-ship-horizontal');
+//         dummyShip.classList.remove('dummy-ship-vertical');
+//       } else {
+//         dummyShip.classList.remove('dummy-ship-horizontal');
+//         dummyShip.classList.add('dummy-ship-vertical');
+//       }
+//     });
+//   }
 
-  (function getShipPlacementFromUser() {
-    if (dummyShipCounter > 6) return initializeDom();
+//   // get input from user w drag and drop
 
-    // const dummyCarrier = document.querySelector('#dummy-ship-carrier');
-    // const dummyBattleship = document.querySelector('#dummy-ship-battleship');
-    // const dummySubmarine = document.querySelector('#dummy-ship-submarine');
-    // const dummyCruiser = document.querySelector('#dummy-ship-cruiser');
-    // const dummyDestroyer = document.querySelector('#dummy-ship-destroyer');
+//   (function getShipPlacementFromUser() {
+//     if (dummyShipCounter > 1) return initializeDom();
 
-    // if (dummyDestroyer) console.log(dummyDestroyer);
-    // if (dummyCruiser) console.log(dummyCruiser);
-    // if (dummySubmarine) console.log(dummySubmarine);
-    // if (dummyBattleship) console.log(dummyBattleship);
-    // if (dummyCarrier) console.log(dummyCarrier);
+//     createDummyShipToDrag(setDummyShipLength());
+//     let dummyBoatCoords;
+//     let dummyBoatOrientation;
 
-    // if (!dummyCarrier) dummyShipCounter = 1;
-    // else if (!dummyBattleship) dummyShipCounter = 2;
-    // else if (!dummySubmarine) dummyShipCounter = 3;
-    // else if (!dummyCruiser) dummyShipCounter = 4;
-    // else if (!dummyDestroyer) dummyShipCounter = 5;
+//     const fill = document.querySelector('.fill');
+//     const setter = document.querySelector('.setter-square');
+//     const empties = document.querySelectorAll('.empty');
 
-    createDummyShipToDrag(setDummyShipLength());
-    let dummyBoatCoords;
-    let dummyBoatOrientation;
+//     fill.addEventListener('dragstart', dragStart);
+//     fill.addEventListener('dragend', dragEnd);
 
-    const fill = document.querySelector('.fill');
-    const setter = document.querySelector('.setter-square');
-    const empties = document.querySelectorAll('.empty');
+//     for (const empty of empties) {
+//       empty.addEventListener('dragover', dragOver);
+//       empty.addEventListener('dragenter', dragEnter);
+//       empty.addEventListener('dragleave', dragLeave);
+//       empty.addEventListener('drop', dragDrop);
+//     }
 
-    fill.addEventListener('dragstart', dragStart);
-    fill.addEventListener('dragend', dragEnd);
+//     function dragStart() {
+//       this.classList.add('hold');
+//       setTimeout(() => {
+//         this.classList.add('invisible');
+//       }, 0);
+//     }
 
-    for (const empty of empties) {
-      empty.addEventListener('dragover', dragOver);
-      empty.addEventListener('dragenter', dragEnter);
-      empty.addEventListener('dragleave', dragLeave);
-      empty.addEventListener('drop', dragDrop);
-    }
+//     function dragEnd() {
+//       this.classList.remove('hold');
+//       this.classList.remove('invisible');
+//     }
 
-    function dragStart() {
-      this.classList.add('hold');
-      setTimeout(() => {
-        this.classList.add('invisible');
-      }, 0);
-    }
+//     function dragOver(e) {
+//       e.preventDefault();
+//     }
+//     function dragEnter(e) {
+//       e.preventDefault();
+//       this.classList.add('hover');
+//     }
+//     function dragLeave() {
+//       this.classList.remove('hover');
+//     }
 
-    function dragEnd() {
-      this.classList.remove('hold');
-      this.classList.remove('invisible');
-    }
+//     function dragDrop() {
+//       this.classList.remove('hover');
 
-    function dragOver(e) {
-      e.preventDefault();
-    }
-    function dragEnter(e) {
-      e.preventDefault();
-      this.classList.add('hover');
-    }
-    function dragLeave() {
-      this.classList.remove('hover');
-    }
+//       const horizontalShip = document.querySelector('.dummy-ship-horizontal');
+//       if (horizontalShip) dummyBoatOrientation = 'horizontal';
+//       else dummyBoatOrientation = 'vertical';
 
-    function dragDrop() {
-      this.classList.remove('hover');
+//       dummyBoatCoords = [
+//         Number(this.id.split('-')[0]),
+//         Number(this.id.split('-')[1]),
+//       ];
 
-      const horizontalShip = document.querySelector('.dummy-ship-horizontal');
-      if (horizontalShip) dummyBoatOrientation = 'horizontal';
-      else dummyBoatOrientation = 'vertical';
+//       if (!firstBoatCoords) {
+//         firstBoatCoords = dummyBoatCoords;
+//         firstBoatOrientation = dummyBoatOrientation;
+//       } else if (!secondBoatCoords) {
+//         secondBoatCoords = dummyBoatCoords;
+//         secondBoatOrientation = dummyBoatOrientation;
+//         console.log(dummyShipCounter);
 
-      dummyBoatCoords = [
-        Number(this.id.split('-')[0]),
-        Number(this.id.split('-')[1]),
-      ];
+//         // dummyShipCounter = 3;
+//       } else if (!thirdBoatCoords) {
+//         thirdBoatCoords = dummyBoatCoords;
+//         thirdBoatOrientation = dummyBoatOrientation;
+//         console.log(dummyShipCounter);
 
-      if (!firstBoatCoords) {
-        firstBoatCoords = dummyBoatCoords;
-        firstBoatOrientation = dummyBoatOrientation;
-      } else if (!secondBoatCoords) {
-        secondBoatCoords = dummyBoatCoords;
-        secondBoatOrientation = dummyBoatOrientation;
-        console.log(dummyShipCounter);
+//         // dummyShipCounter = 4;
+//       } else if (!fourthBoatCoords) {
+//         fourthBoatCoords = dummyBoatCoords;
+//         fourthBoatOrientation = dummyBoatOrientation;
+//         console.log(dummyShipCounter);
 
-        // dummyShipCounter = 3;
-      } else if (!thirdBoatCoords) {
-        thirdBoatCoords = dummyBoatCoords;
-        thirdBoatOrientation = dummyBoatOrientation;
-        console.log(dummyShipCounter);
+//         // dummyShipCounter = 5;
+//       } else if (!fifthBoatCoords) {
+//         fifthBoatCoords = dummyBoatCoords;
+//         fifthBoatOrientation = dummyBoatOrientation;
+//         console.log(dummyShipCounter);
 
-        // dummyShipCounter = 4;
-      } else if (!fourthBoatCoords) {
-        fourthBoatCoords = dummyBoatCoords;
-        fourthBoatOrientation = dummyBoatOrientation;
-        console.log(dummyShipCounter);
+//         // dummyShipCounter = 6;
+//       }
 
-        // dummyShipCounter = 5;
-      } else if (!fifthBoatCoords) {
-        fifthBoatCoords = dummyBoatCoords;
-        fifthBoatOrientation = dummyBoatOrientation;
-        console.log(dummyShipCounter);
+//       function removeAttributesFromDummyShip(ship) {
+//         ship.classList.remove('dummy-ship');
+//         ship.classList.remove('dummy-ship-vertical');
+//         ship.classList.remove('dummy-ship-horizontal');
+//         ship.classList.remove('fill');
+//         ship.setAttribute('draggable', 'false');
+//       }
+//       removeAttributesFromDummyShip(fill);
+//       console.log(fill);
 
-        // dummyShipCounter = 6;
-      }
+//       // need to remove all attributes that mess up game from ship
 
-      function removeAttributesFromDummyShip(ship) {
-        ship.classList.remove('dummy-ship');
-        ship.classList.remove('dummy-ship-vertical');
-        ship.classList.remove('dummy-ship-horizontal');
-        ship.classList.remove('fill');
-        ship.setAttribute('draggable', 'false');
-      }
-      removeAttributesFromDummyShip(fill);
-      console.log(fill);
+//       const dummyCarrier = document.querySelector('#dummy-ship-carrier');
+//       const dummyBattleship = document.querySelector('#dummy-ship-battleship');
+//       const dummySubmarine = document.querySelector('#dummy-ship-submarine');
+//       const dummyCruiser = document.querySelector('#dummy-ship-cruiser');
+//       const dummyDestroyer = document.querySelector('#dummy-ship-destroyer');
 
-      // need to remove all attributes that mess up game from ship
+//       if (!dummyDestroyer) dummyShipCounter = 5;
+//       if (!dummyCruiser) dummyShipCounter = 4;
+//       if (!dummySubmarine) dummyShipCounter = 3;
+//       if (!dummyBattleship) dummyShipCounter = 2;
+//       if (!dummyCarrier) dummyShipCounter = 1;
 
-      getShipPlacementFromUser();
-    }
+//       getShipPlacementFromUser();
+//     }
 
-    // coords need to be adjusted to END not start of ship
+//     // coords need to be adjusted to END not start of ship
 
-    // // needs to remove classes from object
-    // // needs way to "reset which boat is being placed"
+//     // // needs to remove classes from object
+//     // // needs way to "reset which boat is being placed"
 
-    // store returned values
-    // display returned values on dummy board by looking up
-    // corresponding squares
-  })();
-})();
+//     // store returned values
+//     // display returned values on dummy board by looking up
+//     // corresponding squares
+//   })();
+// })();
