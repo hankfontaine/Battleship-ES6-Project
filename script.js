@@ -1,15 +1,3 @@
-// temp values for testing gameplay //
-// const firstBoatCoords = [1, 1];
-// const firstBoatOrientation = '';
-// const secondBoatCoords = [7, 1];
-// const secondBoatOrientation = '';
-// const thirdBoatCoords = [2, 3];
-// const thirdBoatOrientation = 'vertical';
-// const fourthBoatCoords = [4, 3];
-// const fourthBoatOrientation = '';
-// const fifthBoatCoords = [5, 5];
-// const fifthBoatOrientation = 'vertical';
-
 let firstBoatCoords;
 let firstBoatOrientation;
 let secondBoatCoords;
@@ -573,9 +561,6 @@ const initializeGameplay = () => {
   runModulesOfGame();
 };
 
-// to skip boat placement and use pre-set coords:
-// initializeGameplay();
-
 (function createBoatSetupModal() {
   (function buildSetupLayout() {
     const header = document.querySelector('.header');
@@ -808,12 +793,5 @@ const initializeGameplay = () => {
       dummyShipCounter++;
       createDummyShipToDrag(setDummyShipLength());
     }
-
-    // ship is actually displaying correctly when gameplay initializes -
-    // just needs to be fixed w dom manipulation during setup stage
-    // needs way to "reset which boat is being placed"
-
-    // display returned values on dummy board by looking up
-    // corresponding squares
   })();
 })();
