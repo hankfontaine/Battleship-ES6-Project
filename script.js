@@ -674,16 +674,10 @@ const initializeGameplay = () => {
     fill.addEventListener('dragend', dragEnd);
 
     for (const empty of empties) {
-      empty.addEventListener('click', clickOn);
-
       empty.addEventListener('dragover', dragOver);
       empty.addEventListener('dragenter', dragEnter);
       empty.addEventListener('dragleave', dragLeave);
       empty.addEventListener('drop', dragDrop);
-    }
-
-    function clickOn() {
-      console.log(this.id);
     }
 
     function dragStart() {
@@ -709,9 +703,25 @@ const initializeGameplay = () => {
 
     function dragDrop() {
       this.classList.remove('hover');
+
       const horizontalShip = document.querySelector('.dummy-ship-horizontal');
       if (horizontalShip) dummyBoatOrientation = 'horizontal';
       else dummyBoatOrientation = 'vertical';
+
+      //
+      //
+      //
+      //
+      console.log(this.id);
+      this.classList.add('test');
+      // start from setter square
+      // can't append due to deletion of original element, need to change class of grid elements
+      // use already created check for orientation, then make for loop of squares to affect
+      // dom manipulation goes here
+      //
+      //
+      //
+      //
 
       dummyBoatCoords = [
         Number(this.id.split('-')[0]),
@@ -734,61 +744,6 @@ const initializeGameplay = () => {
         fifthBoatCoords = dummyBoatCoords;
         fifthBoatOrientation = dummyBoatOrientation;
       }
-
-      // can't append due to deletion of original element, need to change class of grid elements
-      // use already created check for orientation, then make for loop of squares to affect
-
-      // placeDummyShip = (startingCoord, length, orientation) => {
-      //   if (
-      //     (startingCoord[0] + length > 11 && orientation === 'horizontal') ||
-      //     (startingCoord[1] + length > 11 && orientation === 'vertical')
-      //   )
-      //     return;
-
-      //     let dummyCoordsArray = [];
-
-      //     if (orientation === 'vertical') {
-      //       for (let i = 0; i < length; i++) {
-      //         dummyCoordsArray.push([startingCoord[0], startingCoord[1] + i]);
-      //       }
-      //     } else
-      //       for (let i = 0; i < length; i++) {
-      //         dummyCoordsArray.push([startingCoord[0] + i, startingCoord[1]]);
-      //       }
-
-      //       let arrayOfDummySquaresToOccupy = [];
-      //       dummyCoordsArray.forEach((coordinates) => {
-      //         arrayOfDummySquaresToOccupy.push(
-
-      //           // way to go thru entire grid.find(
-      //           this.squares.find(
-      //             (nodeOfShip) =>
-      //               nodeOfShip.coordsOfSquare[0] === coordinates[0] &&
-      //               nodeOfShip.coordsOfSquare[1] === coordinates[1],
-      //           ),
-      //         );
-      //       });
-
-      //       if (
-      //         arrayOfSquaresToOccupy.find(
-      //           // check that not already filled
-      //           (nodeOfShip) => nodeOfShip.isOccupiedBy != null,
-      //         )
-      //       )
-      //         return;
-
-      //   ship.coordsOccupied.forEach((coord) => {
-      //     const soughtSpace = this.gridArray.find(
-      //       (element) =>
-      //         element.id.split('-')[0] == coord[0] &&
-      //         element.id.split('-')[1] == coord[1],
-      //     );
-      //     soughtSpace.classList.add('occupied-square');
-      //     const pegSlot = document.createElement('div');
-      //     pegSlot.classList = 'empty-peg';
-      //     soughtSpace.appendChild(pegSlot);
-      //   });
-      // };
 
       dummyShipCounter++;
       createDummyShipToDrag(setDummyShipLength());
