@@ -580,25 +580,21 @@ const initializeDom = () => {
   let dummyShipNameCounter = 0;
 
   const setDummyShipName = (input) => {
+    dummyShipNameCounter++;
+
     if (input === 5) {
-      dummyShipNameCounter++;
       return 'carrier';
     }
-
     if (input === 4) {
-      dummyShipNameCounter++;
       return 'battleship';
     }
     if (input === 3 && dummyShipNameCounter === 2) {
-      dummyShipNameCounter++;
       return 'submarine';
     }
     if (input === 3 && dummyShipNameCounter === 3) {
-      dummyShipNameCounter++;
       return 'cruiser';
     }
     if (input === 2) {
-      dummyShipNameCounter++;
       return 'destroyer';
     }
   };
@@ -612,7 +608,6 @@ const initializeDom = () => {
     header.appendChild(setupUpdates);
 
     const mainContainer = document.querySelector('.container');
-
     const containerForSetup = document.createElement('div');
     containerForSetup.classList.add('container-for-setup');
     mainContainer.appendChild(containerForSetup);
@@ -643,23 +638,12 @@ const initializeDom = () => {
   })();
 
   let dummyShipCounter = 1;
-
   const setDummyShipLength = () => {
-    if (dummyShipCounter === 1) {
-      return 5;
-    }
-    if (dummyShipCounter === 2) {
-      return 4;
-    }
-    if (dummyShipCounter === 3) {
-      return 3;
-    }
-    if (dummyShipCounter === 4) {
-      return 3;
-    }
-    if (dummyShipCounter === 5) {
-      return 2;
-    }
+    if (dummyShipCounter === 1) return 5;
+    if (dummyShipCounter === 2) return 4;
+    if (dummyShipCounter === 3) return 3;
+    if (dummyShipCounter === 4) return 3;
+    if (dummyShipCounter === 5) return 2;
   };
 
   function createDummyShipToDrag(input) {
@@ -677,7 +661,7 @@ const initializeDom = () => {
     for (let i = 1; i <= input; i++) {
       const squareOfShip = document.createElement('div');
       squareOfShip.classList.add('occupied-square-setup');
-
+      dummyShip.appendChild(squareOfShip);
       const pegOfSquare = document.createElement('div');
       pegOfSquare.classList.add('empty-peg-setup');
       squareOfShip.appendChild(pegOfSquare);
@@ -685,7 +669,6 @@ const initializeDom = () => {
       if (i === input) {
         squareOfShip.classList.add('setter-square');
       }
-      dummyShip.appendChild(squareOfShip);
     }
 
     dummyShip.addEventListener('click', () => {
@@ -700,7 +683,7 @@ const initializeDom = () => {
   }
 
   (function getShipPlacementFromUser() {
-    if (dummyShipCounter > 2) return initializeDom();
+    if (dummyShipCounter > 5) return initializeDom();
 
     createDummyShipToDrag(setDummyShipLength());
     let dummyBoatCoords;
@@ -758,6 +741,7 @@ const initializeDom = () => {
       if (!firstBoatCoords) {
         firstBoatCoords = dummyBoatCoords;
         firstBoatOrientation = dummyBoatOrientation;
+        console.log(dummyShipCounter);
       } else if (!secondBoatCoords) {
         secondBoatCoords = dummyBoatCoords;
         secondBoatOrientation = dummyBoatOrientation;
@@ -775,33 +759,9 @@ const initializeDom = () => {
         fifthBoatOrientation = dummyBoatOrientation;
         console.log(dummyShipCounter);
       }
-
-      function removeAttributesFromDummyShip(ship) {
-        ship.classList.remove('dummy-ship');
-        ship.classList.remove('dummy-ship-vertical');
-        ship.classList.remove('dummy-ship-horizontal');
-        ship.classList.remove('fill');
-        ship.setAttribute('draggable', 'false');
-      }
-      removeAttributesFromDummyShip(fill);
-      console.log(fill);
-
       // need to remove all attributes that mess up game from ship
 
-      const dummyCarrier = document.querySelector('#dummy-ship-carrier');
-      const dummyBattleship = document.querySelector('#dummy-ship-battleship');
-      const dummySubmarine = document.querySelector('#dummy-ship-submarine');
-      const dummyCruiser = document.querySelector('#dummy-ship-cruiser');
-      const dummyDestroyer = document.querySelector('#dummy-ship-destroyer');
-
-      // if (!dummyDestroyer) dummyShipCounter = 5;
-      // if (!dummyCruiser) dummyShipCounter = 4;
-      // if (!dummySubmarine) dummyShipCounter = 3;
-      // if (!dummyBattleship) dummyShipCounter = 2;
-      // if (!dummyCarrier) dummyShipCounter = 1;
-
       dummyShipCounter++;
-
       getShipPlacementFromUser();
     }
 
