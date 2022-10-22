@@ -21,7 +21,7 @@ let fourthBoatOrientation;
 let fifthBoatCoords;
 let fifthBoatOrientation;
 
-const initializeDom = () => {
+const initializeGameplay = () => {
   const fillUpdateArea = (input) => {
     const gameDescription = document.querySelector('.header-text');
     gameDescription.innerHTML = '';
@@ -574,31 +574,9 @@ const initializeDom = () => {
 };
 
 // to skip boat placement and use pre-set coords:
-// initializeDom();
+// initializeGameplay();
 
 (function createBoatSetupModal() {
-  let dummyShipNameCounter = 0;
-
-  const setDummyShipName = (input) => {
-    dummyShipNameCounter++;
-
-    if (input === 5) {
-      return 'carrier';
-    }
-    if (input === 4) {
-      return 'battleship';
-    }
-    if (input === 3 && dummyShipNameCounter === 2) {
-      return 'submarine';
-    }
-    if (input === 3 && dummyShipNameCounter === 3) {
-      return 'cruiser';
-    }
-    if (input === 2) {
-      return 'destroyer';
-    }
-  };
-
   (function buildSetupLayout() {
     const header = document.querySelector('.header');
 
@@ -637,6 +615,18 @@ const initializeDom = () => {
     }
   })();
 
+  let dummyShipNameCounter = 0;
+  const setDummyShipName = (input) => {
+    dummyShipNameCounter++;
+    if (input === 5) return 'carrier';
+    if (input === 4) return 'battleship';
+    if (input === 3 && dummyShipNameCounter === 3) {
+      return 'submarine';
+    }
+    if (input === 3 && dummyShipNameCounter === 4) return 'cruiser';
+    if (input === 2) return 'destroyer';
+  };
+
   let dummyShipCounter = 1;
   const setDummyShipLength = () => {
     if (dummyShipCounter === 1) return 5;
@@ -651,12 +641,15 @@ const initializeDom = () => {
     area.innerHTML = '';
 
     const dummyShip = document.createElement('div');
-    dummyShip.classList.add('dummy-ship');
     dummyShip.classList.add('dummy-ship-vertical');
     dummyShip.id = 'dummy-ship-' + setDummyShipName(setDummyShipLength());
-    area.appendChild(dummyShip);
     dummyShip.setAttribute('draggable', 'true');
     dummyShip.classList.add('fill');
+    area.appendChild(dummyShip);
+
+    console.log(dummyShip.id);
+    console.log(dummyShipCounter);
+    console.log(dummyShipNameCounter);
 
     for (let i = 1; i <= input; i++) {
       const squareOfShip = document.createElement('div');
@@ -683,7 +676,7 @@ const initializeDom = () => {
   }
 
   (function getShipPlacementFromUser() {
-    if (dummyShipCounter > 5) return initializeDom();
+    if (dummyShipCounter > 5) return initializeGameplay();
 
     createDummyShipToDrag(setDummyShipLength());
     let dummyBoatCoords;
@@ -741,31 +734,40 @@ const initializeDom = () => {
       if (!firstBoatCoords) {
         firstBoatCoords = dummyBoatCoords;
         firstBoatOrientation = dummyBoatOrientation;
-        console.log(dummyShipCounter);
+        // console.log(dummyShipCounter);
+
+        dummyShipCounter++;
       } else if (!secondBoatCoords) {
         secondBoatCoords = dummyBoatCoords;
         secondBoatOrientation = dummyBoatOrientation;
-        console.log(dummyShipCounter);
+        // console.log(dummyShipCounter);
+
+        dummyShipCounter++;
       } else if (!thirdBoatCoords) {
         thirdBoatCoords = dummyBoatCoords;
         thirdBoatOrientation = dummyBoatOrientation;
-        console.log(dummyShipCounter);
+        // console.log(dummyShipCounter);
       } else if (!fourthBoatCoords) {
         fourthBoatCoords = dummyBoatCoords;
         fourthBoatOrientation = dummyBoatOrientation;
-        console.log(dummyShipCounter);
+        // console.log(dummyShipCounter);
+
+        dummyShipCounter++;
       } else if (!fifthBoatCoords) {
         fifthBoatCoords = dummyBoatCoords;
         fifthBoatOrientation = dummyBoatOrientation;
-        console.log(dummyShipCounter);
+        // console.log(dummyShipCounter);
+
+        dummyShipCounter++;
       }
       // need to remove all attributes that mess up game from ship
 
-      dummyShipCounter++;
+      // dummyShipCounter++;
       getShipPlacementFromUser();
     }
 
-    // coords need to be adjusted to END not start of ship
+    // ship is actually displaying correctly when gameplay initializes -
+    // just needs to be fixed w dom manipulation during setup stage
     // needs way to "reset which boat is being placed"
 
     // display returned values on dummy board by looking up

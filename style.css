@@ -129,17 +129,13 @@ body {
   border-radius: 90px;
 }
 
-.dummy-ship {
+.dummy-ship-vertical,
+.dummy-ship-horizontal {
   border-radius: 5px;
   background-color: rgb(177, 183, 189);
   border: 2px solid rgb(177, 183, 189);
   cursor: pointer;
 }
-
-/* .dummy-ship-vertical,
-.dummy-ship-horizontal {
-
-} */
 
 .dummy-ship-horizontal {
   display: flex;
