@@ -620,9 +620,7 @@ const initializeGameplay = () => {
     dummyShipNameCounter++;
     if (input === 5) return 'carrier';
     if (input === 4) return 'battleship';
-    if (input === 3 && dummyShipNameCounter === 3) {
-      return 'submarine';
-    }
+    if (input === 3 && dummyShipNameCounter === 3) return 'submarine';
     if (input === 3 && dummyShipNameCounter === 4) return 'cruiser';
     if (input === 2) return 'destroyer';
   };
@@ -637,12 +635,14 @@ const initializeGameplay = () => {
   };
 
   function createDummyShipToDrag(input) {
+    if (dummyShipCounter > 5) return initializeGameplay();
+
     const area = document.querySelector('.drag-container');
     area.innerHTML = '';
 
     const dummyShip = document.createElement('div');
     dummyShip.classList.add('dummy-ship-vertical');
-    dummyShip.id = 'dummy-ship-' + setDummyShipName(setDummyShipLength());
+    dummyShip.id = 'dummy-ship-' + setDummyShipName(input);
     dummyShip.setAttribute('draggable', 'true');
     dummyShip.classList.add('fill');
     area.appendChild(dummyShip);
@@ -676,8 +676,6 @@ const initializeGameplay = () => {
   }
 
   (function getShipPlacementFromUser() {
-    if (dummyShipCounter > 5) return initializeGameplay();
-
     createDummyShipToDrag(setDummyShipLength());
     let dummyBoatCoords;
     let dummyBoatOrientation;
@@ -721,7 +719,6 @@ const initializeGameplay = () => {
 
     function dragDrop() {
       this.classList.remove('hover');
-
       const horizontalShip = document.querySelector('.dummy-ship-horizontal');
       if (horizontalShip) dummyBoatOrientation = 'horizontal';
       else dummyBoatOrientation = 'vertical';
@@ -734,36 +731,25 @@ const initializeGameplay = () => {
       if (!firstBoatCoords) {
         firstBoatCoords = dummyBoatCoords;
         firstBoatOrientation = dummyBoatOrientation;
-        // console.log(dummyShipCounter);
-
-        dummyShipCounter++;
       } else if (!secondBoatCoords) {
         secondBoatCoords = dummyBoatCoords;
         secondBoatOrientation = dummyBoatOrientation;
-        // console.log(dummyShipCounter);
-
-        dummyShipCounter++;
       } else if (!thirdBoatCoords) {
         thirdBoatCoords = dummyBoatCoords;
         thirdBoatOrientation = dummyBoatOrientation;
-        // console.log(dummyShipCounter);
       } else if (!fourthBoatCoords) {
         fourthBoatCoords = dummyBoatCoords;
         fourthBoatOrientation = dummyBoatOrientation;
-        // console.log(dummyShipCounter);
-
-        dummyShipCounter++;
       } else if (!fifthBoatCoords) {
         fifthBoatCoords = dummyBoatCoords;
         fifthBoatOrientation = dummyBoatOrientation;
-        // console.log(dummyShipCounter);
-
-        dummyShipCounter++;
       }
       // need to remove all attributes that mess up game from ship
 
-      // dummyShipCounter++;
-      getShipPlacementFromUser();
+      /// needs to append boat to this
+
+      dummyShipCounter++;
+      createDummyShipToDrag(setDummyShipLength());
     }
 
     // ship is actually displaying correctly when gameplay initializes -
