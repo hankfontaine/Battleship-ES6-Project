@@ -11,23 +11,16 @@ let fifthBoatOrientation;
 
 const initializeGameplay = () => {
   const fillUpdateArea = (input) => {
-    const gameDescription = document.querySelector('.header-text');
-    gameDescription.innerHTML = '';
-    gameDescription.append(input);
+    document.querySelector('.header-text').innerHTML = '';
+    document.querySelector('.header-text').append(input);
   };
-
-  // const main = document.querySelector('.main');
-  // main.innerHTML = '';
 
   const mainContainer = document.querySelector('.container');
   mainContainer.innerHTML = '';
 
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////// BEGIN DOM MANIPULATION LOGIC MODULES ///////////////////////
-  ///////////////////////////////////////////////////////////////////////
-
   const header = document.querySelector('.header');
   header.innerHTML = '';
+
   const gameUpdates = document.createElement('div');
   gameUpdates.classList.add('header-text');
   gameUpdates.append('B A T T L E S H I P');
@@ -58,12 +51,6 @@ const initializeGameplay = () => {
   playerDefensiveGridArea.classList.add('grid-area');
   playerDefensiveGridArea.id = 'defense-area';
   playerDefenseBoardContainer.appendChild(playerDefensiveGridArea);
-
-  const footer = document.querySelector('.footer');
-  const footerText = document.createElement('div');
-  footerText.classList.add('footer-text');
-  // footerText.append('c Hank');
-  footer.appendChild(footerText);
 
   ///////////////////////////////////////////////////////////////////////
   ///////////////// END DOM MANIPULATION LOGIC MODULES //////////////////
@@ -334,7 +321,6 @@ const initializeGameplay = () => {
                         defensePeg.classList.add('hit-peg');
                       } else {
                         // ideally find a way to revert to previous hit, but currently acts buggy w/o this:
-                        // playerOne.defensiveBoard.mostRecentComputerHit = null;
 
                         fillUpdateArea(
                           'That was a miss by ' + playerTwo.name + '!',
