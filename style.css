@@ -46,7 +46,6 @@ body {
     text-shadow: 1.7px 1.7px 1px black;
     color: #14dd54;
   }
-
   to {
     text-shadow: 2px 2px 1px black;
     color: #119a3c;
@@ -85,10 +84,14 @@ body {
   display: flex;
 }
 
-.drag-container {
-  width: 25vw;
+.drag-container,
+.drag-container-horizontal {
   border-radius: 90px;
   margin: 2vw;
+}
+
+.drag-container {
+  width: 25vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -96,8 +99,6 @@ body {
 }
 
 .drag-container-horizontal {
-  border-radius: 90px;
-  margin: 2vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -208,7 +209,6 @@ body {
 
 .unhit-peg,
 .hit-peg {
-  border-radius: 90px;
   height: 12px;
   width: 12px;
 }
@@ -228,7 +228,6 @@ body {
   from {
     background-color: rgb(253, 85, 85);
   }
-
   to {
     background-color: rgb(242, 62, 62);
   }
@@ -238,7 +237,6 @@ body {
   from {
     background-color: rgba(57, 105, 201, 0.684);
   }
-
   to {
     background-color: rgba(12, 69, 203, 0.369);
   }
@@ -248,7 +246,6 @@ body {
   from {
     background-color: rgba(38, 87, 184, 0.684);
   }
-
   to {
     background-color: rgba(19, 77, 191, 0.684);
   }
