@@ -10,29 +10,36 @@ body {
 }
 
 .main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100vh;
   width: 100vw;
   margin: 0;
 }
 
-.header {
+.main,
+.header,
+.header-text,
+.square {
   display: flex;
-  flex-direction: column;
   align-items: center;
+}
+
+.main,
+.header,
+.square {
+  flex-direction: column;
+}
+
+.main,
+.header-text,
+.square {
+  justify-content: center;
 }
 
 .header-text {
   text-shadow: 1.3px 1.3px 1px black;
   height: 5vh;
   width: 300px;
-  display: flex;
   border-radius: 10px;
-  align-items: center;
-  justify-content: center;
   margin-bottom: 7px;
   opacity: 0.7;
   text-align: center;
@@ -68,10 +75,6 @@ body {
   border-radius: 2px;
   height: 28px;
   width: 28px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 /*  */
@@ -80,8 +83,39 @@ body {
 /*  */
 /*  */
 
-.container-for-setup {
+.container-for-setup,
+.drag-container,
+.drag-container-horizontal,
+.occupied-square-setup,
+.dummy-ship-horizontal,
+.player-offense-board-container,
+.player-defense-board-container,
+.play-again,
+.main-gameplay-window {
   display: flex;
+}
+
+.drag-container,
+.drag-container-horizontal,
+.occupied-square-setup,
+.player-offense-board-container,
+.player-defense-board-container {
+  align-items: center;
+}
+
+.drag-container,
+.drag-container-horizontal,
+.occupied-square-setup,
+.player-offense-board-container,
+.player-defense-board-container,
+.play-again {
+  justify-content: center;
+}
+
+.occupied-square-setup,
+.player-offense-board-container,
+.player-defense-board-container {
+  box-sizing: border-box;
 }
 
 .drag-container,
@@ -92,16 +126,7 @@ body {
 
 .drag-container {
   width: 25vw;
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.drag-container-horizontal {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .drag-container-dropped {
@@ -109,16 +134,11 @@ body {
 }
 
 .occupied-square-setup {
-  box-sizing: border-box;
   border: 1.7px solid black;
   border-radius: 2px;
   height: 28px;
   width: 28px;
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
   background-color: black;
   border-radius: 5px;
 }
@@ -139,7 +159,6 @@ body {
 }
 
 .dummy-ship-horizontal {
-  display: flex;
   flex-direction: row-reverse;
 }
 
@@ -171,7 +190,6 @@ body {
 .main-gameplay-window {
   border: 2px solid black;
   border-radius: 9px;
-  display: flex;
   flex-direction: column;
   background-color: slategray;
   box-shadow: 1px 1px 3px black;
@@ -183,12 +201,8 @@ body {
   background-color: rgb(177, 183, 189);
   height: 300px;
   width: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border: 2px solid black;
   border-radius: 9px;
-  box-sizing: border-box;
 }
 
 .occupied-square {
@@ -262,9 +276,7 @@ body {
   height: 4vh;
   font-style: italic;
   width: 160px;
-  display: flex;
   border-radius: 10px;
-  justify-content: center;
   margin-bottom: 7px;
   opacity: 0.7;
   text-align: center;
