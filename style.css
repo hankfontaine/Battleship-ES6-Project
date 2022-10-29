@@ -1,14 +1,7 @@
-/*  */
-/*  */
-/* LAYOUT */
-/*  */
-/*  */
-
 body {
   animation: water 0.9s infinite alternate;
   font-family: 'Poly', serif;
 }
-
 .main {
   height: 100vh;
   width: 100vw;
@@ -18,28 +11,98 @@ body {
 .main,
 .header,
 .header-text,
-.square {
+.square,
+.container-for-setup,
+.drag-container,
+.drag-container-horizontal,
+.occupied-square-setup,
+.dummy-ship-horizontal,
+.player-offense-board-container,
+.player-defense-board-container,
+.play-again,
+.main-gameplay-window {
   display: flex;
+}
+
+.main,
+.header,
+.header-text,
+.square,
+.drag-container,
+.drag-container-horizontal,
+.occupied-square-setup,
+.player-offense-board-container,
+.player-defense-board-container {
   align-items: center;
 }
 
 .main,
 .header,
-.square {
+.square,
+.drag-container,
+.occupied-square-setup,
+.main-gameplay-window {
   flex-direction: column;
 }
 
 .main,
 .header-text,
-.square {
+.square,
+.drag-container,
+.drag-container-horizontal,
+.occupied-square-setup,
+.player-offense-board-container,
+.player-defense-board-container,
+.play-again {
   justify-content: center;
+}
+
+.square,
+.occupied-square-setup,
+.player-offense-board-container,
+.player-defense-board-container {
+  box-sizing: border-box;
+}
+
+.main-gameplay-window,
+.player-offense-board-container,
+.player-defense-board-container {
+  border: 2px solid black;
+}
+
+.square,
+.occupied-square-setup {
+  border: 1.7px solid black;
+}
+
+.drag-container,
+.drag-container-horizontal,
+.empty-peg-setup,
+.unhit-peg,
+.hit-peg,
+.empty-peg {
+  border-radius: 90px;
+}
+
+.drag-container,
+.drag-container-horizontal {
+  margin: 2vw;
+}
+
+.square,
+.occupied-square-setup {
+  border-radius: 2px;
+}
+
+.header-text,
+.player-offense-board-container,
+.player-defense-board-container {
+  width: 300px;
 }
 
 .header-text {
   text-shadow: 1.3px 1.3px 1px black;
   height: 5vh;
-  width: 300px;
-  border-radius: 10px;
   margin-bottom: 7px;
   opacity: 0.7;
   text-align: center;
@@ -69,90 +132,38 @@ body {
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
-.square {
-  box-sizing: border-box;
-  border: 1.7px solid black;
-  border-radius: 2px;
+.square,
+.occupied-square-setup {
   height: 28px;
   width: 28px;
 }
 
-/*  */
-/*  */
-/* SETUP */
-/*  */
-/*  */
-
-.container-for-setup,
-.drag-container,
-.drag-container-horizontal,
-.occupied-square-setup,
-.dummy-ship-horizontal,
-.player-offense-board-container,
-.player-defense-board-container,
-.play-again,
-.main-gameplay-window {
-  display: flex;
-}
-
-.drag-container,
-.drag-container-horizontal,
-.occupied-square-setup,
-.player-offense-board-container,
-.player-defense-board-container {
-  align-items: center;
-}
-
-.drag-container,
-.drag-container-horizontal,
-.occupied-square-setup,
-.player-offense-board-container,
-.player-defense-board-container,
-.play-again {
-  justify-content: center;
-}
-
-.occupied-square-setup,
-.player-offense-board-container,
-.player-defense-board-container {
-  box-sizing: border-box;
-}
-
-.drag-container,
-.drag-container-horizontal {
-  border-radius: 90px;
-  margin: 2vw;
-}
-
 .drag-container {
   width: 25vw;
-  flex-direction: column;
 }
 
 .drag-container-dropped {
   border: 10px solid red;
 }
 
-.occupied-square-setup {
-  border: 1.7px solid black;
-  border-radius: 2px;
-  height: 28px;
-  width: 28px;
-  flex-direction: column;
-  background-color: black;
+.occupied-square-setup,
+.dummy-ship-vertical,
+.dummy-ship-horizontal {
   border-radius: 5px;
+}
+
+.occupied-square-setup {
+  background-color: black;
 }
 
 .empty-peg-setup {
   background-color: rgb(161, 157, 157);
   height: 14px;
   width: 14px;
-  border-radius: 90px;
 }
 
 .dummy-ship-vertical,
 .dummy-ship-horizontal {
-  border-radius: 5px;
   background-color: rgb(177, 183, 189);
   border: 2px solid rgb(177, 183, 189);
   cursor: pointer;
@@ -187,10 +198,15 @@ body {
 /*  */
 /*  */
 
-.main-gameplay-window {
-  border: 2px solid black;
+.main-gameplay-window,
+.player-offense-board-container,
+.player-defense-board-container,
+.play-again,
+.header-text {
   border-radius: 9px;
-  flex-direction: column;
+}
+
+.main-gameplay-window {
   background-color: slategray;
   box-shadow: 1px 1px 3px black;
 }
@@ -199,10 +215,6 @@ body {
 .player-defense-board-container {
   margin: 10px;
   background-color: rgb(177, 183, 189);
-  height: 300px;
-  width: 300px;
-  border: 2px solid black;
-  border-radius: 9px;
 }
 
 .occupied-square {
@@ -213,12 +225,6 @@ body {
   background-color: rgb(65, 59, 59);
   height: 14px;
   width: 14px;
-}
-
-.unhit-peg,
-.hit-peg,
-.empty-peg {
-  border-radius: 90px;
 }
 
 .unhit-peg,
@@ -265,18 +271,11 @@ body {
   }
 }
 
-/*  */
-/*  */
-/* WIN CONDITION */
-/*  */
-/*  */
-
 .play-again {
   text-shadow: 1.3px 1.3px 1px black;
   height: 4vh;
   font-style: italic;
   width: 160px;
-  border-radius: 10px;
   margin-bottom: 7px;
   opacity: 0.7;
   text-align: center;
