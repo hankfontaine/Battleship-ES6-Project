@@ -94,10 +94,26 @@ const initializeGameplay = () => {
     }
 
     const setShipName = (input) => {
-      if (input === 5) return 'carrier';
-      if (input === 4) return 'battleship';
-      if (input === 3) return 'cruiser';
-      if (input === 2) return 'destroyer';
+      if (input === 5) {
+        console.log(this);
+        return 'carrier';
+      }
+
+      if (input === 4) {
+        console.log(this);
+        return 'battleship';
+      }
+      if (input === 3) {
+        console.log(this);
+        return 'cruiser';
+      }
+
+      if (input === 2) {
+        console.log(this);
+        return 'destroyer';
+      }
+
+      // needs to be updated to fix bug - need a counter of deployed ships
     };
 
     class Gameboard {
@@ -698,7 +714,6 @@ const initializeGameplay = () => {
       //
       //
       //
-      console.log(this.id);
       this.classList.add('test');
       // start from setter square
       // can't append due to deletion of original element, need to change class of grid elements
