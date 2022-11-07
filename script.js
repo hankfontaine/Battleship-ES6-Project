@@ -564,6 +564,7 @@ const initializeGameplay = () => {
 };
 
 (function createBoatSetupModal() {
+  let dummyLength;
   (function buildSetupLayout() {
     const header = document.querySelector('.header');
 
@@ -614,11 +615,26 @@ const initializeGameplay = () => {
 
   let dummyShipCounter = 1;
   const setDummyShipLength = () => {
-    if (dummyShipCounter === 1) return 5;
-    if (dummyShipCounter === 2) return 4;
-    if (dummyShipCounter === 3) return 3;
-    if (dummyShipCounter === 4) return 3;
-    if (dummyShipCounter === 5) return 2;
+    if (dummyShipCounter === 1) {
+      dummyLength = 5;
+      return 5;
+    }
+    if (dummyShipCounter === 2) {
+      dummyLength = 4;
+      return 4;
+    }
+    if (dummyShipCounter === 3) {
+      dummyLength = 3;
+      return 3;
+    }
+    if (dummyShipCounter === 4) {
+      dummyLength = 3;
+      return 3;
+    }
+    if (dummyShipCounter === 5) {
+      dummyLength = 2;
+      return 2;
+    }
   };
 
   const createDummyShipToDrag = (input) => {
@@ -703,26 +719,29 @@ const initializeGameplay = () => {
       this.classList.remove('hover');
     }
 
-    function dragDrop() {
+    function dragDrop(e) {
       this.classList.remove('hover');
 
       const horizontalShip = document.querySelector('.dummy-ship-horizontal');
-      if (horizontalShip) dummyBoatOrientation = 'horizontal';
-      else dummyBoatOrientation = 'vertical';
 
-      //
-      //
-      //
-      //
-      this.classList.add('test');
-      // start from setter square
-      // can't append due to deletion of original element, need to change class of grid elements
-      // use already created check for orientation, then make for loop of squares to affect
-      // dom manipulation goes here
-      //
-      //
-      //
-      //
+      const valueOne = e.target.id.split('-')[0];
+      const valueTwo = e.target.id.split('-')[1];
+
+      if (horizontalShip) {
+        dummyBoatOrientation = 'horizontal';
+        for (let i = valueOne; i <= dummyLength; i++) {
+          let sq = document.getElementById(`${i}-${valueTwo}`);
+          console.log(sq);
+          sq.classList.add('placed');
+        }
+      } else {
+        dummyBoatOrientation = 'vertical';
+        for (let i = valueTwo; i <= dummyLength; i++) {
+          let sq = document.getElementById(`${valueOne}-${i}`);
+          console.log(sq);
+          sq.classList.add('placed');
+        }
+      }
 
       dummyBoatCoords = [
         Number(this.id.split('-')[0]),
