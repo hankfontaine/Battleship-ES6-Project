@@ -733,6 +733,8 @@ const initializeGameplay = () => {
           let sq = document.getElementById(`${i}-${valueTwo}`);
           console.log(sq);
           sq.classList.add('placed');
+
+          // need to fix bug that doesn't allow multiple ship placements
         }
       } else {
         dummyBoatOrientation = 'vertical';
