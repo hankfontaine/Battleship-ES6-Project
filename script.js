@@ -95,21 +95,17 @@ const initializeGameplay = () => {
 
     const setShipName = (input) => {
       if (input === 5) {
-        console.log(this);
         return 'carrier';
       }
 
       if (input === 4) {
-        console.log(this);
         return 'battleship';
       }
       if (input === 3) {
-        console.log(this);
         return 'cruiser';
       }
 
       if (input === 2) {
-        console.log(this);
         return 'destroyer';
       }
 
