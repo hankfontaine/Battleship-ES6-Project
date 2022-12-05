@@ -332,7 +332,7 @@ const initializeGameplay = () => {
 
                         defensePeg.classList.add('hit-peg');
                       } else {
-                        // ideally find a way to revert to previous hit, but currently acts buggy w/o this:
+                        // NOTE: ideally find a way to revert to previous hit, but currently acts buggy w/o this:
 
                         fillUpdateArea(
                           'That was a miss by ' + playerTwo.name + '!',
